@@ -56,16 +56,16 @@ type NewsClient interface {
 	GetArticleContent(ctx context.Context, in *GetArticleParams, opts ...grpc.CallOption) (*GetArticleContentResponse, error)
 	GetArticleSummary(ctx context.Context, in *GetArticleParams, opts ...grpc.CallOption) (*GetArticleSummaryResponse, error)
 	CheckExistArticle(ctx context.Context, in *CheckExistsArticleParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	GetFilters(ctx context.Context, in *GetFiltersParams, opts ...grpc.CallOption) (*GetFiltersResponse, error)
+	GetFilters(ctx context.Context, in *GetFiltersParamsInner, opts ...grpc.CallOption) (*GetFiltersResponse, error)
 	GetFilter(ctx context.Context, in *GetFilterParams, opts ...grpc.CallOption) (*Filter, error)
-	CreateFilter(ctx context.Context, in *CreateFilterParams, opts ...grpc.CallOption) (*Filter, error)
-	UpdateFilterMeta(ctx context.Context, in *UpdateFilterMetaParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	UpdateFilterBody(ctx context.Context, in *UpdateFilterBodyParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	RemoveFilter(ctx context.Context, in *RemoveFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	CreateFilter(ctx context.Context, in *CreateFilterParamsInner, opts ...grpc.CallOption) (*Filter, error)
+	UpdateFilterMeta(ctx context.Context, in *UpdateFilterMetaParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateFilterBody(ctx context.Context, in *UpdateFilterBodyParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	RemoveFilter(ctx context.Context, in *RemoveFilterParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	SortFilter(ctx context.Context, in *SortFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	CopyFilter(ctx context.Context, in *CopyFilterParams, opts ...grpc.CallOption) (*Filter, error)
+	CopyFilter(ctx context.Context, in *CopyFilterParamsInner, opts ...grpc.CallOption) (*Filter, error)
 	GetCategories(ctx context.Context, in *GetCategoriesParams, opts ...grpc.CallOption) (*GetCategoriesResponse, error)
-	GetSourcesByUuids(ctx context.Context, in *GetSourcesParams, opts ...grpc.CallOption) (*GetSourcesResponse, error)
+	GetSourcesByUuids(ctx context.Context, in *GetSourcesByUuidsParams, opts ...grpc.CallOption) (*GetSourcesResponse, error)
 	GetSourcesByQuery(ctx context.Context, in *GetSourcesByQueryParams, opts ...grpc.CallOption) (*GetSourcesByQueryResponse, error)
 	GetSourcesByCategories(ctx context.Context, in *GetSourcesByCategoriesParams, opts ...grpc.CallOption) (*GetSourcesByCategoriesResponse, error)
 }
@@ -168,7 +168,7 @@ func (c *newsClient) CheckExistArticle(ctx context.Context, in *CheckExistsArtic
 	return out, nil
 }
 
-func (c *newsClient) GetFilters(ctx context.Context, in *GetFiltersParams, opts ...grpc.CallOption) (*GetFiltersResponse, error) {
+func (c *newsClient) GetFilters(ctx context.Context, in *GetFiltersParamsInner, opts ...grpc.CallOption) (*GetFiltersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetFiltersResponse)
 	err := c.cc.Invoke(ctx, News_GetFilters_FullMethodName, in, out, cOpts...)
@@ -188,7 +188,7 @@ func (c *newsClient) GetFilter(ctx context.Context, in *GetFilterParams, opts ..
 	return out, nil
 }
 
-func (c *newsClient) CreateFilter(ctx context.Context, in *CreateFilterParams, opts ...grpc.CallOption) (*Filter, error) {
+func (c *newsClient) CreateFilter(ctx context.Context, in *CreateFilterParamsInner, opts ...grpc.CallOption) (*Filter, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Filter)
 	err := c.cc.Invoke(ctx, News_CreateFilter_FullMethodName, in, out, cOpts...)
@@ -198,7 +198,7 @@ func (c *newsClient) CreateFilter(ctx context.Context, in *CreateFilterParams, o
 	return out, nil
 }
 
-func (c *newsClient) UpdateFilterMeta(ctx context.Context, in *UpdateFilterMetaParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *newsClient) UpdateFilterMeta(ctx context.Context, in *UpdateFilterMetaParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, News_UpdateFilterMeta_FullMethodName, in, out, cOpts...)
@@ -208,7 +208,7 @@ func (c *newsClient) UpdateFilterMeta(ctx context.Context, in *UpdateFilterMetaP
 	return out, nil
 }
 
-func (c *newsClient) UpdateFilterBody(ctx context.Context, in *UpdateFilterBodyParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *newsClient) UpdateFilterBody(ctx context.Context, in *UpdateFilterBodyParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, News_UpdateFilterBody_FullMethodName, in, out, cOpts...)
@@ -218,7 +218,7 @@ func (c *newsClient) UpdateFilterBody(ctx context.Context, in *UpdateFilterBodyP
 	return out, nil
 }
 
-func (c *newsClient) RemoveFilter(ctx context.Context, in *RemoveFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *newsClient) RemoveFilter(ctx context.Context, in *RemoveFilterParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, News_RemoveFilter_FullMethodName, in, out, cOpts...)
@@ -238,7 +238,7 @@ func (c *newsClient) SortFilter(ctx context.Context, in *SortFilterParams, opts 
 	return out, nil
 }
 
-func (c *newsClient) CopyFilter(ctx context.Context, in *CopyFilterParams, opts ...grpc.CallOption) (*Filter, error) {
+func (c *newsClient) CopyFilter(ctx context.Context, in *CopyFilterParamsInner, opts ...grpc.CallOption) (*Filter, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Filter)
 	err := c.cc.Invoke(ctx, News_CopyFilter_FullMethodName, in, out, cOpts...)
@@ -258,7 +258,7 @@ func (c *newsClient) GetCategories(ctx context.Context, in *GetCategoriesParams,
 	return out, nil
 }
 
-func (c *newsClient) GetSourcesByUuids(ctx context.Context, in *GetSourcesParams, opts ...grpc.CallOption) (*GetSourcesResponse, error) {
+func (c *newsClient) GetSourcesByUuids(ctx context.Context, in *GetSourcesByUuidsParams, opts ...grpc.CallOption) (*GetSourcesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetSourcesResponse)
 	err := c.cc.Invoke(ctx, News_GetSourcesByUuids_FullMethodName, in, out, cOpts...)
@@ -301,16 +301,16 @@ type NewsServer interface {
 	GetArticleContent(context.Context, *GetArticleParams) (*GetArticleContentResponse, error)
 	GetArticleSummary(context.Context, *GetArticleParams) (*GetArticleSummaryResponse, error)
 	CheckExistArticle(context.Context, *CheckExistsArticleParams) (*common.BoolStatus, error)
-	GetFilters(context.Context, *GetFiltersParams) (*GetFiltersResponse, error)
+	GetFilters(context.Context, *GetFiltersParamsInner) (*GetFiltersResponse, error)
 	GetFilter(context.Context, *GetFilterParams) (*Filter, error)
-	CreateFilter(context.Context, *CreateFilterParams) (*Filter, error)
-	UpdateFilterMeta(context.Context, *UpdateFilterMetaParams) (*common.BoolStatus, error)
-	UpdateFilterBody(context.Context, *UpdateFilterBodyParams) (*common.BoolStatus, error)
-	RemoveFilter(context.Context, *RemoveFilterParams) (*common.BoolStatus, error)
+	CreateFilter(context.Context, *CreateFilterParamsInner) (*Filter, error)
+	UpdateFilterMeta(context.Context, *UpdateFilterMetaParamsInner) (*common.BoolStatus, error)
+	UpdateFilterBody(context.Context, *UpdateFilterBodyParamsInner) (*common.BoolStatus, error)
+	RemoveFilter(context.Context, *RemoveFilterParamsInner) (*common.BoolStatus, error)
 	SortFilter(context.Context, *SortFilterParams) (*common.BoolStatus, error)
-	CopyFilter(context.Context, *CopyFilterParams) (*Filter, error)
+	CopyFilter(context.Context, *CopyFilterParamsInner) (*Filter, error)
 	GetCategories(context.Context, *GetCategoriesParams) (*GetCategoriesResponse, error)
-	GetSourcesByUuids(context.Context, *GetSourcesParams) (*GetSourcesResponse, error)
+	GetSourcesByUuids(context.Context, *GetSourcesByUuidsParams) (*GetSourcesResponse, error)
 	GetSourcesByQuery(context.Context, *GetSourcesByQueryParams) (*GetSourcesByQueryResponse, error)
 	GetSourcesByCategories(context.Context, *GetSourcesByCategoriesParams) (*GetSourcesByCategoriesResponse, error)
 	mustEmbedUnimplementedNewsServer()
@@ -350,34 +350,34 @@ func (UnimplementedNewsServer) GetArticleSummary(context.Context, *GetArticlePar
 func (UnimplementedNewsServer) CheckExistArticle(context.Context, *CheckExistsArticleParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckExistArticle not implemented")
 }
-func (UnimplementedNewsServer) GetFilters(context.Context, *GetFiltersParams) (*GetFiltersResponse, error) {
+func (UnimplementedNewsServer) GetFilters(context.Context, *GetFiltersParamsInner) (*GetFiltersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFilters not implemented")
 }
 func (UnimplementedNewsServer) GetFilter(context.Context, *GetFilterParams) (*Filter, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFilter not implemented")
 }
-func (UnimplementedNewsServer) CreateFilter(context.Context, *CreateFilterParams) (*Filter, error) {
+func (UnimplementedNewsServer) CreateFilter(context.Context, *CreateFilterParamsInner) (*Filter, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateFilter not implemented")
 }
-func (UnimplementedNewsServer) UpdateFilterMeta(context.Context, *UpdateFilterMetaParams) (*common.BoolStatus, error) {
+func (UnimplementedNewsServer) UpdateFilterMeta(context.Context, *UpdateFilterMetaParamsInner) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateFilterMeta not implemented")
 }
-func (UnimplementedNewsServer) UpdateFilterBody(context.Context, *UpdateFilterBodyParams) (*common.BoolStatus, error) {
+func (UnimplementedNewsServer) UpdateFilterBody(context.Context, *UpdateFilterBodyParamsInner) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateFilterBody not implemented")
 }
-func (UnimplementedNewsServer) RemoveFilter(context.Context, *RemoveFilterParams) (*common.BoolStatus, error) {
+func (UnimplementedNewsServer) RemoveFilter(context.Context, *RemoveFilterParamsInner) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveFilter not implemented")
 }
 func (UnimplementedNewsServer) SortFilter(context.Context, *SortFilterParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SortFilter not implemented")
 }
-func (UnimplementedNewsServer) CopyFilter(context.Context, *CopyFilterParams) (*Filter, error) {
+func (UnimplementedNewsServer) CopyFilter(context.Context, *CopyFilterParamsInner) (*Filter, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CopyFilter not implemented")
 }
 func (UnimplementedNewsServer) GetCategories(context.Context, *GetCategoriesParams) (*GetCategoriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCategories not implemented")
 }
-func (UnimplementedNewsServer) GetSourcesByUuids(context.Context, *GetSourcesParams) (*GetSourcesResponse, error) {
+func (UnimplementedNewsServer) GetSourcesByUuids(context.Context, *GetSourcesByUuidsParams) (*GetSourcesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSourcesByUuids not implemented")
 }
 func (UnimplementedNewsServer) GetSourcesByQuery(context.Context, *GetSourcesByQueryParams) (*GetSourcesByQueryResponse, error) {
@@ -570,7 +570,7 @@ func _News_CheckExistArticle_Handler(srv interface{}, ctx context.Context, dec f
 }
 
 func _News_GetFilters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFiltersParams)
+	in := new(GetFiltersParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -582,7 +582,7 @@ func _News_GetFilters_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: News_GetFilters_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServer).GetFilters(ctx, req.(*GetFiltersParams))
+		return srv.(NewsServer).GetFilters(ctx, req.(*GetFiltersParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -606,7 +606,7 @@ func _News_GetFilter_Handler(srv interface{}, ctx context.Context, dec func(inte
 }
 
 func _News_CreateFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateFilterParams)
+	in := new(CreateFilterParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -618,13 +618,13 @@ func _News_CreateFilter_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: News_CreateFilter_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServer).CreateFilter(ctx, req.(*CreateFilterParams))
+		return srv.(NewsServer).CreateFilter(ctx, req.(*CreateFilterParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _News_UpdateFilterMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateFilterMetaParams)
+	in := new(UpdateFilterMetaParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -636,13 +636,13 @@ func _News_UpdateFilterMeta_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: News_UpdateFilterMeta_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServer).UpdateFilterMeta(ctx, req.(*UpdateFilterMetaParams))
+		return srv.(NewsServer).UpdateFilterMeta(ctx, req.(*UpdateFilterMetaParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _News_UpdateFilterBody_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateFilterBodyParams)
+	in := new(UpdateFilterBodyParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -654,13 +654,13 @@ func _News_UpdateFilterBody_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: News_UpdateFilterBody_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServer).UpdateFilterBody(ctx, req.(*UpdateFilterBodyParams))
+		return srv.(NewsServer).UpdateFilterBody(ctx, req.(*UpdateFilterBodyParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _News_RemoveFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveFilterParams)
+	in := new(RemoveFilterParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -672,7 +672,7 @@ func _News_RemoveFilter_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: News_RemoveFilter_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServer).RemoveFilter(ctx, req.(*RemoveFilterParams))
+		return srv.(NewsServer).RemoveFilter(ctx, req.(*RemoveFilterParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -696,7 +696,7 @@ func _News_SortFilter_Handler(srv interface{}, ctx context.Context, dec func(int
 }
 
 func _News_CopyFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CopyFilterParams)
+	in := new(CopyFilterParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -708,7 +708,7 @@ func _News_CopyFilter_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: News_CopyFilter_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServer).CopyFilter(ctx, req.(*CopyFilterParams))
+		return srv.(NewsServer).CopyFilter(ctx, req.(*CopyFilterParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -732,7 +732,7 @@ func _News_GetCategories_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _News_GetSourcesByUuids_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSourcesParams)
+	in := new(GetSourcesByUuidsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -744,7 +744,7 @@ func _News_GetSourcesByUuids_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: News_GetSourcesByUuids_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServer).GetSourcesByUuids(ctx, req.(*GetSourcesParams))
+		return srv.(NewsServer).GetSourcesByUuids(ctx, req.(*GetSourcesByUuidsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
