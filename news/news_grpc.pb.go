@@ -20,25 +20,25 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	News_GetArticlesByFilters_FullMethodName  = "/news.News/GetArticlesByFilters"
-	News_GetArticlesBySources_FullMethodName  = "/news.News/GetArticlesBySources"
-	News_GetArticlesByCategory_FullMethodName = "/news.News/GetArticlesByCategory"
-	News_GetArticlesByUuids_FullMethodName    = "/news.News/GetArticlesByUuids"
-	News_GetArticlesByQuery_FullMethodName    = "/news.News/GetArticlesByQuery"
-	News_GetArticle_FullMethodName            = "/news.News/GetArticle"
-	News_GetArticleContent_FullMethodName     = "/news.News/GetArticleContent"
-	News_GetArticleSummary_FullMethodName     = "/news.News/GetArticleSummary"
-	News_CheckExistArticle_FullMethodName     = "/news.News/CheckExistArticle"
-	News_GetFilters_FullMethodName            = "/news.News/GetFilters"
-	News_GetFilter_FullMethodName             = "/news.News/GetFilter"
-	News_CreateFilter_FullMethodName          = "/news.News/CreateFilter"
-	News_UpdateFilterMeta_FullMethodName      = "/news.News/UpdateFilterMeta"
-	News_UpdateFilterBody_FullMethodName      = "/news.News/UpdateFilterBody"
-	News_RemoveFilter_FullMethodName          = "/news.News/RemoveFilter"
-	News_CopyFilter_FullMethodName            = "/news.News/CopyFilter"
-	News_GetCategories_FullMethodName         = "/news.News/GetCategories"
-	News_GetSourcesByUuids_FullMethodName     = "/news.News/GetSourcesByUuids"
-	News_GetSourcesByQuery_FullMethodName     = "/news.News/GetSourcesByQuery"
+	News_GetArticlesByFilters_FullMethodName    = "/news.News/GetArticlesByFilters"
+	News_GetArticlesBySources_FullMethodName    = "/news.News/GetArticlesBySources"
+	News_GetArticlesByCategories_FullMethodName = "/news.News/GetArticlesByCategories"
+	News_GetArticlesByUuids_FullMethodName      = "/news.News/GetArticlesByUuids"
+	News_GetArticlesByQuery_FullMethodName      = "/news.News/GetArticlesByQuery"
+	News_GetArticle_FullMethodName              = "/news.News/GetArticle"
+	News_GetArticleContent_FullMethodName       = "/news.News/GetArticleContent"
+	News_GetArticleSummary_FullMethodName       = "/news.News/GetArticleSummary"
+	News_CheckExistArticle_FullMethodName       = "/news.News/CheckExistArticle"
+	News_GetFilters_FullMethodName              = "/news.News/GetFilters"
+	News_GetFilter_FullMethodName               = "/news.News/GetFilter"
+	News_CreateFilter_FullMethodName            = "/news.News/CreateFilter"
+	News_UpdateFilterMeta_FullMethodName        = "/news.News/UpdateFilterMeta"
+	News_UpdateFilterBody_FullMethodName        = "/news.News/UpdateFilterBody"
+	News_RemoveFilter_FullMethodName            = "/news.News/RemoveFilter"
+	News_CopyFilter_FullMethodName              = "/news.News/CopyFilter"
+	News_GetCategories_FullMethodName           = "/news.News/GetCategories"
+	News_GetSourcesByUuids_FullMethodName       = "/news.News/GetSourcesByUuids"
+	News_GetSourcesByQuery_FullMethodName       = "/news.News/GetSourcesByQuery"
 )
 
 // NewsClient is the client API for News service.
@@ -47,7 +47,7 @@ const (
 type NewsClient interface {
 	GetArticlesByFilters(ctx context.Context, in *GetArticlesByFiltersParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
 	GetArticlesBySources(ctx context.Context, in *GetArticlesBySourcesParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
-	GetArticlesByCategory(ctx context.Context, in *GetArticlesByCategoriesParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
+	GetArticlesByCategories(ctx context.Context, in *GetArticlesByCategoriesParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
 	GetArticlesByUuids(ctx context.Context, in *GetArticlesByUuidsParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
 	GetArticlesByQuery(ctx context.Context, in *GetArticlesByQueryParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
 	GetArticle(ctx context.Context, in *GetArticleParams, opts ...grpc.CallOption) (*Article, error)
@@ -94,10 +94,10 @@ func (c *newsClient) GetArticlesBySources(ctx context.Context, in *GetArticlesBy
 	return out, nil
 }
 
-func (c *newsClient) GetArticlesByCategory(ctx context.Context, in *GetArticlesByCategoriesParams, opts ...grpc.CallOption) (*GetArticlesResponse, error) {
+func (c *newsClient) GetArticlesByCategories(ctx context.Context, in *GetArticlesByCategoriesParams, opts ...grpc.CallOption) (*GetArticlesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetArticlesResponse)
-	err := c.cc.Invoke(ctx, News_GetArticlesByCategory_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, News_GetArticlesByCategories_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -270,7 +270,7 @@ func (c *newsClient) GetSourcesByQuery(ctx context.Context, in *SearchSourcesPar
 type NewsServer interface {
 	GetArticlesByFilters(context.Context, *GetArticlesByFiltersParams) (*GetArticlesResponse, error)
 	GetArticlesBySources(context.Context, *GetArticlesBySourcesParams) (*GetArticlesResponse, error)
-	GetArticlesByCategory(context.Context, *GetArticlesByCategoriesParams) (*GetArticlesResponse, error)
+	GetArticlesByCategories(context.Context, *GetArticlesByCategoriesParams) (*GetArticlesResponse, error)
 	GetArticlesByUuids(context.Context, *GetArticlesByUuidsParams) (*GetArticlesResponse, error)
 	GetArticlesByQuery(context.Context, *GetArticlesByQueryParams) (*GetArticlesResponse, error)
 	GetArticle(context.Context, *GetArticleParams) (*Article, error)
@@ -303,8 +303,8 @@ func (UnimplementedNewsServer) GetArticlesByFilters(context.Context, *GetArticle
 func (UnimplementedNewsServer) GetArticlesBySources(context.Context, *GetArticlesBySourcesParams) (*GetArticlesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesBySources not implemented")
 }
-func (UnimplementedNewsServer) GetArticlesByCategory(context.Context, *GetArticlesByCategoriesParams) (*GetArticlesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesByCategory not implemented")
+func (UnimplementedNewsServer) GetArticlesByCategories(context.Context, *GetArticlesByCategoriesParams) (*GetArticlesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesByCategories not implemented")
 }
 func (UnimplementedNewsServer) GetArticlesByUuids(context.Context, *GetArticlesByUuidsParams) (*GetArticlesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesByUuids not implemented")
@@ -411,20 +411,20 @@ func _News_GetArticlesBySources_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _News_GetArticlesByCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _News_GetArticlesByCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetArticlesByCategoriesParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NewsServer).GetArticlesByCategory(ctx, in)
+		return srv.(NewsServer).GetArticlesByCategories(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: News_GetArticlesByCategory_FullMethodName,
+		FullMethod: News_GetArticlesByCategories_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServer).GetArticlesByCategory(ctx, req.(*GetArticlesByCategoriesParams))
+		return srv.(NewsServer).GetArticlesByCategories(ctx, req.(*GetArticlesByCategoriesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -733,8 +733,8 @@ var News_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _News_GetArticlesBySources_Handler,
 		},
 		{
-			MethodName: "GetArticlesByCategory",
-			Handler:    _News_GetArticlesByCategory_Handler,
+			MethodName: "GetArticlesByCategories",
+			Handler:    _News_GetArticlesByCategories_Handler,
 		},
 		{
 			MethodName: "GetArticlesByUuids",
