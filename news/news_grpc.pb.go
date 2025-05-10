@@ -35,6 +35,7 @@ const (
 	News_UpdateFilterMeta_FullMethodName        = "/news.News/UpdateFilterMeta"
 	News_UpdateFilterBody_FullMethodName        = "/news.News/UpdateFilterBody"
 	News_RemoveFilter_FullMethodName            = "/news.News/RemoveFilter"
+	News_SortFilter_FullMethodName              = "/news.News/SortFilter"
 	News_CopyFilter_FullMethodName              = "/news.News/CopyFilter"
 	News_GetCategories_FullMethodName           = "/news.News/GetCategories"
 	News_GetSourcesByUuids_FullMethodName       = "/news.News/GetSourcesByUuids"
@@ -61,10 +62,11 @@ type NewsClient interface {
 	UpdateFilterMeta(ctx context.Context, in *UpdateFilterMetaParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	UpdateFilterBody(ctx context.Context, in *UpdateFilterBodyParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	RemoveFilter(ctx context.Context, in *RemoveFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	SortFilter(ctx context.Context, in *SortFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	CopyFilter(ctx context.Context, in *CopyFilterParams, opts ...grpc.CallOption) (*Filter, error)
 	GetCategories(ctx context.Context, in *GetCategoriesParams, opts ...grpc.CallOption) (*GetCategoriesResponse, error)
 	GetSourcesByUuids(ctx context.Context, in *GetSourcesParams, opts ...grpc.CallOption) (*GetSourcesResponse, error)
-	GetSourcesByQuery(ctx context.Context, in *SearchSourcesParams, opts ...grpc.CallOption) (*SearchSourcesResponse, error)
+	GetSourcesByQuery(ctx context.Context, in *GetSourcesByQueryParams, opts ...grpc.CallOption) (*GetSourcesByQueryResponse, error)
 	GetSourcesByCategories(ctx context.Context, in *GetSourcesByCategoriesParams, opts ...grpc.CallOption) (*GetSourcesByCategoriesResponse, error)
 }
 
@@ -226,6 +228,16 @@ func (c *newsClient) RemoveFilter(ctx context.Context, in *RemoveFilterParams, o
 	return out, nil
 }
 
+func (c *newsClient) SortFilter(ctx context.Context, in *SortFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, News_SortFilter_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *newsClient) CopyFilter(ctx context.Context, in *CopyFilterParams, opts ...grpc.CallOption) (*Filter, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Filter)
@@ -256,9 +268,9 @@ func (c *newsClient) GetSourcesByUuids(ctx context.Context, in *GetSourcesParams
 	return out, nil
 }
 
-func (c *newsClient) GetSourcesByQuery(ctx context.Context, in *SearchSourcesParams, opts ...grpc.CallOption) (*SearchSourcesResponse, error) {
+func (c *newsClient) GetSourcesByQuery(ctx context.Context, in *GetSourcesByQueryParams, opts ...grpc.CallOption) (*GetSourcesByQueryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SearchSourcesResponse)
+	out := new(GetSourcesByQueryResponse)
 	err := c.cc.Invoke(ctx, News_GetSourcesByQuery_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -295,10 +307,11 @@ type NewsServer interface {
 	UpdateFilterMeta(context.Context, *UpdateFilterMetaParams) (*common.BoolStatus, error)
 	UpdateFilterBody(context.Context, *UpdateFilterBodyParams) (*common.BoolStatus, error)
 	RemoveFilter(context.Context, *RemoveFilterParams) (*common.BoolStatus, error)
+	SortFilter(context.Context, *SortFilterParams) (*common.BoolStatus, error)
 	CopyFilter(context.Context, *CopyFilterParams) (*Filter, error)
 	GetCategories(context.Context, *GetCategoriesParams) (*GetCategoriesResponse, error)
 	GetSourcesByUuids(context.Context, *GetSourcesParams) (*GetSourcesResponse, error)
-	GetSourcesByQuery(context.Context, *SearchSourcesParams) (*SearchSourcesResponse, error)
+	GetSourcesByQuery(context.Context, *GetSourcesByQueryParams) (*GetSourcesByQueryResponse, error)
 	GetSourcesByCategories(context.Context, *GetSourcesByCategoriesParams) (*GetSourcesByCategoriesResponse, error)
 	mustEmbedUnimplementedNewsServer()
 }
@@ -355,6 +368,9 @@ func (UnimplementedNewsServer) UpdateFilterBody(context.Context, *UpdateFilterBo
 func (UnimplementedNewsServer) RemoveFilter(context.Context, *RemoveFilterParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveFilter not implemented")
 }
+func (UnimplementedNewsServer) SortFilter(context.Context, *SortFilterParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SortFilter not implemented")
+}
 func (UnimplementedNewsServer) CopyFilter(context.Context, *CopyFilterParams) (*Filter, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CopyFilter not implemented")
 }
@@ -364,7 +380,7 @@ func (UnimplementedNewsServer) GetCategories(context.Context, *GetCategoriesPara
 func (UnimplementedNewsServer) GetSourcesByUuids(context.Context, *GetSourcesParams) (*GetSourcesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSourcesByUuids not implemented")
 }
-func (UnimplementedNewsServer) GetSourcesByQuery(context.Context, *SearchSourcesParams) (*SearchSourcesResponse, error) {
+func (UnimplementedNewsServer) GetSourcesByQuery(context.Context, *GetSourcesByQueryParams) (*GetSourcesByQueryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSourcesByQuery not implemented")
 }
 func (UnimplementedNewsServer) GetSourcesByCategories(context.Context, *GetSourcesByCategoriesParams) (*GetSourcesByCategoriesResponse, error) {
@@ -661,6 +677,24 @@ func _News_RemoveFilter_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _News_SortFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SortFilterParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NewsServer).SortFilter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: News_SortFilter_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NewsServer).SortFilter(ctx, req.(*SortFilterParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _News_CopyFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CopyFilterParams)
 	if err := dec(in); err != nil {
@@ -716,7 +750,7 @@ func _News_GetSourcesByUuids_Handler(srv interface{}, ctx context.Context, dec f
 }
 
 func _News_GetSourcesByQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SearchSourcesParams)
+	in := new(GetSourcesByQueryParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -728,7 +762,7 @@ func _News_GetSourcesByQuery_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: News_GetSourcesByQuery_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServer).GetSourcesByQuery(ctx, req.(*SearchSourcesParams))
+		return srv.(NewsServer).GetSourcesByQuery(ctx, req.(*GetSourcesByQueryParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -817,6 +851,10 @@ var News_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveFilter",
 			Handler:    _News_RemoveFilter_Handler,
+		},
+		{
+			MethodName: "SortFilter",
+			Handler:    _News_SortFilter_Handler,
 		},
 		{
 			MethodName: "CopyFilter",
