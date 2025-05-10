@@ -20,11 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	News_GetArticles_FullMethodName             = "/news.News/GetArticles"
 	News_GetArticlesByFilters_FullMethodName    = "/news.News/GetArticlesByFilters"
 	News_GetArticlesBySources_FullMethodName    = "/news.News/GetArticlesBySources"
 	News_GetArticlesByCategories_FullMethodName = "/news.News/GetArticlesByCategories"
 	News_GetArticlesByUuids_FullMethodName      = "/news.News/GetArticlesByUuids"
-	News_GetArticlesByQuery_FullMethodName      = "/news.News/GetArticlesByQuery"
 	News_GetArticle_FullMethodName              = "/news.News/GetArticle"
 	News_GetArticleContent_FullMethodName       = "/news.News/GetArticleContent"
 	News_GetArticleSummary_FullMethodName       = "/news.News/GetArticleSummary"
@@ -39,17 +39,18 @@ const (
 	News_GetCategories_FullMethodName           = "/news.News/GetCategories"
 	News_GetSourcesByUuids_FullMethodName       = "/news.News/GetSourcesByUuids"
 	News_GetSourcesByQuery_FullMethodName       = "/news.News/GetSourcesByQuery"
+	News_GetSourcesByCategories_FullMethodName  = "/news.News/GetSourcesByCategories"
 )
 
 // NewsClient is the client API for News service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NewsClient interface {
+	GetArticles(ctx context.Context, in *GetArticlesParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
 	GetArticlesByFilters(ctx context.Context, in *GetArticlesByFiltersParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
 	GetArticlesBySources(ctx context.Context, in *GetArticlesBySourcesParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
 	GetArticlesByCategories(ctx context.Context, in *GetArticlesByCategoriesParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
 	GetArticlesByUuids(ctx context.Context, in *GetArticlesByUuidsParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
-	GetArticlesByQuery(ctx context.Context, in *GetArticlesByQueryParams, opts ...grpc.CallOption) (*GetArticlesResponse, error)
 	GetArticle(ctx context.Context, in *GetArticleParams, opts ...grpc.CallOption) (*Article, error)
 	GetArticleContent(ctx context.Context, in *GetArticleParams, opts ...grpc.CallOption) (*GetArticleContentResponse, error)
 	GetArticleSummary(ctx context.Context, in *GetArticleParams, opts ...grpc.CallOption) (*GetArticleSummaryResponse, error)
@@ -64,6 +65,7 @@ type NewsClient interface {
 	GetCategories(ctx context.Context, in *GetCategoriesParams, opts ...grpc.CallOption) (*GetCategoriesResponse, error)
 	GetSourcesByUuids(ctx context.Context, in *GetSourcesParams, opts ...grpc.CallOption) (*GetSourcesResponse, error)
 	GetSourcesByQuery(ctx context.Context, in *SearchSourcesParams, opts ...grpc.CallOption) (*SearchSourcesResponse, error)
+	GetSourcesByCategories(ctx context.Context, in *GetSourcesByCategoriesParams, opts ...grpc.CallOption) (*GetSourcesByCategoriesResponse, error)
 }
 
 type newsClient struct {
@@ -72,6 +74,16 @@ type newsClient struct {
 
 func NewNewsClient(cc grpc.ClientConnInterface) NewsClient {
 	return &newsClient{cc}
+}
+
+func (c *newsClient) GetArticles(ctx context.Context, in *GetArticlesParams, opts ...grpc.CallOption) (*GetArticlesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetArticlesResponse)
+	err := c.cc.Invoke(ctx, News_GetArticles_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *newsClient) GetArticlesByFilters(ctx context.Context, in *GetArticlesByFiltersParams, opts ...grpc.CallOption) (*GetArticlesResponse, error) {
@@ -108,16 +120,6 @@ func (c *newsClient) GetArticlesByUuids(ctx context.Context, in *GetArticlesByUu
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetArticlesResponse)
 	err := c.cc.Invoke(ctx, News_GetArticlesByUuids_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *newsClient) GetArticlesByQuery(ctx context.Context, in *GetArticlesByQueryParams, opts ...grpc.CallOption) (*GetArticlesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetArticlesResponse)
-	err := c.cc.Invoke(ctx, News_GetArticlesByQuery_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -264,15 +266,25 @@ func (c *newsClient) GetSourcesByQuery(ctx context.Context, in *SearchSourcesPar
 	return out, nil
 }
 
+func (c *newsClient) GetSourcesByCategories(ctx context.Context, in *GetSourcesByCategoriesParams, opts ...grpc.CallOption) (*GetSourcesByCategoriesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSourcesByCategoriesResponse)
+	err := c.cc.Invoke(ctx, News_GetSourcesByCategories_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NewsServer is the server API for News service.
 // All implementations must embed UnimplementedNewsServer
 // for forward compatibility.
 type NewsServer interface {
+	GetArticles(context.Context, *GetArticlesParams) (*GetArticlesResponse, error)
 	GetArticlesByFilters(context.Context, *GetArticlesByFiltersParams) (*GetArticlesResponse, error)
 	GetArticlesBySources(context.Context, *GetArticlesBySourcesParams) (*GetArticlesResponse, error)
 	GetArticlesByCategories(context.Context, *GetArticlesByCategoriesParams) (*GetArticlesResponse, error)
 	GetArticlesByUuids(context.Context, *GetArticlesByUuidsParams) (*GetArticlesResponse, error)
-	GetArticlesByQuery(context.Context, *GetArticlesByQueryParams) (*GetArticlesResponse, error)
 	GetArticle(context.Context, *GetArticleParams) (*Article, error)
 	GetArticleContent(context.Context, *GetArticleParams) (*GetArticleContentResponse, error)
 	GetArticleSummary(context.Context, *GetArticleParams) (*GetArticleSummaryResponse, error)
@@ -287,6 +299,7 @@ type NewsServer interface {
 	GetCategories(context.Context, *GetCategoriesParams) (*GetCategoriesResponse, error)
 	GetSourcesByUuids(context.Context, *GetSourcesParams) (*GetSourcesResponse, error)
 	GetSourcesByQuery(context.Context, *SearchSourcesParams) (*SearchSourcesResponse, error)
+	GetSourcesByCategories(context.Context, *GetSourcesByCategoriesParams) (*GetSourcesByCategoriesResponse, error)
 	mustEmbedUnimplementedNewsServer()
 }
 
@@ -297,6 +310,9 @@ type NewsServer interface {
 // pointer dereference when methods are called.
 type UnimplementedNewsServer struct{}
 
+func (UnimplementedNewsServer) GetArticles(context.Context, *GetArticlesParams) (*GetArticlesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetArticles not implemented")
+}
 func (UnimplementedNewsServer) GetArticlesByFilters(context.Context, *GetArticlesByFiltersParams) (*GetArticlesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesByFilters not implemented")
 }
@@ -308,9 +324,6 @@ func (UnimplementedNewsServer) GetArticlesByCategories(context.Context, *GetArti
 }
 func (UnimplementedNewsServer) GetArticlesByUuids(context.Context, *GetArticlesByUuidsParams) (*GetArticlesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesByUuids not implemented")
-}
-func (UnimplementedNewsServer) GetArticlesByQuery(context.Context, *GetArticlesByQueryParams) (*GetArticlesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesByQuery not implemented")
 }
 func (UnimplementedNewsServer) GetArticle(context.Context, *GetArticleParams) (*Article, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetArticle not implemented")
@@ -354,6 +367,9 @@ func (UnimplementedNewsServer) GetSourcesByUuids(context.Context, *GetSourcesPar
 func (UnimplementedNewsServer) GetSourcesByQuery(context.Context, *SearchSourcesParams) (*SearchSourcesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSourcesByQuery not implemented")
 }
+func (UnimplementedNewsServer) GetSourcesByCategories(context.Context, *GetSourcesByCategoriesParams) (*GetSourcesByCategoriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSourcesByCategories not implemented")
+}
 func (UnimplementedNewsServer) mustEmbedUnimplementedNewsServer() {}
 func (UnimplementedNewsServer) testEmbeddedByValue()              {}
 
@@ -373,6 +389,24 @@ func RegisterNewsServer(s grpc.ServiceRegistrar, srv NewsServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&News_ServiceDesc, srv)
+}
+
+func _News_GetArticles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetArticlesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NewsServer).GetArticles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: News_GetArticles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NewsServer).GetArticles(ctx, req.(*GetArticlesParams))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _News_GetArticlesByFilters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -443,24 +477,6 @@ func _News_GetArticlesByUuids_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NewsServer).GetArticlesByUuids(ctx, req.(*GetArticlesByUuidsParams))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _News_GetArticlesByQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetArticlesByQueryParams)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NewsServer).GetArticlesByQuery(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: News_GetArticlesByQuery_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServer).GetArticlesByQuery(ctx, req.(*GetArticlesByQueryParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -717,6 +733,24 @@ func _News_GetSourcesByQuery_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _News_GetSourcesByCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSourcesByCategoriesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NewsServer).GetSourcesByCategories(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: News_GetSourcesByCategories_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NewsServer).GetSourcesByCategories(ctx, req.(*GetSourcesByCategoriesParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // News_ServiceDesc is the grpc.ServiceDesc for News service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -724,6 +758,10 @@ var News_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "news.News",
 	HandlerType: (*NewsServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetArticles",
+			Handler:    _News_GetArticles_Handler,
+		},
 		{
 			MethodName: "GetArticlesByFilters",
 			Handler:    _News_GetArticlesByFilters_Handler,
@@ -739,10 +777,6 @@ var News_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetArticlesByUuids",
 			Handler:    _News_GetArticlesByUuids_Handler,
-		},
-		{
-			MethodName: "GetArticlesByQuery",
-			Handler:    _News_GetArticlesByQuery_Handler,
 		},
 		{
 			MethodName: "GetArticle",
@@ -799,6 +833,10 @@ var News_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSourcesByQuery",
 			Handler:    _News_GetSourcesByQuery_Handler,
+		},
+		{
+			MethodName: "GetSourcesByCategories",
+			Handler:    _News_GetSourcesByCategories_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
