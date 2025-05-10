@@ -7,7 +7,7 @@
 package newsv1
 
 import (
-	common "common/common"
+	common "github.com/x3a-tech/contract-go/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

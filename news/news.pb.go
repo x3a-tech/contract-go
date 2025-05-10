@@ -7,7 +7,8 @@
 package newsv1
 
 import (
-	common "common/common"
+	common1 "common/common"
+	common "github.com/x3a-tech/contract-go/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -3164,7 +3165,7 @@ var file_news_news_proto_goTypes = []any{
 	(*UpdateFilterBodyParams)(nil),        // 57: news.UpdateFilterBodyParams
 	(*RemoveFilterParams)(nil),            // 58: news.RemoveFilterParams
 	(*CopyFilterParams)(nil),              // 59: news.CopyFilterParams
-	(*common.BoolStatus)(nil),             // 60: common.BoolStatus
+	(*common1.BoolStatus)(nil),            // 60: common.BoolStatus
 	(*GetFiltersResponse)(nil),            // 61: news.GetFiltersResponse
 	(*Filter)(nil),                        // 62: news.Filter
 }
