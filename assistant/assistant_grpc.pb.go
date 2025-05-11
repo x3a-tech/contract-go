@@ -19,28 +19,28 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Assist_CreateChat_FullMethodName        = "/assistant.Assist/CreateChat"
-	Assist_ChangeChatFolder_FullMethodName  = "/assistant.Assist/ChangeChatFolder"
-	Assist_ChangeChatTitle_FullMethodName   = "/assistant.Assist/ChangeChatTitle"
-	Assist_DeleteChat_FullMethodName        = "/assistant.Assist/DeleteChat"
-	Assist_GetChatByID_FullMethodName       = "/assistant.Assist/GetChatByID"
-	Assist_GetChatsInFolder_FullMethodName  = "/assistant.Assist/GetChatsInFolder"
-	Assist_GetUserChats_FullMethodName      = "/assistant.Assist/GetUserChats"
-	Assist_CreateFolder_FullMethodName      = "/assistant.Assist/CreateFolder"
-	Assist_DeleteFolder_FullMethodName      = "/assistant.Assist/DeleteFolder"
-	Assist_GetFolderByID_FullMethodName     = "/assistant.Assist/GetFolderByID"
-	Assist_GetUserFolders_FullMethodName    = "/assistant.Assist/GetUserFolders"
-	Assist_SendMessage_FullMethodName       = "/assistant.Assist/SendMessage"
-	Assist_SendMessageStream_FullMethodName = "/assistant.Assist/SendMessageStream"
-	Assist_AddMessage_FullMethodName        = "/assistant.Assist/AddMessage"
-	Assist_GetMessageByID_FullMethodName    = "/assistant.Assist/GetMessageByID"
-	Assist_GetMessagesInChat_FullMethodName = "/assistant.Assist/GetMessagesInChat"
+	Assistant_CreateChat_FullMethodName        = "/assistant.Assistant/CreateChat"
+	Assistant_ChangeChatFolder_FullMethodName  = "/assistant.Assistant/ChangeChatFolder"
+	Assistant_ChangeChatTitle_FullMethodName   = "/assistant.Assistant/ChangeChatTitle"
+	Assistant_DeleteChat_FullMethodName        = "/assistant.Assistant/DeleteChat"
+	Assistant_GetChatByID_FullMethodName       = "/assistant.Assistant/GetChatByID"
+	Assistant_GetChatsInFolder_FullMethodName  = "/assistant.Assistant/GetChatsInFolder"
+	Assistant_GetUserChats_FullMethodName      = "/assistant.Assistant/GetUserChats"
+	Assistant_CreateFolder_FullMethodName      = "/assistant.Assistant/CreateFolder"
+	Assistant_DeleteFolder_FullMethodName      = "/assistant.Assistant/DeleteFolder"
+	Assistant_GetFolderByID_FullMethodName     = "/assistant.Assistant/GetFolderByID"
+	Assistant_GetUserFolders_FullMethodName    = "/assistant.Assistant/GetUserFolders"
+	Assistant_SendMessage_FullMethodName       = "/assistant.Assistant/SendMessage"
+	Assistant_SendMessageStream_FullMethodName = "/assistant.Assistant/SendMessageStream"
+	Assistant_AddMessage_FullMethodName        = "/assistant.Assistant/AddMessage"
+	Assistant_GetMessageByID_FullMethodName    = "/assistant.Assistant/GetMessageByID"
+	Assistant_GetMessagesInChat_FullMethodName = "/assistant.Assistant/GetMessagesInChat"
 )
 
-// AssistClient is the client API for Assist service.
+// AssistantClient is the client API for Assistant service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AssistClient interface {
+type AssistantClient interface {
 	CreateChat(ctx context.Context, in *CreateChatRequest, opts ...grpc.CallOption) (*CreateChatResponse, error)
 	ChangeChatFolder(ctx context.Context, in *ChangeChatFolderRequest, opts ...grpc.CallOption) (*ChangeChatFolderResponse, error)
 	ChangeChatTitle(ctx context.Context, in *ChangeChatTitleRequest, opts ...grpc.CallOption) (*ChangeChatTitleResponse, error)
@@ -59,137 +59,137 @@ type AssistClient interface {
 	GetMessagesInChat(ctx context.Context, in *GetMessagesInChatRequest, opts ...grpc.CallOption) (*GetMessagesInChatResponse, error)
 }
 
-type assistClient struct {
+type assistantClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewAssistClient(cc grpc.ClientConnInterface) AssistClient {
-	return &assistClient{cc}
+func NewAssistantClient(cc grpc.ClientConnInterface) AssistantClient {
+	return &assistantClient{cc}
 }
 
-func (c *assistClient) CreateChat(ctx context.Context, in *CreateChatRequest, opts ...grpc.CallOption) (*CreateChatResponse, error) {
+func (c *assistantClient) CreateChat(ctx context.Context, in *CreateChatRequest, opts ...grpc.CallOption) (*CreateChatResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateChatResponse)
-	err := c.cc.Invoke(ctx, Assist_CreateChat_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_CreateChat_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) ChangeChatFolder(ctx context.Context, in *ChangeChatFolderRequest, opts ...grpc.CallOption) (*ChangeChatFolderResponse, error) {
+func (c *assistantClient) ChangeChatFolder(ctx context.Context, in *ChangeChatFolderRequest, opts ...grpc.CallOption) (*ChangeChatFolderResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ChangeChatFolderResponse)
-	err := c.cc.Invoke(ctx, Assist_ChangeChatFolder_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_ChangeChatFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) ChangeChatTitle(ctx context.Context, in *ChangeChatTitleRequest, opts ...grpc.CallOption) (*ChangeChatTitleResponse, error) {
+func (c *assistantClient) ChangeChatTitle(ctx context.Context, in *ChangeChatTitleRequest, opts ...grpc.CallOption) (*ChangeChatTitleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ChangeChatTitleResponse)
-	err := c.cc.Invoke(ctx, Assist_ChangeChatTitle_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_ChangeChatTitle_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) DeleteChat(ctx context.Context, in *DeleteChatRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *assistantClient) DeleteChat(ctx context.Context, in *DeleteChatRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, Assist_DeleteChat_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_DeleteChat_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) GetChatByID(ctx context.Context, in *GetChatByIDRequest, opts ...grpc.CallOption) (*GetChatByIDResponse, error) {
+func (c *assistantClient) GetChatByID(ctx context.Context, in *GetChatByIDRequest, opts ...grpc.CallOption) (*GetChatByIDResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetChatByIDResponse)
-	err := c.cc.Invoke(ctx, Assist_GetChatByID_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_GetChatByID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) GetChatsInFolder(ctx context.Context, in *GetChatsInFolderRequest, opts ...grpc.CallOption) (*GetChatsInFolderResponse, error) {
+func (c *assistantClient) GetChatsInFolder(ctx context.Context, in *GetChatsInFolderRequest, opts ...grpc.CallOption) (*GetChatsInFolderResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetChatsInFolderResponse)
-	err := c.cc.Invoke(ctx, Assist_GetChatsInFolder_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_GetChatsInFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) GetUserChats(ctx context.Context, in *GetUserChatsRequest, opts ...grpc.CallOption) (*GetUserChatsResponse, error) {
+func (c *assistantClient) GetUserChats(ctx context.Context, in *GetUserChatsRequest, opts ...grpc.CallOption) (*GetUserChatsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserChatsResponse)
-	err := c.cc.Invoke(ctx, Assist_GetUserChats_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_GetUserChats_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) CreateFolder(ctx context.Context, in *CreateFolderRequest, opts ...grpc.CallOption) (*CreateFolderResponse, error) {
+func (c *assistantClient) CreateFolder(ctx context.Context, in *CreateFolderRequest, opts ...grpc.CallOption) (*CreateFolderResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateFolderResponse)
-	err := c.cc.Invoke(ctx, Assist_CreateFolder_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_CreateFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) DeleteFolder(ctx context.Context, in *DeleteFolderRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *assistantClient) DeleteFolder(ctx context.Context, in *DeleteFolderRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, Assist_DeleteFolder_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_DeleteFolder_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) GetFolderByID(ctx context.Context, in *GetFolderByIDRequest, opts ...grpc.CallOption) (*GetFolderByIDResponse, error) {
+func (c *assistantClient) GetFolderByID(ctx context.Context, in *GetFolderByIDRequest, opts ...grpc.CallOption) (*GetFolderByIDResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetFolderByIDResponse)
-	err := c.cc.Invoke(ctx, Assist_GetFolderByID_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_GetFolderByID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) GetUserFolders(ctx context.Context, in *GetUserFoldersRequest, opts ...grpc.CallOption) (*GetUserFoldersResponse, error) {
+func (c *assistantClient) GetUserFolders(ctx context.Context, in *GetUserFoldersRequest, opts ...grpc.CallOption) (*GetUserFoldersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserFoldersResponse)
-	err := c.cc.Invoke(ctx, Assist_GetUserFolders_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_GetUserFolders_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error) {
+func (c *assistantClient) SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SendMessageResponse)
-	err := c.cc.Invoke(ctx, Assist_SendMessage_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_SendMessage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) SendMessageStream(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[MessageDelta], error) {
+func (c *assistantClient) SendMessageStream(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[MessageDelta], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Assist_ServiceDesc.Streams[0], Assist_SendMessageStream_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Assistant_ServiceDesc.Streams[0], Assistant_SendMessageStream_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -204,42 +204,42 @@ func (c *assistClient) SendMessageStream(ctx context.Context, in *SendMessageReq
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type Assist_SendMessageStreamClient = grpc.ServerStreamingClient[MessageDelta]
+type Assistant_SendMessageStreamClient = grpc.ServerStreamingClient[MessageDelta]
 
-func (c *assistClient) AddMessage(ctx context.Context, in *AddMessageRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *assistantClient) AddMessage(ctx context.Context, in *AddMessageRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, Assist_AddMessage_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_AddMessage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) GetMessageByID(ctx context.Context, in *GetMessageByIDRequest, opts ...grpc.CallOption) (*GetMessageByIDResponse, error) {
+func (c *assistantClient) GetMessageByID(ctx context.Context, in *GetMessageByIDRequest, opts ...grpc.CallOption) (*GetMessageByIDResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetMessageByIDResponse)
-	err := c.cc.Invoke(ctx, Assist_GetMessageByID_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_GetMessageByID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *assistClient) GetMessagesInChat(ctx context.Context, in *GetMessagesInChatRequest, opts ...grpc.CallOption) (*GetMessagesInChatResponse, error) {
+func (c *assistantClient) GetMessagesInChat(ctx context.Context, in *GetMessagesInChatRequest, opts ...grpc.CallOption) (*GetMessagesInChatResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetMessagesInChatResponse)
-	err := c.cc.Invoke(ctx, Assist_GetMessagesInChat_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Assistant_GetMessagesInChat_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AssistServer is the server API for Assist service.
-// All implementations must embed UnimplementedAssistServer
+// AssistantServer is the server API for Assistant service.
+// All implementations must embed UnimplementedAssistantServer
 // for forward compatibility.
-type AssistServer interface {
+type AssistantServer interface {
 	CreateChat(context.Context, *CreateChatRequest) (*CreateChatResponse, error)
 	ChangeChatFolder(context.Context, *ChangeChatFolderRequest) (*ChangeChatFolderResponse, error)
 	ChangeChatTitle(context.Context, *ChangeChatTitleRequest) (*ChangeChatTitleResponse, error)
@@ -256,438 +256,438 @@ type AssistServer interface {
 	AddMessage(context.Context, *AddMessageRequest) (*Empty, error)
 	GetMessageByID(context.Context, *GetMessageByIDRequest) (*GetMessageByIDResponse, error)
 	GetMessagesInChat(context.Context, *GetMessagesInChatRequest) (*GetMessagesInChatResponse, error)
-	mustEmbedUnimplementedAssistServer()
+	mustEmbedUnimplementedAssistantServer()
 }
 
-// UnimplementedAssistServer must be embedded to have
+// UnimplementedAssistantServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedAssistServer struct{}
+type UnimplementedAssistantServer struct{}
 
-func (UnimplementedAssistServer) CreateChat(context.Context, *CreateChatRequest) (*CreateChatResponse, error) {
+func (UnimplementedAssistantServer) CreateChat(context.Context, *CreateChatRequest) (*CreateChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateChat not implemented")
 }
-func (UnimplementedAssistServer) ChangeChatFolder(context.Context, *ChangeChatFolderRequest) (*ChangeChatFolderResponse, error) {
+func (UnimplementedAssistantServer) ChangeChatFolder(context.Context, *ChangeChatFolderRequest) (*ChangeChatFolderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeChatFolder not implemented")
 }
-func (UnimplementedAssistServer) ChangeChatTitle(context.Context, *ChangeChatTitleRequest) (*ChangeChatTitleResponse, error) {
+func (UnimplementedAssistantServer) ChangeChatTitle(context.Context, *ChangeChatTitleRequest) (*ChangeChatTitleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeChatTitle not implemented")
 }
-func (UnimplementedAssistServer) DeleteChat(context.Context, *DeleteChatRequest) (*Empty, error) {
+func (UnimplementedAssistantServer) DeleteChat(context.Context, *DeleteChatRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteChat not implemented")
 }
-func (UnimplementedAssistServer) GetChatByID(context.Context, *GetChatByIDRequest) (*GetChatByIDResponse, error) {
+func (UnimplementedAssistantServer) GetChatByID(context.Context, *GetChatByIDRequest) (*GetChatByIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChatByID not implemented")
 }
-func (UnimplementedAssistServer) GetChatsInFolder(context.Context, *GetChatsInFolderRequest) (*GetChatsInFolderResponse, error) {
+func (UnimplementedAssistantServer) GetChatsInFolder(context.Context, *GetChatsInFolderRequest) (*GetChatsInFolderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChatsInFolder not implemented")
 }
-func (UnimplementedAssistServer) GetUserChats(context.Context, *GetUserChatsRequest) (*GetUserChatsResponse, error) {
+func (UnimplementedAssistantServer) GetUserChats(context.Context, *GetUserChatsRequest) (*GetUserChatsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserChats not implemented")
 }
-func (UnimplementedAssistServer) CreateFolder(context.Context, *CreateFolderRequest) (*CreateFolderResponse, error) {
+func (UnimplementedAssistantServer) CreateFolder(context.Context, *CreateFolderRequest) (*CreateFolderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateFolder not implemented")
 }
-func (UnimplementedAssistServer) DeleteFolder(context.Context, *DeleteFolderRequest) (*Empty, error) {
+func (UnimplementedAssistantServer) DeleteFolder(context.Context, *DeleteFolderRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteFolder not implemented")
 }
-func (UnimplementedAssistServer) GetFolderByID(context.Context, *GetFolderByIDRequest) (*GetFolderByIDResponse, error) {
+func (UnimplementedAssistantServer) GetFolderByID(context.Context, *GetFolderByIDRequest) (*GetFolderByIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFolderByID not implemented")
 }
-func (UnimplementedAssistServer) GetUserFolders(context.Context, *GetUserFoldersRequest) (*GetUserFoldersResponse, error) {
+func (UnimplementedAssistantServer) GetUserFolders(context.Context, *GetUserFoldersRequest) (*GetUserFoldersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserFolders not implemented")
 }
-func (UnimplementedAssistServer) SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error) {
+func (UnimplementedAssistantServer) SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
 }
-func (UnimplementedAssistServer) SendMessageStream(*SendMessageRequest, grpc.ServerStreamingServer[MessageDelta]) error {
+func (UnimplementedAssistantServer) SendMessageStream(*SendMessageRequest, grpc.ServerStreamingServer[MessageDelta]) error {
 	return status.Errorf(codes.Unimplemented, "method SendMessageStream not implemented")
 }
-func (UnimplementedAssistServer) AddMessage(context.Context, *AddMessageRequest) (*Empty, error) {
+func (UnimplementedAssistantServer) AddMessage(context.Context, *AddMessageRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddMessage not implemented")
 }
-func (UnimplementedAssistServer) GetMessageByID(context.Context, *GetMessageByIDRequest) (*GetMessageByIDResponse, error) {
+func (UnimplementedAssistantServer) GetMessageByID(context.Context, *GetMessageByIDRequest) (*GetMessageByIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMessageByID not implemented")
 }
-func (UnimplementedAssistServer) GetMessagesInChat(context.Context, *GetMessagesInChatRequest) (*GetMessagesInChatResponse, error) {
+func (UnimplementedAssistantServer) GetMessagesInChat(context.Context, *GetMessagesInChatRequest) (*GetMessagesInChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMessagesInChat not implemented")
 }
-func (UnimplementedAssistServer) mustEmbedUnimplementedAssistServer() {}
-func (UnimplementedAssistServer) testEmbeddedByValue()                {}
+func (UnimplementedAssistantServer) mustEmbedUnimplementedAssistantServer() {}
+func (UnimplementedAssistantServer) testEmbeddedByValue()                   {}
 
-// UnsafeAssistServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AssistServer will
+// UnsafeAssistantServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AssistantServer will
 // result in compilation errors.
-type UnsafeAssistServer interface {
-	mustEmbedUnimplementedAssistServer()
+type UnsafeAssistantServer interface {
+	mustEmbedUnimplementedAssistantServer()
 }
 
-func RegisterAssistServer(s grpc.ServiceRegistrar, srv AssistServer) {
-	// If the following call pancis, it indicates UnimplementedAssistServer was
+func RegisterAssistantServer(s grpc.ServiceRegistrar, srv AssistantServer) {
+	// If the following call pancis, it indicates UnimplementedAssistantServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Assist_ServiceDesc, srv)
+	s.RegisterService(&Assistant_ServiceDesc, srv)
 }
 
-func _Assist_CreateChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_CreateChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateChatRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).CreateChat(ctx, in)
+		return srv.(AssistantServer).CreateChat(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_CreateChat_FullMethodName,
+		FullMethod: Assistant_CreateChat_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).CreateChat(ctx, req.(*CreateChatRequest))
+		return srv.(AssistantServer).CreateChat(ctx, req.(*CreateChatRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_ChangeChatFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_ChangeChatFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChangeChatFolderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).ChangeChatFolder(ctx, in)
+		return srv.(AssistantServer).ChangeChatFolder(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_ChangeChatFolder_FullMethodName,
+		FullMethod: Assistant_ChangeChatFolder_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).ChangeChatFolder(ctx, req.(*ChangeChatFolderRequest))
+		return srv.(AssistantServer).ChangeChatFolder(ctx, req.(*ChangeChatFolderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_ChangeChatTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_ChangeChatTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChangeChatTitleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).ChangeChatTitle(ctx, in)
+		return srv.(AssistantServer).ChangeChatTitle(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_ChangeChatTitle_FullMethodName,
+		FullMethod: Assistant_ChangeChatTitle_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).ChangeChatTitle(ctx, req.(*ChangeChatTitleRequest))
+		return srv.(AssistantServer).ChangeChatTitle(ctx, req.(*ChangeChatTitleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_DeleteChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_DeleteChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteChatRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).DeleteChat(ctx, in)
+		return srv.(AssistantServer).DeleteChat(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_DeleteChat_FullMethodName,
+		FullMethod: Assistant_DeleteChat_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).DeleteChat(ctx, req.(*DeleteChatRequest))
+		return srv.(AssistantServer).DeleteChat(ctx, req.(*DeleteChatRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_GetChatByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_GetChatByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetChatByIDRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).GetChatByID(ctx, in)
+		return srv.(AssistantServer).GetChatByID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_GetChatByID_FullMethodName,
+		FullMethod: Assistant_GetChatByID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).GetChatByID(ctx, req.(*GetChatByIDRequest))
+		return srv.(AssistantServer).GetChatByID(ctx, req.(*GetChatByIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_GetChatsInFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_GetChatsInFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetChatsInFolderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).GetChatsInFolder(ctx, in)
+		return srv.(AssistantServer).GetChatsInFolder(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_GetChatsInFolder_FullMethodName,
+		FullMethod: Assistant_GetChatsInFolder_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).GetChatsInFolder(ctx, req.(*GetChatsInFolderRequest))
+		return srv.(AssistantServer).GetChatsInFolder(ctx, req.(*GetChatsInFolderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_GetUserChats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_GetUserChats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserChatsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).GetUserChats(ctx, in)
+		return srv.(AssistantServer).GetUserChats(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_GetUserChats_FullMethodName,
+		FullMethod: Assistant_GetUserChats_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).GetUserChats(ctx, req.(*GetUserChatsRequest))
+		return srv.(AssistantServer).GetUserChats(ctx, req.(*GetUserChatsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_CreateFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_CreateFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateFolderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).CreateFolder(ctx, in)
+		return srv.(AssistantServer).CreateFolder(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_CreateFolder_FullMethodName,
+		FullMethod: Assistant_CreateFolder_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).CreateFolder(ctx, req.(*CreateFolderRequest))
+		return srv.(AssistantServer).CreateFolder(ctx, req.(*CreateFolderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_DeleteFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_DeleteFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteFolderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).DeleteFolder(ctx, in)
+		return srv.(AssistantServer).DeleteFolder(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_DeleteFolder_FullMethodName,
+		FullMethod: Assistant_DeleteFolder_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).DeleteFolder(ctx, req.(*DeleteFolderRequest))
+		return srv.(AssistantServer).DeleteFolder(ctx, req.(*DeleteFolderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_GetFolderByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_GetFolderByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetFolderByIDRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).GetFolderByID(ctx, in)
+		return srv.(AssistantServer).GetFolderByID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_GetFolderByID_FullMethodName,
+		FullMethod: Assistant_GetFolderByID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).GetFolderByID(ctx, req.(*GetFolderByIDRequest))
+		return srv.(AssistantServer).GetFolderByID(ctx, req.(*GetFolderByIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_GetUserFolders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_GetUserFolders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserFoldersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).GetUserFolders(ctx, in)
+		return srv.(AssistantServer).GetUserFolders(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_GetUserFolders_FullMethodName,
+		FullMethod: Assistant_GetUserFolders_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).GetUserFolders(ctx, req.(*GetUserFoldersRequest))
+		return srv.(AssistantServer).GetUserFolders(ctx, req.(*GetUserFoldersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SendMessageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).SendMessage(ctx, in)
+		return srv.(AssistantServer).SendMessage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_SendMessage_FullMethodName,
+		FullMethod: Assistant_SendMessage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).SendMessage(ctx, req.(*SendMessageRequest))
+		return srv.(AssistantServer).SendMessage(ctx, req.(*SendMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_SendMessageStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+func _Assistant_SendMessageStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(SendMessageRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AssistServer).SendMessageStream(m, &grpc.GenericServerStream[SendMessageRequest, MessageDelta]{ServerStream: stream})
+	return srv.(AssistantServer).SendMessageStream(m, &grpc.GenericServerStream[SendMessageRequest, MessageDelta]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type Assist_SendMessageStreamServer = grpc.ServerStreamingServer[MessageDelta]
+type Assistant_SendMessageStreamServer = grpc.ServerStreamingServer[MessageDelta]
 
-func _Assist_AddMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_AddMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddMessageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).AddMessage(ctx, in)
+		return srv.(AssistantServer).AddMessage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_AddMessage_FullMethodName,
+		FullMethod: Assistant_AddMessage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).AddMessage(ctx, req.(*AddMessageRequest))
+		return srv.(AssistantServer).AddMessage(ctx, req.(*AddMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_GetMessageByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_GetMessageByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetMessageByIDRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).GetMessageByID(ctx, in)
+		return srv.(AssistantServer).GetMessageByID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_GetMessageByID_FullMethodName,
+		FullMethod: Assistant_GetMessageByID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).GetMessageByID(ctx, req.(*GetMessageByIDRequest))
+		return srv.(AssistantServer).GetMessageByID(ctx, req.(*GetMessageByIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Assist_GetMessagesInChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Assistant_GetMessagesInChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetMessagesInChatRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AssistServer).GetMessagesInChat(ctx, in)
+		return srv.(AssistantServer).GetMessagesInChat(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Assist_GetMessagesInChat_FullMethodName,
+		FullMethod: Assistant_GetMessagesInChat_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistServer).GetMessagesInChat(ctx, req.(*GetMessagesInChatRequest))
+		return srv.(AssistantServer).GetMessagesInChat(ctx, req.(*GetMessagesInChatRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Assist_ServiceDesc is the grpc.ServiceDesc for Assist service.
+// Assistant_ServiceDesc is the grpc.ServiceDesc for Assistant service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Assist_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "assistant.Assist",
-	HandlerType: (*AssistServer)(nil),
+var Assistant_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "assistant.Assistant",
+	HandlerType: (*AssistantServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "CreateChat",
-			Handler:    _Assist_CreateChat_Handler,
+			Handler:    _Assistant_CreateChat_Handler,
 		},
 		{
 			MethodName: "ChangeChatFolder",
-			Handler:    _Assist_ChangeChatFolder_Handler,
+			Handler:    _Assistant_ChangeChatFolder_Handler,
 		},
 		{
 			MethodName: "ChangeChatTitle",
-			Handler:    _Assist_ChangeChatTitle_Handler,
+			Handler:    _Assistant_ChangeChatTitle_Handler,
 		},
 		{
 			MethodName: "DeleteChat",
-			Handler:    _Assist_DeleteChat_Handler,
+			Handler:    _Assistant_DeleteChat_Handler,
 		},
 		{
 			MethodName: "GetChatByID",
-			Handler:    _Assist_GetChatByID_Handler,
+			Handler:    _Assistant_GetChatByID_Handler,
 		},
 		{
 			MethodName: "GetChatsInFolder",
-			Handler:    _Assist_GetChatsInFolder_Handler,
+			Handler:    _Assistant_GetChatsInFolder_Handler,
 		},
 		{
 			MethodName: "GetUserChats",
-			Handler:    _Assist_GetUserChats_Handler,
+			Handler:    _Assistant_GetUserChats_Handler,
 		},
 		{
 			MethodName: "CreateFolder",
-			Handler:    _Assist_CreateFolder_Handler,
+			Handler:    _Assistant_CreateFolder_Handler,
 		},
 		{
 			MethodName: "DeleteFolder",
-			Handler:    _Assist_DeleteFolder_Handler,
+			Handler:    _Assistant_DeleteFolder_Handler,
 		},
 		{
 			MethodName: "GetFolderByID",
-			Handler:    _Assist_GetFolderByID_Handler,
+			Handler:    _Assistant_GetFolderByID_Handler,
 		},
 		{
 			MethodName: "GetUserFolders",
-			Handler:    _Assist_GetUserFolders_Handler,
+			Handler:    _Assistant_GetUserFolders_Handler,
 		},
 		{
 			MethodName: "SendMessage",
-			Handler:    _Assist_SendMessage_Handler,
+			Handler:    _Assistant_SendMessage_Handler,
 		},
 		{
 			MethodName: "AddMessage",
-			Handler:    _Assist_AddMessage_Handler,
+			Handler:    _Assistant_AddMessage_Handler,
 		},
 		{
 			MethodName: "GetMessageByID",
-			Handler:    _Assist_GetMessageByID_Handler,
+			Handler:    _Assistant_GetMessageByID_Handler,
 		},
 		{
 			MethodName: "GetMessagesInChat",
-			Handler:    _Assist_GetMessagesInChat_Handler,
+			Handler:    _Assistant_GetMessagesInChat_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "SendMessageStream",
-			Handler:       _Assist_SendMessageStream_Handler,
+			Handler:       _Assistant_SendMessageStream_Handler,
 			ServerStreams: true,
 		},
 	},

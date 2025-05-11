@@ -4,10 +4,11 @@
 // - protoc             v4.24.4
 // source: accounts/accounts.proto
 
-package accountv1
+package accountsv1
 
 import (
 	context "context"
+	common "github.com/x3a-tech/contract-go/common"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -20,28 +21,54 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Accounts_TryRegistryFromTelegram_FullMethodName = "/account.Accounts/TryRegistryFromTelegram"
-	Accounts_GetAccountShort_FullMethodName         = "/account.Accounts/GetAccountShort"
-	Accounts_GetFavorites_FullMethodName            = "/account.Accounts/GetFavorites"
-	Accounts_HasFavorites_FullMethodName            = "/account.Accounts/HasFavorites"
-	Accounts_ToggleFavorite_FullMethodName          = "/account.Accounts/ToggleFavorite"
-	Accounts_MoveFavorite_FullMethodName            = "/account.Accounts/MoveFavorite"
-	Accounts_CreateFavoriteFolder_FullMethodName    = "/account.Accounts/CreateFavoriteFolder"
-	Accounts_UpdateFavoriteFolder_FullMethodName    = "/account.Accounts/UpdateFavoriteFolder"
+	Accounts_TryRegistryFromTelegram_FullMethodName = "/accounts.Accounts/TryRegistryFromTelegram"
+	Accounts_AuthTelegram_FullMethodName            = "/accounts.Accounts/AuthTelegram"
+	Accounts_AuthRefresh_FullMethodName             = "/accounts.Accounts/AuthRefresh"
+	Accounts_GetProfile_FullMethodName              = "/accounts.Accounts/GetProfile"
+	Accounts_UpdateProfileInfo_FullMethodName       = "/accounts.Accounts/UpdateProfileInfo"
+	Accounts_RemoveProfile_FullMethodName           = "/accounts.Accounts/RemoveProfile"
+	Accounts_Onboarded_FullMethodName               = "/accounts.Accounts/Onboarded"
+	Accounts_GetAccountsShort_FullMethodName        = "/accounts.Accounts/GetAccountsShort"
+	Accounts_GetSessions_FullMethodName             = "/accounts.Accounts/GetSessions"
+	Accounts_GetSubscribeArticles_FullMethodName    = "/accounts.Accounts/GetSubscribeArticles"
+	Accounts_SubscribeArticle_FullMethodName        = "/accounts.Accounts/SubscribeArticle"
+	Accounts_UnsubscribeArticle_FullMethodName      = "/accounts.Accounts/UnsubscribeArticle"
+	Accounts_GetFavorites_FullMethodName            = "/accounts.Accounts/GetFavorites"
+	Accounts_SetFavorite_FullMethodName             = "/accounts.Accounts/SetFavorite"
+	Accounts_RemoveFavorite_FullMethodName          = "/accounts.Accounts/RemoveFavorite"
+	Accounts_CheckArticlesFavorites_FullMethodName  = "/accounts.Accounts/CheckArticlesFavorites"
+	Accounts_GetReferrals_FullMethodName            = "/accounts.Accounts/GetReferrals"
 )
 
 // AccountsClient is the client API for Accounts service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountsClient interface {
+	// Reg
 	TryRegistryFromTelegram(ctx context.Context, in *TryRegistryFromTelegramParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetAccountShort(ctx context.Context, in *GetAccountParams, opts ...grpc.CallOption) (*AccountShort, error)
-	GetFavorites(ctx context.Context, in *GetFavoritesParams, opts ...grpc.CallOption) (*GetFavoritesResponse, error)
-	HasFavorites(ctx context.Context, in *HasFavoritesParams, opts ...grpc.CallOption) (*HasFavoritesResponse, error)
-	ToggleFavorite(ctx context.Context, in *ToggleFavoriteParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	MoveFavorite(ctx context.Context, in *MoveFavoriteParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	CreateFavoriteFolder(ctx context.Context, in *CreateFavoriteFolderParams, opts ...grpc.CallOption) (*FavoriteFolder, error)
-	UpdateFavoriteFolder(ctx context.Context, in *UpdateFavoriteFolderParams, opts ...grpc.CallOption) (*FavoriteFolder, error)
+	// Auth
+	AuthTelegram(ctx context.Context, in *AuthTelegramParams, opts ...grpc.CallOption) (*AuthResponse, error)
+	AuthRefresh(ctx context.Context, in *AuthRefreshParams, opts ...grpc.CallOption) (*AuthResponse, error)
+	// Profile
+	GetProfile(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*Profile, error)
+	UpdateProfileInfo(ctx context.Context, in *UpdateProfileInfoParams, opts ...grpc.CallOption) (*Profile, error)
+	RemoveProfile(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	// Sets
+	Onboarded(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Global Get
+	GetAccountsShort(ctx context.Context, in *GetAccountsShortParams, opts ...grpc.CallOption) (*GetAccountsShortResponse, error)
+	// Sessions
+	GetSessions(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*GetSessionsResponse, error)
+	GetSubscribeArticles(ctx context.Context, in *GetSubscribeArticlesParamsInner, opts ...grpc.CallOption) (*GetSubscribeArticlesResponse, error)
+	SubscribeArticle(ctx context.Context, in *SubUnsubArticlesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnsubscribeArticle(ctx context.Context, in *SubUnsubArticlesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Favorites
+	GetFavorites(ctx context.Context, in *GetFavoritesParamsInner, opts ...grpc.CallOption) (*GetFavoritesResponse, error)
+	SetFavorite(ctx context.Context, in *ToggleFavoriteParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RemoveFavorite(ctx context.Context, in *ToggleFavoriteParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CheckArticlesFavorites(ctx context.Context, in *CheckArticlesFavoritesParams, opts ...grpc.CallOption) (*CheckArticlesFavoritesResponse, error)
+	// Referrals
+	GetReferrals(ctx context.Context, in *GetReferralsParamsInner, opts ...grpc.CallOption) (*GetReferralsResponse, error)
 }
 
 type accountsClient struct {
@@ -62,17 +89,117 @@ func (c *accountsClient) TryRegistryFromTelegram(ctx context.Context, in *TryReg
 	return out, nil
 }
 
-func (c *accountsClient) GetAccountShort(ctx context.Context, in *GetAccountParams, opts ...grpc.CallOption) (*AccountShort, error) {
+func (c *accountsClient) AuthTelegram(ctx context.Context, in *AuthTelegramParams, opts ...grpc.CallOption) (*AuthResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AccountShort)
-	err := c.cc.Invoke(ctx, Accounts_GetAccountShort_FullMethodName, in, out, cOpts...)
+	out := new(AuthResponse)
+	err := c.cc.Invoke(ctx, Accounts_AuthTelegram_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountsClient) GetFavorites(ctx context.Context, in *GetFavoritesParams, opts ...grpc.CallOption) (*GetFavoritesResponse, error) {
+func (c *accountsClient) AuthRefresh(ctx context.Context, in *AuthRefreshParams, opts ...grpc.CallOption) (*AuthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthResponse)
+	err := c.cc.Invoke(ctx, Accounts_AuthRefresh_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) GetProfile(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*Profile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Profile)
+	err := c.cc.Invoke(ctx, Accounts_GetProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) UpdateProfileInfo(ctx context.Context, in *UpdateProfileInfoParams, opts ...grpc.CallOption) (*Profile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Profile)
+	err := c.cc.Invoke(ctx, Accounts_UpdateProfileInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) RemoveProfile(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, Accounts_RemoveProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) Onboarded(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_Onboarded_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) GetAccountsShort(ctx context.Context, in *GetAccountsShortParams, opts ...grpc.CallOption) (*GetAccountsShortResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountsShortResponse)
+	err := c.cc.Invoke(ctx, Accounts_GetAccountsShort_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) GetSessions(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*GetSessionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSessionsResponse)
+	err := c.cc.Invoke(ctx, Accounts_GetSessions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) GetSubscribeArticles(ctx context.Context, in *GetSubscribeArticlesParamsInner, opts ...grpc.CallOption) (*GetSubscribeArticlesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSubscribeArticlesResponse)
+	err := c.cc.Invoke(ctx, Accounts_GetSubscribeArticles_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) SubscribeArticle(ctx context.Context, in *SubUnsubArticlesParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_SubscribeArticle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) UnsubscribeArticle(ctx context.Context, in *SubUnsubArticlesParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_UnsubscribeArticle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) GetFavorites(ctx context.Context, in *GetFavoritesParamsInner, opts ...grpc.CallOption) (*GetFavoritesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetFavoritesResponse)
 	err := c.cc.Invoke(ctx, Accounts_GetFavorites_FullMethodName, in, out, cOpts...)
@@ -82,50 +209,40 @@ func (c *accountsClient) GetFavorites(ctx context.Context, in *GetFavoritesParam
 	return out, nil
 }
 
-func (c *accountsClient) HasFavorites(ctx context.Context, in *HasFavoritesParams, opts ...grpc.CallOption) (*HasFavoritesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HasFavoritesResponse)
-	err := c.cc.Invoke(ctx, Accounts_HasFavorites_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountsClient) ToggleFavorite(ctx context.Context, in *ToggleFavoriteParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *accountsClient) SetFavorite(ctx context.Context, in *ToggleFavoriteParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Accounts_ToggleFavorite_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Accounts_SetFavorite_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountsClient) MoveFavorite(ctx context.Context, in *MoveFavoriteParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *accountsClient) RemoveFavorite(ctx context.Context, in *ToggleFavoriteParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Accounts_MoveFavorite_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Accounts_RemoveFavorite_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountsClient) CreateFavoriteFolder(ctx context.Context, in *CreateFavoriteFolderParams, opts ...grpc.CallOption) (*FavoriteFolder, error) {
+func (c *accountsClient) CheckArticlesFavorites(ctx context.Context, in *CheckArticlesFavoritesParams, opts ...grpc.CallOption) (*CheckArticlesFavoritesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FavoriteFolder)
-	err := c.cc.Invoke(ctx, Accounts_CreateFavoriteFolder_FullMethodName, in, out, cOpts...)
+	out := new(CheckArticlesFavoritesResponse)
+	err := c.cc.Invoke(ctx, Accounts_CheckArticlesFavorites_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountsClient) UpdateFavoriteFolder(ctx context.Context, in *UpdateFavoriteFolderParams, opts ...grpc.CallOption) (*FavoriteFolder, error) {
+func (c *accountsClient) GetReferrals(ctx context.Context, in *GetReferralsParamsInner, opts ...grpc.CallOption) (*GetReferralsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FavoriteFolder)
-	err := c.cc.Invoke(ctx, Accounts_UpdateFavoriteFolder_FullMethodName, in, out, cOpts...)
+	out := new(GetReferralsResponse)
+	err := c.cc.Invoke(ctx, Accounts_GetReferrals_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -136,14 +253,31 @@ func (c *accountsClient) UpdateFavoriteFolder(ctx context.Context, in *UpdateFav
 // All implementations must embed UnimplementedAccountsServer
 // for forward compatibility.
 type AccountsServer interface {
+	// Reg
 	TryRegistryFromTelegram(context.Context, *TryRegistryFromTelegramParams) (*emptypb.Empty, error)
-	GetAccountShort(context.Context, *GetAccountParams) (*AccountShort, error)
-	GetFavorites(context.Context, *GetFavoritesParams) (*GetFavoritesResponse, error)
-	HasFavorites(context.Context, *HasFavoritesParams) (*HasFavoritesResponse, error)
-	ToggleFavorite(context.Context, *ToggleFavoriteParams) (*emptypb.Empty, error)
-	MoveFavorite(context.Context, *MoveFavoriteParams) (*emptypb.Empty, error)
-	CreateFavoriteFolder(context.Context, *CreateFavoriteFolderParams) (*FavoriteFolder, error)
-	UpdateFavoriteFolder(context.Context, *UpdateFavoriteFolderParams) (*FavoriteFolder, error)
+	// Auth
+	AuthTelegram(context.Context, *AuthTelegramParams) (*AuthResponse, error)
+	AuthRefresh(context.Context, *AuthRefreshParams) (*AuthResponse, error)
+	// Profile
+	GetProfile(context.Context, *ProfileParams) (*Profile, error)
+	UpdateProfileInfo(context.Context, *UpdateProfileInfoParams) (*Profile, error)
+	RemoveProfile(context.Context, *ProfileParams) (*common.BoolStatus, error)
+	// Sets
+	Onboarded(context.Context, *ProfileParams) (*emptypb.Empty, error)
+	// Global Get
+	GetAccountsShort(context.Context, *GetAccountsShortParams) (*GetAccountsShortResponse, error)
+	// Sessions
+	GetSessions(context.Context, *ProfileParams) (*GetSessionsResponse, error)
+	GetSubscribeArticles(context.Context, *GetSubscribeArticlesParamsInner) (*GetSubscribeArticlesResponse, error)
+	SubscribeArticle(context.Context, *SubUnsubArticlesParams) (*emptypb.Empty, error)
+	UnsubscribeArticle(context.Context, *SubUnsubArticlesParams) (*emptypb.Empty, error)
+	// Favorites
+	GetFavorites(context.Context, *GetFavoritesParamsInner) (*GetFavoritesResponse, error)
+	SetFavorite(context.Context, *ToggleFavoriteParamsInner) (*emptypb.Empty, error)
+	RemoveFavorite(context.Context, *ToggleFavoriteParamsInner) (*emptypb.Empty, error)
+	CheckArticlesFavorites(context.Context, *CheckArticlesFavoritesParams) (*CheckArticlesFavoritesResponse, error)
+	// Referrals
+	GetReferrals(context.Context, *GetReferralsParamsInner) (*GetReferralsResponse, error)
 	mustEmbedUnimplementedAccountsServer()
 }
 
@@ -157,26 +291,53 @@ type UnimplementedAccountsServer struct{}
 func (UnimplementedAccountsServer) TryRegistryFromTelegram(context.Context, *TryRegistryFromTelegramParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TryRegistryFromTelegram not implemented")
 }
-func (UnimplementedAccountsServer) GetAccountShort(context.Context, *GetAccountParams) (*AccountShort, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAccountShort not implemented")
+func (UnimplementedAccountsServer) AuthTelegram(context.Context, *AuthTelegramParams) (*AuthResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AuthTelegram not implemented")
 }
-func (UnimplementedAccountsServer) GetFavorites(context.Context, *GetFavoritesParams) (*GetFavoritesResponse, error) {
+func (UnimplementedAccountsServer) AuthRefresh(context.Context, *AuthRefreshParams) (*AuthResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AuthRefresh not implemented")
+}
+func (UnimplementedAccountsServer) GetProfile(context.Context, *ProfileParams) (*Profile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProfile not implemented")
+}
+func (UnimplementedAccountsServer) UpdateProfileInfo(context.Context, *UpdateProfileInfoParams) (*Profile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfileInfo not implemented")
+}
+func (UnimplementedAccountsServer) RemoveProfile(context.Context, *ProfileParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveProfile not implemented")
+}
+func (UnimplementedAccountsServer) Onboarded(context.Context, *ProfileParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Onboarded not implemented")
+}
+func (UnimplementedAccountsServer) GetAccountsShort(context.Context, *GetAccountsShortParams) (*GetAccountsShortResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountsShort not implemented")
+}
+func (UnimplementedAccountsServer) GetSessions(context.Context, *ProfileParams) (*GetSessionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSessions not implemented")
+}
+func (UnimplementedAccountsServer) GetSubscribeArticles(context.Context, *GetSubscribeArticlesParamsInner) (*GetSubscribeArticlesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSubscribeArticles not implemented")
+}
+func (UnimplementedAccountsServer) SubscribeArticle(context.Context, *SubUnsubArticlesParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubscribeArticle not implemented")
+}
+func (UnimplementedAccountsServer) UnsubscribeArticle(context.Context, *SubUnsubArticlesParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnsubscribeArticle not implemented")
+}
+func (UnimplementedAccountsServer) GetFavorites(context.Context, *GetFavoritesParamsInner) (*GetFavoritesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFavorites not implemented")
 }
-func (UnimplementedAccountsServer) HasFavorites(context.Context, *HasFavoritesParams) (*HasFavoritesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HasFavorites not implemented")
+func (UnimplementedAccountsServer) SetFavorite(context.Context, *ToggleFavoriteParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetFavorite not implemented")
 }
-func (UnimplementedAccountsServer) ToggleFavorite(context.Context, *ToggleFavoriteParams) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ToggleFavorite not implemented")
+func (UnimplementedAccountsServer) RemoveFavorite(context.Context, *ToggleFavoriteParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveFavorite not implemented")
 }
-func (UnimplementedAccountsServer) MoveFavorite(context.Context, *MoveFavoriteParams) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MoveFavorite not implemented")
+func (UnimplementedAccountsServer) CheckArticlesFavorites(context.Context, *CheckArticlesFavoritesParams) (*CheckArticlesFavoritesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckArticlesFavorites not implemented")
 }
-func (UnimplementedAccountsServer) CreateFavoriteFolder(context.Context, *CreateFavoriteFolderParams) (*FavoriteFolder, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateFavoriteFolder not implemented")
-}
-func (UnimplementedAccountsServer) UpdateFavoriteFolder(context.Context, *UpdateFavoriteFolderParams) (*FavoriteFolder, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateFavoriteFolder not implemented")
+func (UnimplementedAccountsServer) GetReferrals(context.Context, *GetReferralsParamsInner) (*GetReferralsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetReferrals not implemented")
 }
 func (UnimplementedAccountsServer) mustEmbedUnimplementedAccountsServer() {}
 func (UnimplementedAccountsServer) testEmbeddedByValue()                  {}
@@ -217,26 +378,206 @@ func _Accounts_TryRegistryFromTelegram_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Accounts_GetAccountShort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccountParams)
+func _Accounts_AuthTelegram_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthTelegramParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountsServer).GetAccountShort(ctx, in)
+		return srv.(AccountsServer).AuthTelegram(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Accounts_GetAccountShort_FullMethodName,
+		FullMethod: Accounts_AuthTelegram_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).GetAccountShort(ctx, req.(*GetAccountParams))
+		return srv.(AccountsServer).AuthTelegram(ctx, req.(*AuthTelegramParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_AuthRefresh_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthRefreshParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).AuthRefresh(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_AuthRefresh_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).AuthRefresh(ctx, req.(*AuthRefreshParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_GetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProfileParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).GetProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_GetProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).GetProfile(ctx, req.(*ProfileParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_UpdateProfileInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProfileInfoParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).UpdateProfileInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_UpdateProfileInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).UpdateProfileInfo(ctx, req.(*UpdateProfileInfoParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_RemoveProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProfileParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).RemoveProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_RemoveProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).RemoveProfile(ctx, req.(*ProfileParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_Onboarded_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProfileParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).Onboarded(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_Onboarded_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).Onboarded(ctx, req.(*ProfileParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_GetAccountsShort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountsShortParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).GetAccountsShort(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_GetAccountsShort_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).GetAccountsShort(ctx, req.(*GetAccountsShortParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_GetSessions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProfileParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).GetSessions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_GetSessions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).GetSessions(ctx, req.(*ProfileParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_GetSubscribeArticles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSubscribeArticlesParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).GetSubscribeArticles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_GetSubscribeArticles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).GetSubscribeArticles(ctx, req.(*GetSubscribeArticlesParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_SubscribeArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubUnsubArticlesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).SubscribeArticle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_SubscribeArticle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).SubscribeArticle(ctx, req.(*SubUnsubArticlesParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_UnsubscribeArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubUnsubArticlesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).UnsubscribeArticle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_UnsubscribeArticle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).UnsubscribeArticle(ctx, req.(*SubUnsubArticlesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Accounts_GetFavorites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFavoritesParams)
+	in := new(GetFavoritesParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -248,97 +589,79 @@ func _Accounts_GetFavorites_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: Accounts_GetFavorites_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).GetFavorites(ctx, req.(*GetFavoritesParams))
+		return srv.(AccountsServer).GetFavorites(ctx, req.(*GetFavoritesParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Accounts_HasFavorites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HasFavoritesParams)
+func _Accounts_SetFavorite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToggleFavoriteParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountsServer).HasFavorites(ctx, in)
+		return srv.(AccountsServer).SetFavorite(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Accounts_HasFavorites_FullMethodName,
+		FullMethod: Accounts_SetFavorite_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).HasFavorites(ctx, req.(*HasFavoritesParams))
+		return srv.(AccountsServer).SetFavorite(ctx, req.(*ToggleFavoriteParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Accounts_ToggleFavorite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ToggleFavoriteParams)
+func _Accounts_RemoveFavorite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToggleFavoriteParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountsServer).ToggleFavorite(ctx, in)
+		return srv.(AccountsServer).RemoveFavorite(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Accounts_ToggleFavorite_FullMethodName,
+		FullMethod: Accounts_RemoveFavorite_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).ToggleFavorite(ctx, req.(*ToggleFavoriteParams))
+		return srv.(AccountsServer).RemoveFavorite(ctx, req.(*ToggleFavoriteParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Accounts_MoveFavorite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MoveFavoriteParams)
+func _Accounts_CheckArticlesFavorites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckArticlesFavoritesParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountsServer).MoveFavorite(ctx, in)
+		return srv.(AccountsServer).CheckArticlesFavorites(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Accounts_MoveFavorite_FullMethodName,
+		FullMethod: Accounts_CheckArticlesFavorites_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).MoveFavorite(ctx, req.(*MoveFavoriteParams))
+		return srv.(AccountsServer).CheckArticlesFavorites(ctx, req.(*CheckArticlesFavoritesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Accounts_CreateFavoriteFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateFavoriteFolderParams)
+func _Accounts_GetReferrals_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetReferralsParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountsServer).CreateFavoriteFolder(ctx, in)
+		return srv.(AccountsServer).GetReferrals(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Accounts_CreateFavoriteFolder_FullMethodName,
+		FullMethod: Accounts_GetReferrals_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).CreateFavoriteFolder(ctx, req.(*CreateFavoriteFolderParams))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Accounts_UpdateFavoriteFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateFavoriteFolderParams)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountsServer).UpdateFavoriteFolder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Accounts_UpdateFavoriteFolder_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).UpdateFavoriteFolder(ctx, req.(*UpdateFavoriteFolderParams))
+		return srv.(AccountsServer).GetReferrals(ctx, req.(*GetReferralsParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -347,7 +670,7 @@ func _Accounts_UpdateFavoriteFolder_Handler(srv interface{}, ctx context.Context
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Accounts_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "account.Accounts",
+	ServiceName: "accounts.Accounts",
 	HandlerType: (*AccountsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -355,32 +678,68 @@ var Accounts_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Accounts_TryRegistryFromTelegram_Handler,
 		},
 		{
-			MethodName: "GetAccountShort",
-			Handler:    _Accounts_GetAccountShort_Handler,
+			MethodName: "AuthTelegram",
+			Handler:    _Accounts_AuthTelegram_Handler,
+		},
+		{
+			MethodName: "AuthRefresh",
+			Handler:    _Accounts_AuthRefresh_Handler,
+		},
+		{
+			MethodName: "GetProfile",
+			Handler:    _Accounts_GetProfile_Handler,
+		},
+		{
+			MethodName: "UpdateProfileInfo",
+			Handler:    _Accounts_UpdateProfileInfo_Handler,
+		},
+		{
+			MethodName: "RemoveProfile",
+			Handler:    _Accounts_RemoveProfile_Handler,
+		},
+		{
+			MethodName: "Onboarded",
+			Handler:    _Accounts_Onboarded_Handler,
+		},
+		{
+			MethodName: "GetAccountsShort",
+			Handler:    _Accounts_GetAccountsShort_Handler,
+		},
+		{
+			MethodName: "GetSessions",
+			Handler:    _Accounts_GetSessions_Handler,
+		},
+		{
+			MethodName: "GetSubscribeArticles",
+			Handler:    _Accounts_GetSubscribeArticles_Handler,
+		},
+		{
+			MethodName: "SubscribeArticle",
+			Handler:    _Accounts_SubscribeArticle_Handler,
+		},
+		{
+			MethodName: "UnsubscribeArticle",
+			Handler:    _Accounts_UnsubscribeArticle_Handler,
 		},
 		{
 			MethodName: "GetFavorites",
 			Handler:    _Accounts_GetFavorites_Handler,
 		},
 		{
-			MethodName: "HasFavorites",
-			Handler:    _Accounts_HasFavorites_Handler,
+			MethodName: "SetFavorite",
+			Handler:    _Accounts_SetFavorite_Handler,
 		},
 		{
-			MethodName: "ToggleFavorite",
-			Handler:    _Accounts_ToggleFavorite_Handler,
+			MethodName: "RemoveFavorite",
+			Handler:    _Accounts_RemoveFavorite_Handler,
 		},
 		{
-			MethodName: "MoveFavorite",
-			Handler:    _Accounts_MoveFavorite_Handler,
+			MethodName: "CheckArticlesFavorites",
+			Handler:    _Accounts_CheckArticlesFavorites_Handler,
 		},
 		{
-			MethodName: "CreateFavoriteFolder",
-			Handler:    _Accounts_CreateFavoriteFolder_Handler,
-		},
-		{
-			MethodName: "UpdateFavoriteFolder",
-			Handler:    _Accounts_UpdateFavoriteFolder_Handler,
+			MethodName: "GetReferrals",
+			Handler:    _Accounts_GetReferrals_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

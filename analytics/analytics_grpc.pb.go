@@ -20,8 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Analytics_IncrementArticle_FullMethodName = "/analytics.Analytics/IncrementArticle"
-	Analytics_GetArticleCounts_FullMethodName = "/analytics.Analytics/GetArticleCounts"
+	Analytics_IncrementArticle_FullMethodName  = "/analytics.Analytics/IncrementArticle"
+	Analytics_GetArticleCounts_FullMethodName  = "/analytics.Analytics/GetArticleCounts"
+	Analytics_GetArticlesCounts_FullMethodName = "/analytics.Analytics/GetArticlesCounts"
+	Analytics_SetArticlesView_FullMethodName   = "/analytics.Analytics/SetArticlesView"
+	Analytics_SetArticleComment_FullMethodName = "/analytics.Analytics/SetArticleComment"
 )
 
 // AnalyticsClient is the client API for Analytics service.
@@ -30,6 +33,9 @@ const (
 type AnalyticsClient interface {
 	IncrementArticle(ctx context.Context, in *IncrementArticleParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetArticleCounts(ctx context.Context, in *GetArticleCountsParams, opts ...grpc.CallOption) (*ArticleCountsResponse, error)
+	GetArticlesCounts(ctx context.Context, in *SetArticlesViewParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SetArticlesView(ctx context.Context, in *SetArticlesViewParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SetArticleComment(ctx context.Context, in *SetArticleCommentParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type analyticsClient struct {
@@ -60,12 +66,45 @@ func (c *analyticsClient) GetArticleCounts(ctx context.Context, in *GetArticleCo
 	return out, nil
 }
 
+func (c *analyticsClient) GetArticlesCounts(ctx context.Context, in *SetArticlesViewParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Analytics_GetArticlesCounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsClient) SetArticlesView(ctx context.Context, in *SetArticlesViewParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Analytics_SetArticlesView_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsClient) SetArticleComment(ctx context.Context, in *SetArticleCommentParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Analytics_SetArticleComment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AnalyticsServer is the server API for Analytics service.
 // All implementations must embed UnimplementedAnalyticsServer
 // for forward compatibility.
 type AnalyticsServer interface {
 	IncrementArticle(context.Context, *IncrementArticleParams) (*emptypb.Empty, error)
 	GetArticleCounts(context.Context, *GetArticleCountsParams) (*ArticleCountsResponse, error)
+	GetArticlesCounts(context.Context, *SetArticlesViewParams) (*emptypb.Empty, error)
+	SetArticlesView(context.Context, *SetArticlesViewParams) (*emptypb.Empty, error)
+	SetArticleComment(context.Context, *SetArticleCommentParams) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAnalyticsServer()
 }
 
@@ -81,6 +120,15 @@ func (UnimplementedAnalyticsServer) IncrementArticle(context.Context, *Increment
 }
 func (UnimplementedAnalyticsServer) GetArticleCounts(context.Context, *GetArticleCountsParams) (*ArticleCountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetArticleCounts not implemented")
+}
+func (UnimplementedAnalyticsServer) GetArticlesCounts(context.Context, *SetArticlesViewParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesCounts not implemented")
+}
+func (UnimplementedAnalyticsServer) SetArticlesView(context.Context, *SetArticlesViewParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetArticlesView not implemented")
+}
+func (UnimplementedAnalyticsServer) SetArticleComment(context.Context, *SetArticleCommentParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetArticleComment not implemented")
 }
 func (UnimplementedAnalyticsServer) mustEmbedUnimplementedAnalyticsServer() {}
 func (UnimplementedAnalyticsServer) testEmbeddedByValue()                   {}
@@ -139,6 +187,60 @@ func _Analytics_GetArticleCounts_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Analytics_GetArticlesCounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetArticlesViewParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServer).GetArticlesCounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Analytics_GetArticlesCounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServer).GetArticlesCounts(ctx, req.(*SetArticlesViewParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Analytics_SetArticlesView_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetArticlesViewParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServer).SetArticlesView(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Analytics_SetArticlesView_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServer).SetArticlesView(ctx, req.(*SetArticlesViewParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Analytics_SetArticleComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetArticleCommentParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServer).SetArticleComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Analytics_SetArticleComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServer).SetArticleComment(ctx, req.(*SetArticleCommentParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Analytics_ServiceDesc is the grpc.ServiceDesc for Analytics service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -153,6 +255,18 @@ var Analytics_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetArticleCounts",
 			Handler:    _Analytics_GetArticleCounts_Handler,
+		},
+		{
+			MethodName: "GetArticlesCounts",
+			Handler:    _Analytics_GetArticlesCounts_Handler,
+		},
+		{
+			MethodName: "SetArticlesView",
+			Handler:    _Analytics_SetArticlesView_Handler,
+		},
+		{
+			MethodName: "SetArticleComment",
+			Handler:    _Analytics_SetArticleComment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
