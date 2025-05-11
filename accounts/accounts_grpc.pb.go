@@ -27,6 +27,7 @@ const (
 	Accounts_GetProfile_FullMethodName              = "/accounts.Accounts/GetProfile"
 	Accounts_UpdateProfileInfo_FullMethodName       = "/accounts.Accounts/UpdateProfileInfo"
 	Accounts_RemoveProfile_FullMethodName           = "/accounts.Accounts/RemoveProfile"
+	Accounts_SetCurrentFilter_FullMethodName        = "/accounts.Accounts/SetCurrentFilter"
 	Accounts_Onboarded_FullMethodName               = "/accounts.Accounts/Onboarded"
 	Accounts_GetAccountsShort_FullMethodName        = "/accounts.Accounts/GetAccountsShort"
 	Accounts_GetSessions_FullMethodName             = "/accounts.Accounts/GetSessions"
@@ -53,6 +54,8 @@ type AccountsClient interface {
 	GetProfile(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*Profile, error)
 	UpdateProfileInfo(ctx context.Context, in *UpdateProfileInfoParams, opts ...grpc.CallOption) (*Profile, error)
 	RemoveProfile(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	// Filters
+	SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Sets
 	Onboarded(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Global Get
@@ -133,6 +136,16 @@ func (c *accountsClient) RemoveProfile(ctx context.Context, in *ProfileParams, o
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, Accounts_RemoveProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_SetCurrentFilter_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -262,6 +275,8 @@ type AccountsServer interface {
 	GetProfile(context.Context, *ProfileParams) (*Profile, error)
 	UpdateProfileInfo(context.Context, *UpdateProfileInfoParams) (*Profile, error)
 	RemoveProfile(context.Context, *ProfileParams) (*common.BoolStatus, error)
+	// Filters
+	SetCurrentFilter(context.Context, *SetCurrentFilterParams) (*emptypb.Empty, error)
 	// Sets
 	Onboarded(context.Context, *ProfileParams) (*emptypb.Empty, error)
 	// Global Get
@@ -305,6 +320,9 @@ func (UnimplementedAccountsServer) UpdateProfileInfo(context.Context, *UpdatePro
 }
 func (UnimplementedAccountsServer) RemoveProfile(context.Context, *ProfileParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveProfile not implemented")
+}
+func (UnimplementedAccountsServer) SetCurrentFilter(context.Context, *SetCurrentFilterParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetCurrentFilter not implemented")
 }
 func (UnimplementedAccountsServer) Onboarded(context.Context, *ProfileParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Onboarded not implemented")
@@ -464,6 +482,24 @@ func _Accounts_RemoveProfile_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountsServer).RemoveProfile(ctx, req.(*ProfileParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_SetCurrentFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetCurrentFilterParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).SetCurrentFilter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_SetCurrentFilter_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).SetCurrentFilter(ctx, req.(*SetCurrentFilterParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -696,6 +732,10 @@ var Accounts_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveProfile",
 			Handler:    _Accounts_RemoveProfile_Handler,
+		},
+		{
+			MethodName: "SetCurrentFilter",
+			Handler:    _Accounts_SetCurrentFilter_Handler,
 		},
 		{
 			MethodName: "Onboarded",
