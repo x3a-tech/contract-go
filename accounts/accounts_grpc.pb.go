@@ -39,6 +39,10 @@ const (
 	Accounts_RemoveFavorite_FullMethodName          = "/accounts.Accounts/RemoveFavorite"
 	Accounts_CheckArticlesFavorites_FullMethodName  = "/accounts.Accounts/CheckArticlesFavorites"
 	Accounts_GetReferrals_FullMethodName            = "/accounts.Accounts/GetReferrals"
+	Accounts_GetWidgets_FullMethodName              = "/accounts.Accounts/GetWidgets"
+	Accounts_CreateWidget_FullMethodName            = "/accounts.Accounts/CreateWidget"
+	Accounts_DeleteWidget_FullMethodName            = "/accounts.Accounts/DeleteWidget"
+	Accounts_UpdateBatchWidgetCc_FullMethodName     = "/accounts.Accounts/UpdateBatchWidgetCc"
 )
 
 // AccountsClient is the client API for Accounts service.
@@ -72,6 +76,11 @@ type AccountsClient interface {
 	CheckArticlesFavorites(ctx context.Context, in *CheckArticlesFavoritesParams, opts ...grpc.CallOption) (*CheckArticlesFavoritesResponse, error)
 	// Referrals
 	GetReferrals(ctx context.Context, in *GetReferralsParamsInner, opts ...grpc.CallOption) (*GetReferralsResponse, error)
+	// Widgets
+	GetWidgets(ctx context.Context, in *GetWidgetsParamsInner, opts ...grpc.CallOption) (*GetWidgetsResponse, error)
+	CreateWidget(ctx context.Context, in *CreateWidgetParamsInner, opts ...grpc.CallOption) (*CreateWidgetResponse, error)
+	DeleteWidget(ctx context.Context, in *DeleteWidgetParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateBatchWidgetCc(ctx context.Context, in *UpdateBatchWidgetCcInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type accountsClient struct {
@@ -262,6 +271,46 @@ func (c *accountsClient) GetReferrals(ctx context.Context, in *GetReferralsParam
 	return out, nil
 }
 
+func (c *accountsClient) GetWidgets(ctx context.Context, in *GetWidgetsParamsInner, opts ...grpc.CallOption) (*GetWidgetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWidgetsResponse)
+	err := c.cc.Invoke(ctx, Accounts_GetWidgets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) CreateWidget(ctx context.Context, in *CreateWidgetParamsInner, opts ...grpc.CallOption) (*CreateWidgetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWidgetResponse)
+	err := c.cc.Invoke(ctx, Accounts_CreateWidget_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) DeleteWidget(ctx context.Context, in *DeleteWidgetParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_DeleteWidget_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) UpdateBatchWidgetCc(ctx context.Context, in *UpdateBatchWidgetCcInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_UpdateBatchWidgetCc_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountsServer is the server API for Accounts service.
 // All implementations must embed UnimplementedAccountsServer
 // for forward compatibility.
@@ -293,6 +342,11 @@ type AccountsServer interface {
 	CheckArticlesFavorites(context.Context, *CheckArticlesFavoritesParams) (*CheckArticlesFavoritesResponse, error)
 	// Referrals
 	GetReferrals(context.Context, *GetReferralsParamsInner) (*GetReferralsResponse, error)
+	// Widgets
+	GetWidgets(context.Context, *GetWidgetsParamsInner) (*GetWidgetsResponse, error)
+	CreateWidget(context.Context, *CreateWidgetParamsInner) (*CreateWidgetResponse, error)
+	DeleteWidget(context.Context, *DeleteWidgetParams) (*emptypb.Empty, error)
+	UpdateBatchWidgetCc(context.Context, *UpdateBatchWidgetCcInner) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAccountsServer()
 }
 
@@ -356,6 +410,18 @@ func (UnimplementedAccountsServer) CheckArticlesFavorites(context.Context, *Chec
 }
 func (UnimplementedAccountsServer) GetReferrals(context.Context, *GetReferralsParamsInner) (*GetReferralsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReferrals not implemented")
+}
+func (UnimplementedAccountsServer) GetWidgets(context.Context, *GetWidgetsParamsInner) (*GetWidgetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWidgets not implemented")
+}
+func (UnimplementedAccountsServer) CreateWidget(context.Context, *CreateWidgetParamsInner) (*CreateWidgetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateWidget not implemented")
+}
+func (UnimplementedAccountsServer) DeleteWidget(context.Context, *DeleteWidgetParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteWidget not implemented")
+}
+func (UnimplementedAccountsServer) UpdateBatchWidgetCc(context.Context, *UpdateBatchWidgetCcInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBatchWidgetCc not implemented")
 }
 func (UnimplementedAccountsServer) mustEmbedUnimplementedAccountsServer() {}
 func (UnimplementedAccountsServer) testEmbeddedByValue()                  {}
@@ -702,6 +768,78 @@ func _Accounts_GetReferrals_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Accounts_GetWidgets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWidgetsParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).GetWidgets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_GetWidgets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).GetWidgets(ctx, req.(*GetWidgetsParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_CreateWidget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWidgetParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).CreateWidget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_CreateWidget_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).CreateWidget(ctx, req.(*CreateWidgetParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_DeleteWidget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteWidgetParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).DeleteWidget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_DeleteWidget_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).DeleteWidget(ctx, req.(*DeleteWidgetParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_UpdateBatchWidgetCc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBatchWidgetCcInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).UpdateBatchWidgetCc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_UpdateBatchWidgetCc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).UpdateBatchWidgetCc(ctx, req.(*UpdateBatchWidgetCcInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Accounts_ServiceDesc is the grpc.ServiceDesc for Accounts service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -780,6 +918,22 @@ var Accounts_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetReferrals",
 			Handler:    _Accounts_GetReferrals_Handler,
+		},
+		{
+			MethodName: "GetWidgets",
+			Handler:    _Accounts_GetWidgets_Handler,
+		},
+		{
+			MethodName: "CreateWidget",
+			Handler:    _Accounts_CreateWidget_Handler,
+		},
+		{
+			MethodName: "DeleteWidget",
+			Handler:    _Accounts_DeleteWidget_Handler,
+		},
+		{
+			MethodName: "UpdateBatchWidgetCc",
+			Handler:    _Accounts_UpdateBatchWidgetCc_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
