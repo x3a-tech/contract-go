@@ -63,8 +63,8 @@ type AccountsClient interface {
 	// Sessions
 	GetSessions(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*GetSessionsResponse, error)
 	GetSubscribeArticles(ctx context.Context, in *GetSubscribeArticlesParamsInner, opts ...grpc.CallOption) (*GetSubscribeArticlesResponse, error)
-	SubscribeArticle(ctx context.Context, in *SubUnsubArticlesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UnsubscribeArticle(ctx context.Context, in *SubUnsubArticlesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnsubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Favorites
 	GetFavorites(ctx context.Context, in *GetFavoritesParamsInner, opts ...grpc.CallOption) (*GetFavoritesResponse, error)
 	SetFavorite(ctx context.Context, in *ToggleFavoriteParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -192,7 +192,7 @@ func (c *accountsClient) GetSubscribeArticles(ctx context.Context, in *GetSubscr
 	return out, nil
 }
 
-func (c *accountsClient) SubscribeArticle(ctx context.Context, in *SubUnsubArticlesParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *accountsClient) SubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Accounts_SubscribeArticle_FullMethodName, in, out, cOpts...)
@@ -202,7 +202,7 @@ func (c *accountsClient) SubscribeArticle(ctx context.Context, in *SubUnsubArtic
 	return out, nil
 }
 
-func (c *accountsClient) UnsubscribeArticle(ctx context.Context, in *SubUnsubArticlesParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *accountsClient) UnsubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Accounts_UnsubscribeArticle_FullMethodName, in, out, cOpts...)
@@ -284,8 +284,8 @@ type AccountsServer interface {
 	// Sessions
 	GetSessions(context.Context, *ProfileParams) (*GetSessionsResponse, error)
 	GetSubscribeArticles(context.Context, *GetSubscribeArticlesParamsInner) (*GetSubscribeArticlesResponse, error)
-	SubscribeArticle(context.Context, *SubUnsubArticlesParams) (*emptypb.Empty, error)
-	UnsubscribeArticle(context.Context, *SubUnsubArticlesParams) (*emptypb.Empty, error)
+	SubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error)
+	UnsubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error)
 	// Favorites
 	GetFavorites(context.Context, *GetFavoritesParamsInner) (*GetFavoritesResponse, error)
 	SetFavorite(context.Context, *ToggleFavoriteParamsInner) (*emptypb.Empty, error)
@@ -336,10 +336,10 @@ func (UnimplementedAccountsServer) GetSessions(context.Context, *ProfileParams) 
 func (UnimplementedAccountsServer) GetSubscribeArticles(context.Context, *GetSubscribeArticlesParamsInner) (*GetSubscribeArticlesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSubscribeArticles not implemented")
 }
-func (UnimplementedAccountsServer) SubscribeArticle(context.Context, *SubUnsubArticlesParams) (*emptypb.Empty, error) {
+func (UnimplementedAccountsServer) SubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubscribeArticle not implemented")
 }
-func (UnimplementedAccountsServer) UnsubscribeArticle(context.Context, *SubUnsubArticlesParams) (*emptypb.Empty, error) {
+func (UnimplementedAccountsServer) UnsubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnsubscribeArticle not implemented")
 }
 func (UnimplementedAccountsServer) GetFavorites(context.Context, *GetFavoritesParamsInner) (*GetFavoritesResponse, error) {
@@ -577,7 +577,7 @@ func _Accounts_GetSubscribeArticles_Handler(srv interface{}, ctx context.Context
 }
 
 func _Accounts_SubscribeArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubUnsubArticlesParams)
+	in := new(SubUnsubArticlesParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -589,13 +589,13 @@ func _Accounts_SubscribeArticle_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: Accounts_SubscribeArticle_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).SubscribeArticle(ctx, req.(*SubUnsubArticlesParams))
+		return srv.(AccountsServer).SubscribeArticle(ctx, req.(*SubUnsubArticlesParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Accounts_UnsubscribeArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubUnsubArticlesParams)
+	in := new(SubUnsubArticlesParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -607,7 +607,7 @@ func _Accounts_UnsubscribeArticle_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: Accounts_UnsubscribeArticle_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).UnsubscribeArticle(ctx, req.(*SubUnsubArticlesParams))
+		return srv.(AccountsServer).UnsubscribeArticle(ctx, req.(*SubUnsubArticlesParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
