@@ -8,6 +8,7 @@ package analyticsv1
 
 import (
 	context "context"
+	news "github.com/x3a-tech/contract-go/news"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -32,8 +33,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AnalyticsClient interface {
 	IncrementArticle(ctx context.Context, in *IncrementArticleParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetArticleCounts(ctx context.Context, in *GetArticleCountsParams, opts ...grpc.CallOption) (*ArticleCountsResponse, error)
-	GetArticlesCounts(ctx context.Context, in *SetArticlesViewParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetArticleCounts(ctx context.Context, in *GetArticleCountsParams, opts ...grpc.CallOption) (*news.ArticleCounts, error)
+	GetArticlesCounts(ctx context.Context, in *GetArticlesCountsParams, opts ...grpc.CallOption) (*GetArticlesCountsResponse, error)
 	SetArticlesView(ctx context.Context, in *SetArticlesViewParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	SetArticleComment(ctx context.Context, in *SetArticleCommentParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -56,9 +57,9 @@ func (c *analyticsClient) IncrementArticle(ctx context.Context, in *IncrementArt
 	return out, nil
 }
 
-func (c *analyticsClient) GetArticleCounts(ctx context.Context, in *GetArticleCountsParams, opts ...grpc.CallOption) (*ArticleCountsResponse, error) {
+func (c *analyticsClient) GetArticleCounts(ctx context.Context, in *GetArticleCountsParams, opts ...grpc.CallOption) (*news.ArticleCounts, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ArticleCountsResponse)
+	out := new(news.ArticleCounts)
 	err := c.cc.Invoke(ctx, Analytics_GetArticleCounts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -66,9 +67,9 @@ func (c *analyticsClient) GetArticleCounts(ctx context.Context, in *GetArticleCo
 	return out, nil
 }
 
-func (c *analyticsClient) GetArticlesCounts(ctx context.Context, in *SetArticlesViewParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *analyticsClient) GetArticlesCounts(ctx context.Context, in *GetArticlesCountsParams, opts ...grpc.CallOption) (*GetArticlesCountsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(GetArticlesCountsResponse)
 	err := c.cc.Invoke(ctx, Analytics_GetArticlesCounts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -101,8 +102,8 @@ func (c *analyticsClient) SetArticleComment(ctx context.Context, in *SetArticleC
 // for forward compatibility.
 type AnalyticsServer interface {
 	IncrementArticle(context.Context, *IncrementArticleParams) (*emptypb.Empty, error)
-	GetArticleCounts(context.Context, *GetArticleCountsParams) (*ArticleCountsResponse, error)
-	GetArticlesCounts(context.Context, *SetArticlesViewParams) (*emptypb.Empty, error)
+	GetArticleCounts(context.Context, *GetArticleCountsParams) (*news.ArticleCounts, error)
+	GetArticlesCounts(context.Context, *GetArticlesCountsParams) (*GetArticlesCountsResponse, error)
 	SetArticlesView(context.Context, *SetArticlesViewParams) (*emptypb.Empty, error)
 	SetArticleComment(context.Context, *SetArticleCommentParams) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAnalyticsServer()
@@ -118,10 +119,10 @@ type UnimplementedAnalyticsServer struct{}
 func (UnimplementedAnalyticsServer) IncrementArticle(context.Context, *IncrementArticleParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IncrementArticle not implemented")
 }
-func (UnimplementedAnalyticsServer) GetArticleCounts(context.Context, *GetArticleCountsParams) (*ArticleCountsResponse, error) {
+func (UnimplementedAnalyticsServer) GetArticleCounts(context.Context, *GetArticleCountsParams) (*news.ArticleCounts, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetArticleCounts not implemented")
 }
-func (UnimplementedAnalyticsServer) GetArticlesCounts(context.Context, *SetArticlesViewParams) (*emptypb.Empty, error) {
+func (UnimplementedAnalyticsServer) GetArticlesCounts(context.Context, *GetArticlesCountsParams) (*GetArticlesCountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesCounts not implemented")
 }
 func (UnimplementedAnalyticsServer) SetArticlesView(context.Context, *SetArticlesViewParams) (*emptypb.Empty, error) {
@@ -188,7 +189,7 @@ func _Analytics_GetArticleCounts_Handler(srv interface{}, ctx context.Context, d
 }
 
 func _Analytics_GetArticlesCounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetArticlesViewParams)
+	in := new(GetArticlesCountsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -200,7 +201,7 @@ func _Analytics_GetArticlesCounts_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: Analytics_GetArticlesCounts_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnalyticsServer).GetArticlesCounts(ctx, req.(*SetArticlesViewParams))
+		return srv.(AnalyticsServer).GetArticlesCounts(ctx, req.(*GetArticlesCountsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
