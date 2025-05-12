@@ -52,8 +52,8 @@ type AccountsClient interface {
 	// Reg
 	TryRegistryFromTelegram(ctx context.Context, in *TryRegistryFromTelegramParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Auth
-	AuthTelegram(ctx context.Context, in *AuthTelegramParams, opts ...grpc.CallOption) (*AuthResponse, error)
-	AuthRefresh(ctx context.Context, in *AuthRefreshParams, opts ...grpc.CallOption) (*AuthResponse, error)
+	AuthTelegram(ctx context.Context, in *AuthTelegramParamsInner, opts ...grpc.CallOption) (*AuthResponse, error)
+	AuthRefresh(ctx context.Context, in *AuthRefreshParamsInner, opts ...grpc.CallOption) (*AuthResponse, error)
 	// Profile
 	GetProfile(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*Profile, error)
 	UpdateProfileInfo(ctx context.Context, in *UpdateProfileInfoParams, opts ...grpc.CallOption) (*Profile, error)
@@ -101,7 +101,7 @@ func (c *accountsClient) TryRegistryFromTelegram(ctx context.Context, in *TryReg
 	return out, nil
 }
 
-func (c *accountsClient) AuthTelegram(ctx context.Context, in *AuthTelegramParams, opts ...grpc.CallOption) (*AuthResponse, error) {
+func (c *accountsClient) AuthTelegram(ctx context.Context, in *AuthTelegramParamsInner, opts ...grpc.CallOption) (*AuthResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthResponse)
 	err := c.cc.Invoke(ctx, Accounts_AuthTelegram_FullMethodName, in, out, cOpts...)
@@ -111,7 +111,7 @@ func (c *accountsClient) AuthTelegram(ctx context.Context, in *AuthTelegramParam
 	return out, nil
 }
 
-func (c *accountsClient) AuthRefresh(ctx context.Context, in *AuthRefreshParams, opts ...grpc.CallOption) (*AuthResponse, error) {
+func (c *accountsClient) AuthRefresh(ctx context.Context, in *AuthRefreshParamsInner, opts ...grpc.CallOption) (*AuthResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthResponse)
 	err := c.cc.Invoke(ctx, Accounts_AuthRefresh_FullMethodName, in, out, cOpts...)
@@ -318,8 +318,8 @@ type AccountsServer interface {
 	// Reg
 	TryRegistryFromTelegram(context.Context, *TryRegistryFromTelegramParams) (*emptypb.Empty, error)
 	// Auth
-	AuthTelegram(context.Context, *AuthTelegramParams) (*AuthResponse, error)
-	AuthRefresh(context.Context, *AuthRefreshParams) (*AuthResponse, error)
+	AuthTelegram(context.Context, *AuthTelegramParamsInner) (*AuthResponse, error)
+	AuthRefresh(context.Context, *AuthRefreshParamsInner) (*AuthResponse, error)
 	// Profile
 	GetProfile(context.Context, *ProfileParams) (*Profile, error)
 	UpdateProfileInfo(context.Context, *UpdateProfileInfoParams) (*Profile, error)
@@ -360,10 +360,10 @@ type UnimplementedAccountsServer struct{}
 func (UnimplementedAccountsServer) TryRegistryFromTelegram(context.Context, *TryRegistryFromTelegramParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TryRegistryFromTelegram not implemented")
 }
-func (UnimplementedAccountsServer) AuthTelegram(context.Context, *AuthTelegramParams) (*AuthResponse, error) {
+func (UnimplementedAccountsServer) AuthTelegram(context.Context, *AuthTelegramParamsInner) (*AuthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AuthTelegram not implemented")
 }
-func (UnimplementedAccountsServer) AuthRefresh(context.Context, *AuthRefreshParams) (*AuthResponse, error) {
+func (UnimplementedAccountsServer) AuthRefresh(context.Context, *AuthRefreshParamsInner) (*AuthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AuthRefresh not implemented")
 }
 func (UnimplementedAccountsServer) GetProfile(context.Context, *ProfileParams) (*Profile, error) {
@@ -463,7 +463,7 @@ func _Accounts_TryRegistryFromTelegram_Handler(srv interface{}, ctx context.Cont
 }
 
 func _Accounts_AuthTelegram_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthTelegramParams)
+	in := new(AuthTelegramParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -475,13 +475,13 @@ func _Accounts_AuthTelegram_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: Accounts_AuthTelegram_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).AuthTelegram(ctx, req.(*AuthTelegramParams))
+		return srv.(AccountsServer).AuthTelegram(ctx, req.(*AuthTelegramParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Accounts_AuthRefresh_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthRefreshParams)
+	in := new(AuthRefreshParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -493,7 +493,7 @@ func _Accounts_AuthRefresh_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: Accounts_AuthRefresh_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).AuthRefresh(ctx, req.(*AuthRefreshParams))
+		return srv.(AccountsServer).AuthRefresh(ctx, req.(*AuthRefreshParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
