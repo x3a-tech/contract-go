@@ -59,9 +59,9 @@ type AccountsClient interface {
 	UpdateProfileInfo(ctx context.Context, in *UpdateProfileInfoParams, opts ...grpc.CallOption) (*Profile, error)
 	RemoveProfile(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Filters
-	SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Sets
-	Onboarded(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Onboarded(ctx context.Context, in *OnboardingParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Global Get
 	GetAccountsShort(ctx context.Context, in *GetAccountsShortParams, opts ...grpc.CallOption) (*GetAccountsShortResponse, error)
 	// Sessions
@@ -151,9 +151,9 @@ func (c *accountsClient) RemoveProfile(ctx context.Context, in *ProfileParams, o
 	return out, nil
 }
 
-func (c *accountsClient) SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *accountsClient) SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, Accounts_SetCurrentFilter_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -161,9 +161,9 @@ func (c *accountsClient) SetCurrentFilter(ctx context.Context, in *SetCurrentFil
 	return out, nil
 }
 
-func (c *accountsClient) Onboarded(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *accountsClient) Onboarded(ctx context.Context, in *OnboardingParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, Accounts_Onboarded_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -325,9 +325,9 @@ type AccountsServer interface {
 	UpdateProfileInfo(context.Context, *UpdateProfileInfoParams) (*Profile, error)
 	RemoveProfile(context.Context, *ProfileParams) (*common.BoolStatus, error)
 	// Filters
-	SetCurrentFilter(context.Context, *SetCurrentFilterParams) (*emptypb.Empty, error)
+	SetCurrentFilter(context.Context, *SetCurrentFilterParams) (*common.BoolStatus, error)
 	// Sets
-	Onboarded(context.Context, *ProfileParams) (*emptypb.Empty, error)
+	Onboarded(context.Context, *OnboardingParamsInner) (*common.BoolStatus, error)
 	// Global Get
 	GetAccountsShort(context.Context, *GetAccountsShortParams) (*GetAccountsShortResponse, error)
 	// Sessions
@@ -375,10 +375,10 @@ func (UnimplementedAccountsServer) UpdateProfileInfo(context.Context, *UpdatePro
 func (UnimplementedAccountsServer) RemoveProfile(context.Context, *ProfileParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveProfile not implemented")
 }
-func (UnimplementedAccountsServer) SetCurrentFilter(context.Context, *SetCurrentFilterParams) (*emptypb.Empty, error) {
+func (UnimplementedAccountsServer) SetCurrentFilter(context.Context, *SetCurrentFilterParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetCurrentFilter not implemented")
 }
-func (UnimplementedAccountsServer) Onboarded(context.Context, *ProfileParams) (*emptypb.Empty, error) {
+func (UnimplementedAccountsServer) Onboarded(context.Context, *OnboardingParamsInner) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Onboarded not implemented")
 }
 func (UnimplementedAccountsServer) GetAccountsShort(context.Context, *GetAccountsShortParams) (*GetAccountsShortResponse, error) {
@@ -571,7 +571,7 @@ func _Accounts_SetCurrentFilter_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _Accounts_Onboarded_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProfileParams)
+	in := new(OnboardingParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -583,7 +583,7 @@ func _Accounts_Onboarded_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: Accounts_Onboarded_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).Onboarded(ctx, req.(*ProfileParams))
+		return srv.(AccountsServer).Onboarded(ctx, req.(*OnboardingParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
