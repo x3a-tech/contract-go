@@ -21,28 +21,38 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Accounts_TryRegistryFromTelegram_FullMethodName = "/accounts.Accounts/TryRegistryFromTelegram"
-	Accounts_AuthTelegram_FullMethodName            = "/accounts.Accounts/AuthTelegram"
-	Accounts_AuthRefresh_FullMethodName             = "/accounts.Accounts/AuthRefresh"
-	Accounts_GetProfile_FullMethodName              = "/accounts.Accounts/GetProfile"
-	Accounts_UpdateProfileInfo_FullMethodName       = "/accounts.Accounts/UpdateProfileInfo"
-	Accounts_RemoveProfile_FullMethodName           = "/accounts.Accounts/RemoveProfile"
-	Accounts_SetCurrentFilter_FullMethodName        = "/accounts.Accounts/SetCurrentFilter"
-	Accounts_Onboarded_FullMethodName               = "/accounts.Accounts/Onboarded"
-	Accounts_GetAccountsShort_FullMethodName        = "/accounts.Accounts/GetAccountsShort"
-	Accounts_GetSessions_FullMethodName             = "/accounts.Accounts/GetSessions"
-	Accounts_GetSubscribeArticles_FullMethodName    = "/accounts.Accounts/GetSubscribeArticles"
-	Accounts_SubscribeArticle_FullMethodName        = "/accounts.Accounts/SubscribeArticle"
-	Accounts_UnsubscribeArticle_FullMethodName      = "/accounts.Accounts/UnsubscribeArticle"
-	Accounts_GetFavorites_FullMethodName            = "/accounts.Accounts/GetFavorites"
-	Accounts_SetFavorite_FullMethodName             = "/accounts.Accounts/SetFavorite"
-	Accounts_RemoveFavorite_FullMethodName          = "/accounts.Accounts/RemoveFavorite"
-	Accounts_CheckArticlesFavorites_FullMethodName  = "/accounts.Accounts/CheckArticlesFavorites"
-	Accounts_GetReferrals_FullMethodName            = "/accounts.Accounts/GetReferrals"
-	Accounts_GetWidgets_FullMethodName              = "/accounts.Accounts/GetWidgets"
-	Accounts_CreateWidget_FullMethodName            = "/accounts.Accounts/CreateWidget"
-	Accounts_DeleteWidget_FullMethodName            = "/accounts.Accounts/DeleteWidget"
-	Accounts_UpdateBatchWidgetCc_FullMethodName     = "/accounts.Accounts/UpdateBatchWidgetCc"
+	Accounts_TryRegistryFromTelegram_FullMethodName      = "/accounts.Accounts/TryRegistryFromTelegram"
+	Accounts_AuthTelegram_FullMethodName                 = "/accounts.Accounts/AuthTelegram"
+	Accounts_AuthRefresh_FullMethodName                  = "/accounts.Accounts/AuthRefresh"
+	Accounts_GetProfile_FullMethodName                   = "/accounts.Accounts/GetProfile"
+	Accounts_UpdateProfileInfo_FullMethodName            = "/accounts.Accounts/UpdateProfileInfo"
+	Accounts_RemoveProfile_FullMethodName                = "/accounts.Accounts/RemoveProfile"
+	Accounts_GetAccountsShort_FullMethodName             = "/accounts.Accounts/GetAccountsShort"
+	Accounts_SetCurrentFilter_FullMethodName             = "/accounts.Accounts/SetCurrentFilter"
+	Accounts_Onboarded_FullMethodName                    = "/accounts.Accounts/Onboarded"
+	Accounts_GetSessions_FullMethodName                  = "/accounts.Accounts/GetSessions"
+	Accounts_GetSubscribeArticles_FullMethodName         = "/accounts.Accounts/GetSubscribeArticles"
+	Accounts_SubscribeArticle_FullMethodName             = "/accounts.Accounts/SubscribeArticle"
+	Accounts_UnsubscribeArticle_FullMethodName           = "/accounts.Accounts/UnsubscribeArticle"
+	Accounts_GetFavorites_FullMethodName                 = "/accounts.Accounts/GetFavorites"
+	Accounts_SetFavorite_FullMethodName                  = "/accounts.Accounts/SetFavorite"
+	Accounts_RemoveFavorite_FullMethodName               = "/accounts.Accounts/RemoveFavorite"
+	Accounts_CheckArticlesFavorites_FullMethodName       = "/accounts.Accounts/CheckArticlesFavorites"
+	Accounts_GetReferrals_FullMethodName                 = "/accounts.Accounts/GetReferrals"
+	Accounts_GetWidgets_FullMethodName                   = "/accounts.Accounts/GetWidgets"
+	Accounts_CreateWidget_FullMethodName                 = "/accounts.Accounts/CreateWidget"
+	Accounts_DeleteWidget_FullMethodName                 = "/accounts.Accounts/DeleteWidget"
+	Accounts_UpdateWidgetPcValues_FullMethodName         = "/accounts.Accounts/UpdateWidgetPcValues"
+	Accounts_SortWidgetPcValues_FullMethodName           = "/accounts.Accounts/SortWidgetPcValues"
+	Accounts_UpdateWidgetCurrenciesValues_FullMethodName = "/accounts.Accounts/UpdateWidgetCurrenciesValues"
+	Accounts_SortWidgetCurrenciesValues_FullMethodName   = "/accounts.Accounts/SortWidgetCurrenciesValues"
+	Accounts_UpdateWidgetUcValues_FullMethodName         = "/accounts.Accounts/UpdateWidgetUcValues"
+	Accounts_SortWidgetUcValues_FullMethodName           = "/accounts.Accounts/SortWidgetUcValues"
+	Accounts_UpdateWidgetNcValues_FullMethodName         = "/accounts.Accounts/UpdateWidgetNcValues"
+	Accounts_UpdateWidgetNsValues_FullMethodName         = "/accounts.Accounts/UpdateWidgetNsValues"
+	Accounts_UpdateWidgetNscValues_FullMethodName        = "/accounts.Accounts/UpdateWidgetNscValues"
+	Accounts_UpdateWidgetSdlValue_FullMethodName         = "/accounts.Accounts/UpdateWidgetSdlValue"
+	Accounts_UpdateWidgetSdeValue_FullMethodName         = "/accounts.Accounts/UpdateWidgetSdeValue"
 )
 
 // AccountsClient is the client API for Accounts service.
@@ -58,14 +68,14 @@ type AccountsClient interface {
 	GetProfile(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*Profile, error)
 	UpdateProfileInfo(ctx context.Context, in *UpdateProfileInfoParams, opts ...grpc.CallOption) (*Profile, error)
 	RemoveProfile(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	GetAccountsShort(ctx context.Context, in *GetAccountsShortParams, opts ...grpc.CallOption) (*GetAccountsShortResponse, error)
 	// Filters
 	SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Sets
 	Onboarded(ctx context.Context, in *OnboardingParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	// Global Get
-	GetAccountsShort(ctx context.Context, in *GetAccountsShortParams, opts ...grpc.CallOption) (*GetAccountsShortResponse, error)
 	// Sessions
 	GetSessions(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*GetSessionsResponse, error)
+	// Subscribe Articles
 	GetSubscribeArticles(ctx context.Context, in *GetSubscribeArticlesParamsInner, opts ...grpc.CallOption) (*GetSubscribeArticlesResponse, error)
 	SubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UnsubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -80,7 +90,25 @@ type AccountsClient interface {
 	GetWidgets(ctx context.Context, in *GetWidgetsParamsInner, opts ...grpc.CallOption) (*GetWidgetsResponse, error)
 	CreateWidget(ctx context.Context, in *CreateWidgetParamsInner, opts ...grpc.CallOption) (*CreateWidgetResponse, error)
 	DeleteWidget(ctx context.Context, in *DeleteWidgetParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateBatchWidgetCc(ctx context.Context, in *UpdateBatchWidgetCcInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Pc
+	UpdateWidgetPcValues(ctx context.Context, in *UpdateWidgetPcParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SortWidgetPcValues(ctx context.Context, in *SortWidgetValuesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// CC & CP & CS
+	UpdateWidgetCurrenciesValues(ctx context.Context, in *UpdateWidgetSingleValuesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SortWidgetCurrenciesValues(ctx context.Context, in *SortWidgetValuesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Uc
+	UpdateWidgetUcValues(ctx context.Context, in *UpdateWidgetUcParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SortWidgetUcValues(ctx context.Context, in *SortWidgetValuesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Nc
+	UpdateWidgetNcValues(ctx context.Context, in *UpdateWidgetSingleValuesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Ns
+	UpdateWidgetNsValues(ctx context.Context, in *UpdateWidgetSingleValuesUuidParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Nsc
+	UpdateWidgetNscValues(ctx context.Context, in *UpdateWidgetNscParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Sdl
+	UpdateWidgetSdlValue(ctx context.Context, in *UpdateWidgetSingleParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Sde
+	UpdateWidgetSdeValue(ctx context.Context, in *UpdateWidgetSingleParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type accountsClient struct {
@@ -151,6 +179,16 @@ func (c *accountsClient) RemoveProfile(ctx context.Context, in *ProfileParams, o
 	return out, nil
 }
 
+func (c *accountsClient) GetAccountsShort(ctx context.Context, in *GetAccountsShortParams, opts ...grpc.CallOption) (*GetAccountsShortResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountsShortResponse)
+	err := c.cc.Invoke(ctx, Accounts_GetAccountsShort_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *accountsClient) SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
@@ -165,16 +203,6 @@ func (c *accountsClient) Onboarded(ctx context.Context, in *OnboardingParamsInne
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, Accounts_Onboarded_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *accountsClient) GetAccountsShort(ctx context.Context, in *GetAccountsShortParams, opts ...grpc.CallOption) (*GetAccountsShortResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAccountsShortResponse)
-	err := c.cc.Invoke(ctx, Accounts_GetAccountsShort_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -301,10 +329,110 @@ func (c *accountsClient) DeleteWidget(ctx context.Context, in *DeleteWidgetParam
 	return out, nil
 }
 
-func (c *accountsClient) UpdateBatchWidgetCc(ctx context.Context, in *UpdateBatchWidgetCcInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *accountsClient) UpdateWidgetPcValues(ctx context.Context, in *UpdateWidgetPcParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Accounts_UpdateBatchWidgetCc_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Accounts_UpdateWidgetPcValues_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) SortWidgetPcValues(ctx context.Context, in *SortWidgetValuesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_SortWidgetPcValues_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) UpdateWidgetCurrenciesValues(ctx context.Context, in *UpdateWidgetSingleValuesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_UpdateWidgetCurrenciesValues_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) SortWidgetCurrenciesValues(ctx context.Context, in *SortWidgetValuesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_SortWidgetCurrenciesValues_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) UpdateWidgetUcValues(ctx context.Context, in *UpdateWidgetUcParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_UpdateWidgetUcValues_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) SortWidgetUcValues(ctx context.Context, in *SortWidgetValuesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_SortWidgetUcValues_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) UpdateWidgetNcValues(ctx context.Context, in *UpdateWidgetSingleValuesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_UpdateWidgetNcValues_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) UpdateWidgetNsValues(ctx context.Context, in *UpdateWidgetSingleValuesUuidParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_UpdateWidgetNsValues_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) UpdateWidgetNscValues(ctx context.Context, in *UpdateWidgetNscParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_UpdateWidgetNscValues_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) UpdateWidgetSdlValue(ctx context.Context, in *UpdateWidgetSingleParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_UpdateWidgetSdlValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) UpdateWidgetSdeValue(ctx context.Context, in *UpdateWidgetSingleParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Accounts_UpdateWidgetSdeValue_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -324,14 +452,14 @@ type AccountsServer interface {
 	GetProfile(context.Context, *ProfileParams) (*Profile, error)
 	UpdateProfileInfo(context.Context, *UpdateProfileInfoParams) (*Profile, error)
 	RemoveProfile(context.Context, *ProfileParams) (*common.BoolStatus, error)
+	GetAccountsShort(context.Context, *GetAccountsShortParams) (*GetAccountsShortResponse, error)
 	// Filters
 	SetCurrentFilter(context.Context, *SetCurrentFilterParams) (*common.BoolStatus, error)
 	// Sets
 	Onboarded(context.Context, *OnboardingParamsInner) (*common.BoolStatus, error)
-	// Global Get
-	GetAccountsShort(context.Context, *GetAccountsShortParams) (*GetAccountsShortResponse, error)
 	// Sessions
 	GetSessions(context.Context, *ProfileParams) (*GetSessionsResponse, error)
+	// Subscribe Articles
 	GetSubscribeArticles(context.Context, *GetSubscribeArticlesParamsInner) (*GetSubscribeArticlesResponse, error)
 	SubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error)
 	UnsubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error)
@@ -346,7 +474,25 @@ type AccountsServer interface {
 	GetWidgets(context.Context, *GetWidgetsParamsInner) (*GetWidgetsResponse, error)
 	CreateWidget(context.Context, *CreateWidgetParamsInner) (*CreateWidgetResponse, error)
 	DeleteWidget(context.Context, *DeleteWidgetParams) (*emptypb.Empty, error)
-	UpdateBatchWidgetCc(context.Context, *UpdateBatchWidgetCcInner) (*emptypb.Empty, error)
+	// Pc
+	UpdateWidgetPcValues(context.Context, *UpdateWidgetPcParamsInner) (*emptypb.Empty, error)
+	SortWidgetPcValues(context.Context, *SortWidgetValuesParamsInner) (*emptypb.Empty, error)
+	// CC & CP & CS
+	UpdateWidgetCurrenciesValues(context.Context, *UpdateWidgetSingleValuesParamsInner) (*emptypb.Empty, error)
+	SortWidgetCurrenciesValues(context.Context, *SortWidgetValuesParamsInner) (*emptypb.Empty, error)
+	// Uc
+	UpdateWidgetUcValues(context.Context, *UpdateWidgetUcParamsInner) (*emptypb.Empty, error)
+	SortWidgetUcValues(context.Context, *SortWidgetValuesParamsInner) (*emptypb.Empty, error)
+	// Nc
+	UpdateWidgetNcValues(context.Context, *UpdateWidgetSingleValuesParamsInner) (*emptypb.Empty, error)
+	// Ns
+	UpdateWidgetNsValues(context.Context, *UpdateWidgetSingleValuesUuidParamsInner) (*emptypb.Empty, error)
+	// Nsc
+	UpdateWidgetNscValues(context.Context, *UpdateWidgetNscParamsInner) (*emptypb.Empty, error)
+	// Sdl
+	UpdateWidgetSdlValue(context.Context, *UpdateWidgetSingleParamsInner) (*emptypb.Empty, error)
+	// Sde
+	UpdateWidgetSdeValue(context.Context, *UpdateWidgetSingleParamsInner) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAccountsServer()
 }
 
@@ -375,14 +521,14 @@ func (UnimplementedAccountsServer) UpdateProfileInfo(context.Context, *UpdatePro
 func (UnimplementedAccountsServer) RemoveProfile(context.Context, *ProfileParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveProfile not implemented")
 }
+func (UnimplementedAccountsServer) GetAccountsShort(context.Context, *GetAccountsShortParams) (*GetAccountsShortResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountsShort not implemented")
+}
 func (UnimplementedAccountsServer) SetCurrentFilter(context.Context, *SetCurrentFilterParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetCurrentFilter not implemented")
 }
 func (UnimplementedAccountsServer) Onboarded(context.Context, *OnboardingParamsInner) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Onboarded not implemented")
-}
-func (UnimplementedAccountsServer) GetAccountsShort(context.Context, *GetAccountsShortParams) (*GetAccountsShortResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAccountsShort not implemented")
 }
 func (UnimplementedAccountsServer) GetSessions(context.Context, *ProfileParams) (*GetSessionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSessions not implemented")
@@ -420,8 +566,38 @@ func (UnimplementedAccountsServer) CreateWidget(context.Context, *CreateWidgetPa
 func (UnimplementedAccountsServer) DeleteWidget(context.Context, *DeleteWidgetParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteWidget not implemented")
 }
-func (UnimplementedAccountsServer) UpdateBatchWidgetCc(context.Context, *UpdateBatchWidgetCcInner) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateBatchWidgetCc not implemented")
+func (UnimplementedAccountsServer) UpdateWidgetPcValues(context.Context, *UpdateWidgetPcParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWidgetPcValues not implemented")
+}
+func (UnimplementedAccountsServer) SortWidgetPcValues(context.Context, *SortWidgetValuesParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SortWidgetPcValues not implemented")
+}
+func (UnimplementedAccountsServer) UpdateWidgetCurrenciesValues(context.Context, *UpdateWidgetSingleValuesParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWidgetCurrenciesValues not implemented")
+}
+func (UnimplementedAccountsServer) SortWidgetCurrenciesValues(context.Context, *SortWidgetValuesParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SortWidgetCurrenciesValues not implemented")
+}
+func (UnimplementedAccountsServer) UpdateWidgetUcValues(context.Context, *UpdateWidgetUcParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWidgetUcValues not implemented")
+}
+func (UnimplementedAccountsServer) SortWidgetUcValues(context.Context, *SortWidgetValuesParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SortWidgetUcValues not implemented")
+}
+func (UnimplementedAccountsServer) UpdateWidgetNcValues(context.Context, *UpdateWidgetSingleValuesParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWidgetNcValues not implemented")
+}
+func (UnimplementedAccountsServer) UpdateWidgetNsValues(context.Context, *UpdateWidgetSingleValuesUuidParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWidgetNsValues not implemented")
+}
+func (UnimplementedAccountsServer) UpdateWidgetNscValues(context.Context, *UpdateWidgetNscParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWidgetNscValues not implemented")
+}
+func (UnimplementedAccountsServer) UpdateWidgetSdlValue(context.Context, *UpdateWidgetSingleParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWidgetSdlValue not implemented")
+}
+func (UnimplementedAccountsServer) UpdateWidgetSdeValue(context.Context, *UpdateWidgetSingleParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWidgetSdeValue not implemented")
 }
 func (UnimplementedAccountsServer) mustEmbedUnimplementedAccountsServer() {}
 func (UnimplementedAccountsServer) testEmbeddedByValue()                  {}
@@ -552,6 +728,24 @@ func _Accounts_RemoveProfile_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Accounts_GetAccountsShort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountsShortParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).GetAccountsShort(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_GetAccountsShort_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).GetAccountsShort(ctx, req.(*GetAccountsShortParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Accounts_SetCurrentFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetCurrentFilterParams)
 	if err := dec(in); err != nil {
@@ -584,24 +778,6 @@ func _Accounts_Onboarded_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountsServer).Onboarded(ctx, req.(*OnboardingParamsInner))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Accounts_GetAccountsShort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccountsShortParams)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AccountsServer).GetAccountsShort(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Accounts_GetAccountsShort_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).GetAccountsShort(ctx, req.(*GetAccountsShortParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -822,20 +998,200 @@ func _Accounts_DeleteWidget_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Accounts_UpdateBatchWidgetCc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateBatchWidgetCcInner)
+func _Accounts_UpdateWidgetPcValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWidgetPcParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountsServer).UpdateBatchWidgetCc(ctx, in)
+		return srv.(AccountsServer).UpdateWidgetPcValues(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Accounts_UpdateBatchWidgetCc_FullMethodName,
+		FullMethod: Accounts_UpdateWidgetPcValues_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).UpdateBatchWidgetCc(ctx, req.(*UpdateBatchWidgetCcInner))
+		return srv.(AccountsServer).UpdateWidgetPcValues(ctx, req.(*UpdateWidgetPcParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_SortWidgetPcValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SortWidgetValuesParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).SortWidgetPcValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_SortWidgetPcValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).SortWidgetPcValues(ctx, req.(*SortWidgetValuesParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_UpdateWidgetCurrenciesValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWidgetSingleValuesParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).UpdateWidgetCurrenciesValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_UpdateWidgetCurrenciesValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).UpdateWidgetCurrenciesValues(ctx, req.(*UpdateWidgetSingleValuesParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_SortWidgetCurrenciesValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SortWidgetValuesParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).SortWidgetCurrenciesValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_SortWidgetCurrenciesValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).SortWidgetCurrenciesValues(ctx, req.(*SortWidgetValuesParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_UpdateWidgetUcValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWidgetUcParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).UpdateWidgetUcValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_UpdateWidgetUcValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).UpdateWidgetUcValues(ctx, req.(*UpdateWidgetUcParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_SortWidgetUcValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SortWidgetValuesParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).SortWidgetUcValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_SortWidgetUcValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).SortWidgetUcValues(ctx, req.(*SortWidgetValuesParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_UpdateWidgetNcValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWidgetSingleValuesParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).UpdateWidgetNcValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_UpdateWidgetNcValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).UpdateWidgetNcValues(ctx, req.(*UpdateWidgetSingleValuesParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_UpdateWidgetNsValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWidgetSingleValuesUuidParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).UpdateWidgetNsValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_UpdateWidgetNsValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).UpdateWidgetNsValues(ctx, req.(*UpdateWidgetSingleValuesUuidParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_UpdateWidgetNscValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWidgetNscParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).UpdateWidgetNscValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_UpdateWidgetNscValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).UpdateWidgetNscValues(ctx, req.(*UpdateWidgetNscParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_UpdateWidgetSdlValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWidgetSingleParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).UpdateWidgetSdlValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_UpdateWidgetSdlValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).UpdateWidgetSdlValue(ctx, req.(*UpdateWidgetSingleParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_UpdateWidgetSdeValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWidgetSingleParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).UpdateWidgetSdeValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_UpdateWidgetSdeValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).UpdateWidgetSdeValue(ctx, req.(*UpdateWidgetSingleParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -872,16 +1228,16 @@ var Accounts_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Accounts_RemoveProfile_Handler,
 		},
 		{
+			MethodName: "GetAccountsShort",
+			Handler:    _Accounts_GetAccountsShort_Handler,
+		},
+		{
 			MethodName: "SetCurrentFilter",
 			Handler:    _Accounts_SetCurrentFilter_Handler,
 		},
 		{
 			MethodName: "Onboarded",
 			Handler:    _Accounts_Onboarded_Handler,
-		},
-		{
-			MethodName: "GetAccountsShort",
-			Handler:    _Accounts_GetAccountsShort_Handler,
 		},
 		{
 			MethodName: "GetSessions",
@@ -932,8 +1288,48 @@ var Accounts_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Accounts_DeleteWidget_Handler,
 		},
 		{
-			MethodName: "UpdateBatchWidgetCc",
-			Handler:    _Accounts_UpdateBatchWidgetCc_Handler,
+			MethodName: "UpdateWidgetPcValues",
+			Handler:    _Accounts_UpdateWidgetPcValues_Handler,
+		},
+		{
+			MethodName: "SortWidgetPcValues",
+			Handler:    _Accounts_SortWidgetPcValues_Handler,
+		},
+		{
+			MethodName: "UpdateWidgetCurrenciesValues",
+			Handler:    _Accounts_UpdateWidgetCurrenciesValues_Handler,
+		},
+		{
+			MethodName: "SortWidgetCurrenciesValues",
+			Handler:    _Accounts_SortWidgetCurrenciesValues_Handler,
+		},
+		{
+			MethodName: "UpdateWidgetUcValues",
+			Handler:    _Accounts_UpdateWidgetUcValues_Handler,
+		},
+		{
+			MethodName: "SortWidgetUcValues",
+			Handler:    _Accounts_SortWidgetUcValues_Handler,
+		},
+		{
+			MethodName: "UpdateWidgetNcValues",
+			Handler:    _Accounts_UpdateWidgetNcValues_Handler,
+		},
+		{
+			MethodName: "UpdateWidgetNsValues",
+			Handler:    _Accounts_UpdateWidgetNsValues_Handler,
+		},
+		{
+			MethodName: "UpdateWidgetNscValues",
+			Handler:    _Accounts_UpdateWidgetNscValues_Handler,
+		},
+		{
+			MethodName: "UpdateWidgetSdlValue",
+			Handler:    _Accounts_UpdateWidgetSdlValue_Handler,
+		},
+		{
+			MethodName: "UpdateWidgetSdeValue",
+			Handler:    _Accounts_UpdateWidgetSdeValue_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
