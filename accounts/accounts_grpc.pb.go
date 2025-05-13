@@ -71,7 +71,7 @@ type AccountsClient interface {
 	RemoveProfile(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	GetAccountsShort(ctx context.Context, in *GetAccountsShortParams, opts ...grpc.CallOption) (*GetAccountsShortResponse, error)
 	// Filters
-	SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Sets
 	Onboarded(ctx context.Context, in *OnboardingParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	SetLang(ctx context.Context, in *SetLangParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
@@ -191,7 +191,7 @@ func (c *accountsClient) GetAccountsShort(ctx context.Context, in *GetAccountsSh
 	return out, nil
 }
 
-func (c *accountsClient) SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *accountsClient) SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, Accounts_SetCurrentFilter_FullMethodName, in, out, cOpts...)
@@ -466,7 +466,7 @@ type AccountsServer interface {
 	RemoveProfile(context.Context, *ProfileParams) (*common.BoolStatus, error)
 	GetAccountsShort(context.Context, *GetAccountsShortParams) (*GetAccountsShortResponse, error)
 	// Filters
-	SetCurrentFilter(context.Context, *SetCurrentFilterParams) (*common.BoolStatus, error)
+	SetCurrentFilter(context.Context, *SetCurrentFilterParamsInner) (*common.BoolStatus, error)
 	// Sets
 	Onboarded(context.Context, *OnboardingParamsInner) (*common.BoolStatus, error)
 	SetLang(context.Context, *SetLangParamsInner) (*common.BoolStatus, error)
@@ -537,7 +537,7 @@ func (UnimplementedAccountsServer) RemoveProfile(context.Context, *ProfileParams
 func (UnimplementedAccountsServer) GetAccountsShort(context.Context, *GetAccountsShortParams) (*GetAccountsShortResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountsShort not implemented")
 }
-func (UnimplementedAccountsServer) SetCurrentFilter(context.Context, *SetCurrentFilterParams) (*common.BoolStatus, error) {
+func (UnimplementedAccountsServer) SetCurrentFilter(context.Context, *SetCurrentFilterParamsInner) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetCurrentFilter not implemented")
 }
 func (UnimplementedAccountsServer) Onboarded(context.Context, *OnboardingParamsInner) (*common.BoolStatus, error) {
@@ -763,7 +763,7 @@ func _Accounts_GetAccountsShort_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _Accounts_SetCurrentFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetCurrentFilterParams)
+	in := new(SetCurrentFilterParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -775,7 +775,7 @@ func _Accounts_SetCurrentFilter_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: Accounts_SetCurrentFilter_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).SetCurrentFilter(ctx, req.(*SetCurrentFilterParams))
+		return srv.(AccountsServer).SetCurrentFilter(ctx, req.(*SetCurrentFilterParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
