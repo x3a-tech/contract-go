@@ -30,6 +30,7 @@ const (
 	Accounts_GetAccountsShort_FullMethodName             = "/accounts.Accounts/GetAccountsShort"
 	Accounts_SetCurrentFilter_FullMethodName             = "/accounts.Accounts/SetCurrentFilter"
 	Accounts_Onboarded_FullMethodName                    = "/accounts.Accounts/Onboarded"
+	Accounts_SetLang_FullMethodName                      = "/accounts.Accounts/SetLang"
 	Accounts_GetSessions_FullMethodName                  = "/accounts.Accounts/GetSessions"
 	Accounts_GetSubscribeArticles_FullMethodName         = "/accounts.Accounts/GetSubscribeArticles"
 	Accounts_SubscribeArticle_FullMethodName             = "/accounts.Accounts/SubscribeArticle"
@@ -73,6 +74,7 @@ type AccountsClient interface {
 	SetCurrentFilter(ctx context.Context, in *SetCurrentFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Sets
 	Onboarded(ctx context.Context, in *OnboardingParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	SetLang(ctx context.Context, in *SetLangParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Sessions
 	GetSessions(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*GetSessionsResponse, error)
 	// Subscribe Articles
@@ -203,6 +205,16 @@ func (c *accountsClient) Onboarded(ctx context.Context, in *OnboardingParamsInne
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, Accounts_Onboarded_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) SetLang(ctx context.Context, in *SetLangParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, Accounts_SetLang_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -457,6 +469,7 @@ type AccountsServer interface {
 	SetCurrentFilter(context.Context, *SetCurrentFilterParams) (*common.BoolStatus, error)
 	// Sets
 	Onboarded(context.Context, *OnboardingParamsInner) (*common.BoolStatus, error)
+	SetLang(context.Context, *SetLangParamsInner) (*common.BoolStatus, error)
 	// Sessions
 	GetSessions(context.Context, *ProfileParams) (*GetSessionsResponse, error)
 	// Subscribe Articles
@@ -529,6 +542,9 @@ func (UnimplementedAccountsServer) SetCurrentFilter(context.Context, *SetCurrent
 }
 func (UnimplementedAccountsServer) Onboarded(context.Context, *OnboardingParamsInner) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Onboarded not implemented")
+}
+func (UnimplementedAccountsServer) SetLang(context.Context, *SetLangParamsInner) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetLang not implemented")
 }
 func (UnimplementedAccountsServer) GetSessions(context.Context, *ProfileParams) (*GetSessionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSessions not implemented")
@@ -778,6 +794,24 @@ func _Accounts_Onboarded_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountsServer).Onboarded(ctx, req.(*OnboardingParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_SetLang_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetLangParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).SetLang(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_SetLang_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).SetLang(ctx, req.(*SetLangParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1238,6 +1272,10 @@ var Accounts_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Onboarded",
 			Handler:    _Accounts_Onboarded_Handler,
+		},
+		{
+			MethodName: "SetLang",
+			Handler:    _Accounts_SetLang_Handler,
 		},
 		{
 			MethodName: "GetSessions",
