@@ -22,12 +22,10 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Socials_GetCommentsByArticle_FullMethodName = "/social.Socials/GetCommentsByArticle"
 	Socials_CreateArticleComment_FullMethodName = "/social.Socials/CreateArticleComment"
-	Socials_UpdateArticleComment_FullMethodName = "/social.Socials/UpdateArticleComment"
-	Socials_RemoveArticleComment_FullMethodName = "/social.Socials/RemoveArticleComment"
+	Socials_UpdateComment_FullMethodName        = "/social.Socials/UpdateComment"
+	Socials_RemoveComment_FullMethodName        = "/social.Socials/RemoveComment"
 	Socials_GetCommentsByEntity_FullMethodName  = "/social.Socials/GetCommentsByEntity"
 	Socials_CreateEntityComment_FullMethodName  = "/social.Socials/CreateEntityComment"
-	Socials_UpdateEntityComment_FullMethodName  = "/social.Socials/UpdateEntityComment"
-	Socials_RemoveEntityComment_FullMethodName  = "/social.Socials/RemoveEntityComment"
 	Socials_SetArticleReaction_FullMethodName   = "/social.Socials/SetArticleReaction"
 	Socials_SetCommentReaction_FullMethodName   = "/social.Socials/SetCommentReaction"
 )
@@ -38,12 +36,10 @@ const (
 type SocialsClient interface {
 	GetCommentsByArticle(ctx context.Context, in *GetCommentsByArticleParams, opts ...grpc.CallOption) (*GetCommentsResponse, error)
 	CreateArticleComment(ctx context.Context, in *UpsertCommentArticleParamsInner, opts ...grpc.CallOption) (*Comment, error)
-	UpdateArticleComment(ctx context.Context, in *UpsertCommentArticleParamsInner, opts ...grpc.CallOption) (*Comment, error)
-	RemoveArticleComment(ctx context.Context, in *RemoveCommentParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateComment(ctx context.Context, in *UpsertCommentArticleParamsInner, opts ...grpc.CallOption) (*Comment, error)
+	RemoveComment(ctx context.Context, in *RemoveCommentParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	GetCommentsByEntity(ctx context.Context, in *GetCommentsByEntityParams, opts ...grpc.CallOption) (*GetCommentsResponse, error)
 	CreateEntityComment(ctx context.Context, in *UpsertCommentEntityParamsInner, opts ...grpc.CallOption) (*Comment, error)
-	UpdateEntityComment(ctx context.Context, in *UpsertCommentEntityParamsInner, opts ...grpc.CallOption) (*Comment, error)
-	RemoveEntityComment(ctx context.Context, in *RemoveCommentParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	SetArticleReaction(ctx context.Context, in *SetArticleReactionParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	SetCommentReaction(ctx context.Context, in *SetCommentReactionParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 }
@@ -76,20 +72,20 @@ func (c *socialsClient) CreateArticleComment(ctx context.Context, in *UpsertComm
 	return out, nil
 }
 
-func (c *socialsClient) UpdateArticleComment(ctx context.Context, in *UpsertCommentArticleParamsInner, opts ...grpc.CallOption) (*Comment, error) {
+func (c *socialsClient) UpdateComment(ctx context.Context, in *UpsertCommentArticleParamsInner, opts ...grpc.CallOption) (*Comment, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Comment)
-	err := c.cc.Invoke(ctx, Socials_UpdateArticleComment_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Socials_UpdateComment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *socialsClient) RemoveArticleComment(ctx context.Context, in *RemoveCommentParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *socialsClient) RemoveComment(ctx context.Context, in *RemoveCommentParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
-	err := c.cc.Invoke(ctx, Socials_RemoveArticleComment_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Socials_RemoveComment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -110,26 +106,6 @@ func (c *socialsClient) CreateEntityComment(ctx context.Context, in *UpsertComme
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Comment)
 	err := c.cc.Invoke(ctx, Socials_CreateEntityComment_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *socialsClient) UpdateEntityComment(ctx context.Context, in *UpsertCommentEntityParamsInner, opts ...grpc.CallOption) (*Comment, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Comment)
-	err := c.cc.Invoke(ctx, Socials_UpdateEntityComment_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *socialsClient) RemoveEntityComment(ctx context.Context, in *RemoveCommentParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
-	err := c.cc.Invoke(ctx, Socials_RemoveEntityComment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -162,12 +138,10 @@ func (c *socialsClient) SetCommentReaction(ctx context.Context, in *SetCommentRe
 type SocialsServer interface {
 	GetCommentsByArticle(context.Context, *GetCommentsByArticleParams) (*GetCommentsResponse, error)
 	CreateArticleComment(context.Context, *UpsertCommentArticleParamsInner) (*Comment, error)
-	UpdateArticleComment(context.Context, *UpsertCommentArticleParamsInner) (*Comment, error)
-	RemoveArticleComment(context.Context, *RemoveCommentParamsInner) (*common.BoolStatus, error)
+	UpdateComment(context.Context, *UpsertCommentArticleParamsInner) (*Comment, error)
+	RemoveComment(context.Context, *RemoveCommentParamsInner) (*common.BoolStatus, error)
 	GetCommentsByEntity(context.Context, *GetCommentsByEntityParams) (*GetCommentsResponse, error)
 	CreateEntityComment(context.Context, *UpsertCommentEntityParamsInner) (*Comment, error)
-	UpdateEntityComment(context.Context, *UpsertCommentEntityParamsInner) (*Comment, error)
-	RemoveEntityComment(context.Context, *RemoveCommentParamsInner) (*common.BoolStatus, error)
 	SetArticleReaction(context.Context, *SetArticleReactionParamsInner) (*common.BoolStatus, error)
 	SetCommentReaction(context.Context, *SetCommentReactionParamsInner) (*common.BoolStatus, error)
 	mustEmbedUnimplementedSocialsServer()
@@ -186,23 +160,17 @@ func (UnimplementedSocialsServer) GetCommentsByArticle(context.Context, *GetComm
 func (UnimplementedSocialsServer) CreateArticleComment(context.Context, *UpsertCommentArticleParamsInner) (*Comment, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateArticleComment not implemented")
 }
-func (UnimplementedSocialsServer) UpdateArticleComment(context.Context, *UpsertCommentArticleParamsInner) (*Comment, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateArticleComment not implemented")
+func (UnimplementedSocialsServer) UpdateComment(context.Context, *UpsertCommentArticleParamsInner) (*Comment, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateComment not implemented")
 }
-func (UnimplementedSocialsServer) RemoveArticleComment(context.Context, *RemoveCommentParamsInner) (*common.BoolStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveArticleComment not implemented")
+func (UnimplementedSocialsServer) RemoveComment(context.Context, *RemoveCommentParamsInner) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveComment not implemented")
 }
 func (UnimplementedSocialsServer) GetCommentsByEntity(context.Context, *GetCommentsByEntityParams) (*GetCommentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCommentsByEntity not implemented")
 }
 func (UnimplementedSocialsServer) CreateEntityComment(context.Context, *UpsertCommentEntityParamsInner) (*Comment, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateEntityComment not implemented")
-}
-func (UnimplementedSocialsServer) UpdateEntityComment(context.Context, *UpsertCommentEntityParamsInner) (*Comment, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateEntityComment not implemented")
-}
-func (UnimplementedSocialsServer) RemoveEntityComment(context.Context, *RemoveCommentParamsInner) (*common.BoolStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveEntityComment not implemented")
 }
 func (UnimplementedSocialsServer) SetArticleReaction(context.Context, *SetArticleReactionParamsInner) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetArticleReaction not implemented")
@@ -267,38 +235,38 @@ func _Socials_CreateArticleComment_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Socials_UpdateArticleComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Socials_UpdateComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpsertCommentArticleParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SocialsServer).UpdateArticleComment(ctx, in)
+		return srv.(SocialsServer).UpdateComment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Socials_UpdateArticleComment_FullMethodName,
+		FullMethod: Socials_UpdateComment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SocialsServer).UpdateArticleComment(ctx, req.(*UpsertCommentArticleParamsInner))
+		return srv.(SocialsServer).UpdateComment(ctx, req.(*UpsertCommentArticleParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Socials_RemoveArticleComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Socials_RemoveComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RemoveCommentParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SocialsServer).RemoveArticleComment(ctx, in)
+		return srv.(SocialsServer).RemoveComment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Socials_RemoveArticleComment_FullMethodName,
+		FullMethod: Socials_RemoveComment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SocialsServer).RemoveArticleComment(ctx, req.(*RemoveCommentParamsInner))
+		return srv.(SocialsServer).RemoveComment(ctx, req.(*RemoveCommentParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -335,42 +303,6 @@ func _Socials_CreateEntityComment_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SocialsServer).CreateEntityComment(ctx, req.(*UpsertCommentEntityParamsInner))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Socials_UpdateEntityComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpsertCommentEntityParamsInner)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SocialsServer).UpdateEntityComment(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Socials_UpdateEntityComment_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SocialsServer).UpdateEntityComment(ctx, req.(*UpsertCommentEntityParamsInner))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Socials_RemoveEntityComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveCommentParamsInner)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SocialsServer).RemoveEntityComment(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Socials_RemoveEntityComment_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SocialsServer).RemoveEntityComment(ctx, req.(*RemoveCommentParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -427,12 +359,12 @@ var Socials_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Socials_CreateArticleComment_Handler,
 		},
 		{
-			MethodName: "UpdateArticleComment",
-			Handler:    _Socials_UpdateArticleComment_Handler,
+			MethodName: "UpdateComment",
+			Handler:    _Socials_UpdateComment_Handler,
 		},
 		{
-			MethodName: "RemoveArticleComment",
-			Handler:    _Socials_RemoveArticleComment_Handler,
+			MethodName: "RemoveComment",
+			Handler:    _Socials_RemoveComment_Handler,
 		},
 		{
 			MethodName: "GetCommentsByEntity",
@@ -441,14 +373,6 @@ var Socials_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateEntityComment",
 			Handler:    _Socials_CreateEntityComment_Handler,
-		},
-		{
-			MethodName: "UpdateEntityComment",
-			Handler:    _Socials_UpdateEntityComment_Handler,
-		},
-		{
-			MethodName: "RemoveEntityComment",
-			Handler:    _Socials_RemoveEntityComment_Handler,
 		},
 		{
 			MethodName: "SetArticleReaction",
