@@ -28,6 +28,7 @@ const (
 	Socials_SetArticleReaction_FullMethodName   = "/social.Socials/SetArticleReaction"
 	Socials_GetCommentsByEntity_FullMethodName  = "/social.Socials/GetCommentsByEntity"
 	Socials_CreateEntityComment_FullMethodName  = "/social.Socials/CreateEntityComment"
+	Socials_GetCommentsByAccount_FullMethodName = "/social.Socials/GetCommentsByAccount"
 )
 
 // SocialsClient is the client API for Socials service.
@@ -42,6 +43,7 @@ type SocialsClient interface {
 	SetArticleReaction(ctx context.Context, in *SetArticleReactionParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	GetCommentsByEntity(ctx context.Context, in *GetCommentsByEntityParams, opts ...grpc.CallOption) (*GetCommentsResponse, error)
 	CreateEntityComment(ctx context.Context, in *CreateCommentEntityParamsInner, opts ...grpc.CallOption) (*Comment, error)
+	GetCommentsByAccount(ctx context.Context, in *GetCommentsByAccountParamsInner, opts ...grpc.CallOption) (*GetCommentsResponse, error)
 }
 
 type socialsClient struct {
@@ -132,6 +134,16 @@ func (c *socialsClient) CreateEntityComment(ctx context.Context, in *CreateComme
 	return out, nil
 }
 
+func (c *socialsClient) GetCommentsByAccount(ctx context.Context, in *GetCommentsByAccountParamsInner, opts ...grpc.CallOption) (*GetCommentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCommentsResponse)
+	err := c.cc.Invoke(ctx, Socials_GetCommentsByAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SocialsServer is the server API for Socials service.
 // All implementations must embed UnimplementedSocialsServer
 // for forward compatibility.
@@ -144,6 +156,7 @@ type SocialsServer interface {
 	SetArticleReaction(context.Context, *SetArticleReactionParamsInner) (*common.BoolStatus, error)
 	GetCommentsByEntity(context.Context, *GetCommentsByEntityParams) (*GetCommentsResponse, error)
 	CreateEntityComment(context.Context, *CreateCommentEntityParamsInner) (*Comment, error)
+	GetCommentsByAccount(context.Context, *GetCommentsByAccountParamsInner) (*GetCommentsResponse, error)
 	mustEmbedUnimplementedSocialsServer()
 }
 
@@ -177,6 +190,9 @@ func (UnimplementedSocialsServer) GetCommentsByEntity(context.Context, *GetComme
 }
 func (UnimplementedSocialsServer) CreateEntityComment(context.Context, *CreateCommentEntityParamsInner) (*Comment, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateEntityComment not implemented")
+}
+func (UnimplementedSocialsServer) GetCommentsByAccount(context.Context, *GetCommentsByAccountParamsInner) (*GetCommentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCommentsByAccount not implemented")
 }
 func (UnimplementedSocialsServer) mustEmbedUnimplementedSocialsServer() {}
 func (UnimplementedSocialsServer) testEmbeddedByValue()                 {}
@@ -343,6 +359,24 @@ func _Socials_CreateEntityComment_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Socials_GetCommentsByAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCommentsByAccountParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SocialsServer).GetCommentsByAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Socials_GetCommentsByAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SocialsServer).GetCommentsByAccount(ctx, req.(*GetCommentsByAccountParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Socials_ServiceDesc is the grpc.ServiceDesc for Socials service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -381,6 +415,10 @@ var Socials_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateEntityComment",
 			Handler:    _Socials_CreateEntityComment_Handler,
+		},
+		{
+			MethodName: "GetCommentsByAccount",
+			Handler:    _Socials_GetCommentsByAccount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
