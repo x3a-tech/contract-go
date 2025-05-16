@@ -12,6 +12,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -90,69 +91,69 @@ type StaticDataClient interface {
 	// GroupKeys
 	GetGroupKeys(ctx context.Context, in *GetGroupKeysParams, opts ...grpc.CallOption) (*GetGroupKeysResponse, error)
 	CreateGroupKeys(ctx context.Context, in *CreateGroupKeysParams, opts ...grpc.CallOption) (*CreateGroupKeysResponse, error)
-	RemoveGroupKeys(ctx context.Context, in *RemoveGroupKeysParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	RemoveGroupKeys(ctx context.Context, in *RemoveGroupKeysParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists
 	GetLists(ctx context.Context, in *GetListsParams, opts ...grpc.CallOption) (*GetListResponse, error)
 	GetListsInner(ctx context.Context, in *GetListsParams, opts ...grpc.CallOption) (*GetListResponse, error)
 	CreateList(ctx context.Context, in *CreateListParams, opts ...grpc.CallOption) (*List, error)
-	UpdateListSlug(ctx context.Context, in *UpdateListSlugParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	UpdateListMeta(ctx context.Context, in *UpdateListMetaParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateListSlug(ctx context.Context, in *UpdateListSlugParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateListMeta(ctx context.Context, in *UpdateListMetaParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateListImage(ctx context.Context, in *UpdateListImageParams, opts ...grpc.CallOption) (*UpdateListImageResponse, error)
-	RemoveListImage(ctx context.Context, in *RemoveListImageParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	UpdateListL10Ns(ctx context.Context, in *UpdateListL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	ShowLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	HideLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	RemoveLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	SortLists(ctx context.Context, in *SortListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	AttachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	DetachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	RemoveListImage(ctx context.Context, in *RemoveListImageParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateListL10Ns(ctx context.Context, in *UpdateListL10NsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ShowLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	HideLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RemoveLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SortLists(ctx context.Context, in *SortListParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AttachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DetachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CopyList(ctx context.Context, in *CopyListParams, opts ...grpc.CallOption) (*List, error)
 	CopyListWithRelations(ctx context.Context, in *CopyListParams, opts ...grpc.CallOption) (*List, error)
 	CheckFreeSlugInList(ctx context.Context, in *CheckFreeSlugInListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Entities
 	GetEntities(ctx context.Context, in *GetEntitiesParams, opts ...grpc.CallOption) (*GetEntitiesResponse, error)
 	CreateEntity(ctx context.Context, in *CreateEntityParams, opts ...grpc.CallOption) (*Entity, error)
-	UpdateEntitiesRating(ctx context.Context, in *UpdateEntitiesRaringParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	UpdateEntitySlug(ctx context.Context, in *UpdateEntitySlugParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateEntitiesRating(ctx context.Context, in *UpdateEntitiesRaringParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateEntitySlug(ctx context.Context, in *UpdateEntitySlugParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateEntityImage(ctx context.Context, in *UpdateEntityImageParams, opts ...grpc.CallOption) (*UpdateEntityImageResponse, error)
-	RemoveEntityImage(ctx context.Context, in *RemoveEntityImageParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	UpdateEntityL10Ns(ctx context.Context, in *UpdateEntityL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	ShowEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	HideEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	RemoveEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	SortEntities(ctx context.Context, in *SortEntitiesParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	AttachEntitiesToList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	DetachEntitiesFromList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	CopyEntity(ctx context.Context, in *CopyEntitiesParams, opts ...grpc.CallOption) (*Entity, error)
-	CopyEntityWithRelations(ctx context.Context, in *CopyEntitiesParams, opts ...grpc.CallOption) (*Entity, error)
+	RemoveEntityImage(ctx context.Context, in *RemoveEntityImageParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateEntityL10Ns(ctx context.Context, in *UpdateEntityL10NsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ShowEntities(ctx context.Context, in *SingleManipulationEntitiesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	HideEntities(ctx context.Context, in *SingleManipulationEntitiesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RemoveEntities(ctx context.Context, in *SingleManipulationEntitiesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SortEntities(ctx context.Context, in *SortEntitiesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AttachEntitiesToList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DetachEntitiesFromList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CopyEntity(ctx context.Context, in *CopyEntityParams, opts ...grpc.CallOption) (*Entity, error)
+	CopyEntityWithRelations(ctx context.Context, in *CopyEntityParams, opts ...grpc.CallOption) (*Entity, error)
 	CheckFreeSlugInEntities(ctx context.Context, in *CheckFreeSlugInEntitiesParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Fields
 	GetFields(ctx context.Context, in *GetFieldsParams, opts ...grpc.CallOption) (*GetFieldsResponse, error)
 	GetFieldsValuesByEntities(ctx context.Context, in *GetFieldsValuesByEntitiesParams, opts ...grpc.CallOption) (*GetFieldsValuesByEntitiesResponse, error)
 	CreateField(ctx context.Context, in *CreateFieldParams, opts ...grpc.CallOption) (*Field, error)
-	UpsertEntityFieldValue(ctx context.Context, in *UpsertEntityFieldValueParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	RemoveEntityFieldValue(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	UpsertEntityFieldImage(ctx context.Context, in *UpsertEntityFieldImageResponse, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	RemoveEntityFieldImage(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	UpdateFields(ctx context.Context, in *UpdateFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	UpdateFieldsL10Ns(ctx context.Context, in *UpdateFieldsL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	RemoveFieldsL10Ns(ctx context.Context, in *RemoveFieldsL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	RemoveFields(ctx context.Context, in *RemoveFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	SortFields(ctx context.Context, in *SortFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	UpsertFieldImage(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	UpdateOptionsFields(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	AttachFieldToListParams(ctx context.Context, in *AttachFieldParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	DetachFieldFromListParams(ctx context.Context, in *AttachFieldParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	AttachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	DetachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpsertEntityFieldValue(ctx context.Context, in *UpsertEntityFieldValueParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RemoveEntityFieldValue(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpsertEntityFieldImage(ctx context.Context, in *UpsertEntityFieldImageResponse, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RemoveEntityFieldImage(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateFields(ctx context.Context, in *UpdateFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateFieldsL10Ns(ctx context.Context, in *UpdateFieldsL10NsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RemoveFieldsL10Ns(ctx context.Context, in *RemoveFieldsL10NsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RemoveFields(ctx context.Context, in *RemoveFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SortFields(ctx context.Context, in *SortFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpsertFieldImage(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateOptionsFields(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AttachFieldToListParams(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DetachFieldFromListParams(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AttachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToKeyGroupsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DetachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToKeyGroupsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CheckAttachedFieldsInList(ctx context.Context, in *CheckAttachedFieldsInListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Pages
 	GetPages(ctx context.Context, in *GetPagesParams, opts ...grpc.CallOption) (*GetPagesResponse, error)
 	CreatePage(ctx context.Context, in *PageParams, opts ...grpc.CallOption) (*Page, error)
 	UpdatePage(ctx context.Context, in *UpdatePageParams, opts ...grpc.CallOption) (*Page, error)
 	RemovePage(ctx context.Context, in *RemovePagesParams, opts ...grpc.CallOption) (*Page, error)
-	AttachPageToParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	DetachPageFromParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	AttachPageToParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DetachPageFromParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type staticDataClient struct {
@@ -183,9 +184,9 @@ func (c *staticDataClient) CreateGroupKeys(ctx context.Context, in *CreateGroupK
 	return out, nil
 }
 
-func (c *staticDataClient) RemoveGroupKeys(ctx context.Context, in *RemoveGroupKeysParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) RemoveGroupKeys(ctx context.Context, in *RemoveGroupKeysParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_RemoveGroupKeys_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -223,9 +224,9 @@ func (c *staticDataClient) CreateList(ctx context.Context, in *CreateListParams,
 	return out, nil
 }
 
-func (c *staticDataClient) UpdateListSlug(ctx context.Context, in *UpdateListSlugParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateListSlug(ctx context.Context, in *UpdateListSlugParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpdateListSlug_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -233,9 +234,9 @@ func (c *staticDataClient) UpdateListSlug(ctx context.Context, in *UpdateListSlu
 	return out, nil
 }
 
-func (c *staticDataClient) UpdateListMeta(ctx context.Context, in *UpdateListMetaParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateListMeta(ctx context.Context, in *UpdateListMetaParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpdateListMeta_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -253,9 +254,9 @@ func (c *staticDataClient) UpdateListImage(ctx context.Context, in *UpdateListIm
 	return out, nil
 }
 
-func (c *staticDataClient) RemoveListImage(ctx context.Context, in *RemoveListImageParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) RemoveListImage(ctx context.Context, in *RemoveListImageParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_RemoveListImage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -263,9 +264,9 @@ func (c *staticDataClient) RemoveListImage(ctx context.Context, in *RemoveListIm
 	return out, nil
 }
 
-func (c *staticDataClient) UpdateListL10Ns(ctx context.Context, in *UpdateListL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateListL10Ns(ctx context.Context, in *UpdateListL10NsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpdateListL10Ns_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -273,9 +274,9 @@ func (c *staticDataClient) UpdateListL10Ns(ctx context.Context, in *UpdateListL1
 	return out, nil
 }
 
-func (c *staticDataClient) ShowLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) ShowLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_ShowLists_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -283,9 +284,9 @@ func (c *staticDataClient) ShowLists(ctx context.Context, in *SingleManipulation
 	return out, nil
 }
 
-func (c *staticDataClient) HideLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) HideLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_HideLists_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -293,9 +294,9 @@ func (c *staticDataClient) HideLists(ctx context.Context, in *SingleManipulation
 	return out, nil
 }
 
-func (c *staticDataClient) RemoveLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) RemoveLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_RemoveLists_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -303,9 +304,9 @@ func (c *staticDataClient) RemoveLists(ctx context.Context, in *SingleManipulati
 	return out, nil
 }
 
-func (c *staticDataClient) SortLists(ctx context.Context, in *SortListParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) SortLists(ctx context.Context, in *SortListParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_SortLists_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -313,9 +314,9 @@ func (c *staticDataClient) SortLists(ctx context.Context, in *SortListParams, op
 	return out, nil
 }
 
-func (c *staticDataClient) AttachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) AttachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_AttachListsToLists_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -323,9 +324,9 @@ func (c *staticDataClient) AttachListsToLists(ctx context.Context, in *AttachLis
 	return out, nil
 }
 
-func (c *staticDataClient) DetachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) DetachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_DetachListsToLists_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -383,9 +384,9 @@ func (c *staticDataClient) CreateEntity(ctx context.Context, in *CreateEntityPar
 	return out, nil
 }
 
-func (c *staticDataClient) UpdateEntitiesRating(ctx context.Context, in *UpdateEntitiesRaringParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateEntitiesRating(ctx context.Context, in *UpdateEntitiesRaringParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpdateEntitiesRating_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -393,9 +394,9 @@ func (c *staticDataClient) UpdateEntitiesRating(ctx context.Context, in *UpdateE
 	return out, nil
 }
 
-func (c *staticDataClient) UpdateEntitySlug(ctx context.Context, in *UpdateEntitySlugParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateEntitySlug(ctx context.Context, in *UpdateEntitySlugParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpdateEntitySlug_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -413,9 +414,9 @@ func (c *staticDataClient) UpdateEntityImage(ctx context.Context, in *UpdateEnti
 	return out, nil
 }
 
-func (c *staticDataClient) RemoveEntityImage(ctx context.Context, in *RemoveEntityImageParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) RemoveEntityImage(ctx context.Context, in *RemoveEntityImageParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_RemoveEntityImage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -423,9 +424,9 @@ func (c *staticDataClient) RemoveEntityImage(ctx context.Context, in *RemoveEnti
 	return out, nil
 }
 
-func (c *staticDataClient) UpdateEntityL10Ns(ctx context.Context, in *UpdateEntityL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateEntityL10Ns(ctx context.Context, in *UpdateEntityL10NsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpdateEntityL10Ns_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -433,9 +434,9 @@ func (c *staticDataClient) UpdateEntityL10Ns(ctx context.Context, in *UpdateEnti
 	return out, nil
 }
 
-func (c *staticDataClient) ShowEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) ShowEntities(ctx context.Context, in *SingleManipulationEntitiesParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_ShowEntities_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -443,9 +444,9 @@ func (c *staticDataClient) ShowEntities(ctx context.Context, in *SingleManipulat
 	return out, nil
 }
 
-func (c *staticDataClient) HideEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) HideEntities(ctx context.Context, in *SingleManipulationEntitiesParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_HideEntities_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -453,9 +454,9 @@ func (c *staticDataClient) HideEntities(ctx context.Context, in *SingleManipulat
 	return out, nil
 }
 
-func (c *staticDataClient) RemoveEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) RemoveEntities(ctx context.Context, in *SingleManipulationEntitiesParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_RemoveEntities_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -463,9 +464,9 @@ func (c *staticDataClient) RemoveEntities(ctx context.Context, in *SingleManipul
 	return out, nil
 }
 
-func (c *staticDataClient) SortEntities(ctx context.Context, in *SortEntitiesParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) SortEntities(ctx context.Context, in *SortEntitiesParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_SortEntities_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -473,9 +474,9 @@ func (c *staticDataClient) SortEntities(ctx context.Context, in *SortEntitiesPar
 	return out, nil
 }
 
-func (c *staticDataClient) AttachEntitiesToList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) AttachEntitiesToList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_AttachEntitiesToList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -483,9 +484,9 @@ func (c *staticDataClient) AttachEntitiesToList(ctx context.Context, in *AttachE
 	return out, nil
 }
 
-func (c *staticDataClient) DetachEntitiesFromList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) DetachEntitiesFromList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_DetachEntitiesFromList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -493,7 +494,7 @@ func (c *staticDataClient) DetachEntitiesFromList(ctx context.Context, in *Attac
 	return out, nil
 }
 
-func (c *staticDataClient) CopyEntity(ctx context.Context, in *CopyEntitiesParams, opts ...grpc.CallOption) (*Entity, error) {
+func (c *staticDataClient) CopyEntity(ctx context.Context, in *CopyEntityParams, opts ...grpc.CallOption) (*Entity, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Entity)
 	err := c.cc.Invoke(ctx, StaticData_CopyEntity_FullMethodName, in, out, cOpts...)
@@ -503,7 +504,7 @@ func (c *staticDataClient) CopyEntity(ctx context.Context, in *CopyEntitiesParam
 	return out, nil
 }
 
-func (c *staticDataClient) CopyEntityWithRelations(ctx context.Context, in *CopyEntitiesParams, opts ...grpc.CallOption) (*Entity, error) {
+func (c *staticDataClient) CopyEntityWithRelations(ctx context.Context, in *CopyEntityParams, opts ...grpc.CallOption) (*Entity, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Entity)
 	err := c.cc.Invoke(ctx, StaticData_CopyEntityWithRelations_FullMethodName, in, out, cOpts...)
@@ -553,9 +554,9 @@ func (c *staticDataClient) CreateField(ctx context.Context, in *CreateFieldParam
 	return out, nil
 }
 
-func (c *staticDataClient) UpsertEntityFieldValue(ctx context.Context, in *UpsertEntityFieldValueParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpsertEntityFieldValue(ctx context.Context, in *UpsertEntityFieldValueParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpsertEntityFieldValue_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -563,9 +564,9 @@ func (c *staticDataClient) UpsertEntityFieldValue(ctx context.Context, in *Upser
 	return out, nil
 }
 
-func (c *staticDataClient) RemoveEntityFieldValue(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) RemoveEntityFieldValue(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_RemoveEntityFieldValue_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -573,9 +574,9 @@ func (c *staticDataClient) RemoveEntityFieldValue(ctx context.Context, in *Remov
 	return out, nil
 }
 
-func (c *staticDataClient) UpsertEntityFieldImage(ctx context.Context, in *UpsertEntityFieldImageResponse, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpsertEntityFieldImage(ctx context.Context, in *UpsertEntityFieldImageResponse, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpsertEntityFieldImage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -583,9 +584,9 @@ func (c *staticDataClient) UpsertEntityFieldImage(ctx context.Context, in *Upser
 	return out, nil
 }
 
-func (c *staticDataClient) RemoveEntityFieldImage(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) RemoveEntityFieldImage(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_RemoveEntityFieldImage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -593,9 +594,9 @@ func (c *staticDataClient) RemoveEntityFieldImage(ctx context.Context, in *Remov
 	return out, nil
 }
 
-func (c *staticDataClient) UpdateFields(ctx context.Context, in *UpdateFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateFields(ctx context.Context, in *UpdateFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpdateFields_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -603,9 +604,9 @@ func (c *staticDataClient) UpdateFields(ctx context.Context, in *UpdateFieldsPar
 	return out, nil
 }
 
-func (c *staticDataClient) UpdateFieldsL10Ns(ctx context.Context, in *UpdateFieldsL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateFieldsL10Ns(ctx context.Context, in *UpdateFieldsL10NsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpdateFieldsL10Ns_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -613,9 +614,9 @@ func (c *staticDataClient) UpdateFieldsL10Ns(ctx context.Context, in *UpdateFiel
 	return out, nil
 }
 
-func (c *staticDataClient) RemoveFieldsL10Ns(ctx context.Context, in *RemoveFieldsL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) RemoveFieldsL10Ns(ctx context.Context, in *RemoveFieldsL10NsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_RemoveFieldsL10Ns_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -623,9 +624,9 @@ func (c *staticDataClient) RemoveFieldsL10Ns(ctx context.Context, in *RemoveFiel
 	return out, nil
 }
 
-func (c *staticDataClient) RemoveFields(ctx context.Context, in *RemoveFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) RemoveFields(ctx context.Context, in *RemoveFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_RemoveFields_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -633,9 +634,9 @@ func (c *staticDataClient) RemoveFields(ctx context.Context, in *RemoveFieldsPar
 	return out, nil
 }
 
-func (c *staticDataClient) SortFields(ctx context.Context, in *SortFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) SortFields(ctx context.Context, in *SortFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_SortFields_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -643,9 +644,9 @@ func (c *staticDataClient) SortFields(ctx context.Context, in *SortFieldsParams,
 	return out, nil
 }
 
-func (c *staticDataClient) UpsertFieldImage(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpsertFieldImage(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpsertFieldImage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -653,9 +654,9 @@ func (c *staticDataClient) UpsertFieldImage(ctx context.Context, in *UpdateOptio
 	return out, nil
 }
 
-func (c *staticDataClient) UpdateOptionsFields(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateOptionsFields(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpdateOptionsFields_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -663,9 +664,9 @@ func (c *staticDataClient) UpdateOptionsFields(ctx context.Context, in *UpdateOp
 	return out, nil
 }
 
-func (c *staticDataClient) AttachFieldToListParams(ctx context.Context, in *AttachFieldParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) AttachFieldToListParams(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_AttachFieldToListParams_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -673,9 +674,9 @@ func (c *staticDataClient) AttachFieldToListParams(ctx context.Context, in *Atta
 	return out, nil
 }
 
-func (c *staticDataClient) DetachFieldFromListParams(ctx context.Context, in *AttachFieldParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) DetachFieldFromListParams(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_DetachFieldFromListParams_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -683,9 +684,9 @@ func (c *staticDataClient) DetachFieldFromListParams(ctx context.Context, in *At
 	return out, nil
 }
 
-func (c *staticDataClient) AttachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) AttachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToKeyGroupsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_AttachFieldsToGroupKeys_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -693,9 +694,9 @@ func (c *staticDataClient) AttachFieldsToGroupKeys(ctx context.Context, in *Togg
 	return out, nil
 }
 
-func (c *staticDataClient) DetachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) DetachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToKeyGroupsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_DetachFieldsToGroupKeys_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -753,9 +754,9 @@ func (c *staticDataClient) RemovePage(ctx context.Context, in *RemovePagesParams
 	return out, nil
 }
 
-func (c *staticDataClient) AttachPageToParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) AttachPageToParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_AttachPageToParent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -763,9 +764,9 @@ func (c *staticDataClient) AttachPageToParent(ctx context.Context, in *ToggleAtt
 	return out, nil
 }
 
-func (c *staticDataClient) DetachPageFromParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) DetachPageFromParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_DetachPageFromParent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -780,69 +781,69 @@ type StaticDataServer interface {
 	// GroupKeys
 	GetGroupKeys(context.Context, *GetGroupKeysParams) (*GetGroupKeysResponse, error)
 	CreateGroupKeys(context.Context, *CreateGroupKeysParams) (*CreateGroupKeysResponse, error)
-	RemoveGroupKeys(context.Context, *RemoveGroupKeysParams) (*common.BoolStatus, error)
+	RemoveGroupKeys(context.Context, *RemoveGroupKeysParams) (*emptypb.Empty, error)
 	// Lists
 	GetLists(context.Context, *GetListsParams) (*GetListResponse, error)
 	GetListsInner(context.Context, *GetListsParams) (*GetListResponse, error)
 	CreateList(context.Context, *CreateListParams) (*List, error)
-	UpdateListSlug(context.Context, *UpdateListSlugParams) (*common.BoolStatus, error)
-	UpdateListMeta(context.Context, *UpdateListMetaParams) (*common.BoolStatus, error)
+	UpdateListSlug(context.Context, *UpdateListSlugParams) (*emptypb.Empty, error)
+	UpdateListMeta(context.Context, *UpdateListMetaParams) (*emptypb.Empty, error)
 	UpdateListImage(context.Context, *UpdateListImageParams) (*UpdateListImageResponse, error)
-	RemoveListImage(context.Context, *RemoveListImageParams) (*common.BoolStatus, error)
-	UpdateListL10Ns(context.Context, *UpdateListL10NsParams) (*common.BoolStatus, error)
-	ShowLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error)
-	HideLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error)
-	RemoveLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error)
-	SortLists(context.Context, *SortListParams) (*common.BoolStatus, error)
-	AttachListsToLists(context.Context, *AttachListsParams) (*common.BoolStatus, error)
-	DetachListsToLists(context.Context, *AttachListsParams) (*common.BoolStatus, error)
+	RemoveListImage(context.Context, *RemoveListImageParams) (*emptypb.Empty, error)
+	UpdateListL10Ns(context.Context, *UpdateListL10NsParams) (*emptypb.Empty, error)
+	ShowLists(context.Context, *SingleManipulationListsParams) (*emptypb.Empty, error)
+	HideLists(context.Context, *SingleManipulationListsParams) (*emptypb.Empty, error)
+	RemoveLists(context.Context, *SingleManipulationListsParams) (*emptypb.Empty, error)
+	SortLists(context.Context, *SortListParams) (*emptypb.Empty, error)
+	AttachListsToLists(context.Context, *AttachListsParams) (*emptypb.Empty, error)
+	DetachListsToLists(context.Context, *AttachListsParams) (*emptypb.Empty, error)
 	CopyList(context.Context, *CopyListParams) (*List, error)
 	CopyListWithRelations(context.Context, *CopyListParams) (*List, error)
 	CheckFreeSlugInList(context.Context, *CheckFreeSlugInListParams) (*common.BoolStatus, error)
 	// Entities
 	GetEntities(context.Context, *GetEntitiesParams) (*GetEntitiesResponse, error)
 	CreateEntity(context.Context, *CreateEntityParams) (*Entity, error)
-	UpdateEntitiesRating(context.Context, *UpdateEntitiesRaringParams) (*common.BoolStatus, error)
-	UpdateEntitySlug(context.Context, *UpdateEntitySlugParams) (*common.BoolStatus, error)
+	UpdateEntitiesRating(context.Context, *UpdateEntitiesRaringParams) (*emptypb.Empty, error)
+	UpdateEntitySlug(context.Context, *UpdateEntitySlugParams) (*emptypb.Empty, error)
 	UpdateEntityImage(context.Context, *UpdateEntityImageParams) (*UpdateEntityImageResponse, error)
-	RemoveEntityImage(context.Context, *RemoveEntityImageParams) (*common.BoolStatus, error)
-	UpdateEntityL10Ns(context.Context, *UpdateEntityL10NsParams) (*common.BoolStatus, error)
-	ShowEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error)
-	HideEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error)
-	RemoveEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error)
-	SortEntities(context.Context, *SortEntitiesParams) (*common.BoolStatus, error)
-	AttachEntitiesToList(context.Context, *AttachEntitiesToListsParams) (*common.BoolStatus, error)
-	DetachEntitiesFromList(context.Context, *AttachEntitiesToListsParams) (*common.BoolStatus, error)
-	CopyEntity(context.Context, *CopyEntitiesParams) (*Entity, error)
-	CopyEntityWithRelations(context.Context, *CopyEntitiesParams) (*Entity, error)
+	RemoveEntityImage(context.Context, *RemoveEntityImageParams) (*emptypb.Empty, error)
+	UpdateEntityL10Ns(context.Context, *UpdateEntityL10NsParams) (*emptypb.Empty, error)
+	ShowEntities(context.Context, *SingleManipulationEntitiesParams) (*emptypb.Empty, error)
+	HideEntities(context.Context, *SingleManipulationEntitiesParams) (*emptypb.Empty, error)
+	RemoveEntities(context.Context, *SingleManipulationEntitiesParams) (*emptypb.Empty, error)
+	SortEntities(context.Context, *SortEntitiesParams) (*emptypb.Empty, error)
+	AttachEntitiesToList(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error)
+	DetachEntitiesFromList(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error)
+	CopyEntity(context.Context, *CopyEntityParams) (*Entity, error)
+	CopyEntityWithRelations(context.Context, *CopyEntityParams) (*Entity, error)
 	CheckFreeSlugInEntities(context.Context, *CheckFreeSlugInEntitiesParams) (*common.BoolStatus, error)
 	// Fields
 	GetFields(context.Context, *GetFieldsParams) (*GetFieldsResponse, error)
 	GetFieldsValuesByEntities(context.Context, *GetFieldsValuesByEntitiesParams) (*GetFieldsValuesByEntitiesResponse, error)
 	CreateField(context.Context, *CreateFieldParams) (*Field, error)
-	UpsertEntityFieldValue(context.Context, *UpsertEntityFieldValueParams) (*common.BoolStatus, error)
-	RemoveEntityFieldValue(context.Context, *RemoveEntityFieldValueParams) (*common.BoolStatus, error)
-	UpsertEntityFieldImage(context.Context, *UpsertEntityFieldImageResponse) (*common.BoolStatus, error)
-	RemoveEntityFieldImage(context.Context, *RemoveEntityFieldValueParams) (*common.BoolStatus, error)
-	UpdateFields(context.Context, *UpdateFieldsParams) (*common.BoolStatus, error)
-	UpdateFieldsL10Ns(context.Context, *UpdateFieldsL10NsParams) (*common.BoolStatus, error)
-	RemoveFieldsL10Ns(context.Context, *RemoveFieldsL10NsParams) (*common.BoolStatus, error)
-	RemoveFields(context.Context, *RemoveFieldsParams) (*common.BoolStatus, error)
-	SortFields(context.Context, *SortFieldsParams) (*common.BoolStatus, error)
-	UpsertFieldImage(context.Context, *UpdateOptionsFieldsParams) (*common.BoolStatus, error)
-	UpdateOptionsFields(context.Context, *UpdateOptionsFieldsParams) (*common.BoolStatus, error)
-	AttachFieldToListParams(context.Context, *AttachFieldParams) (*common.BoolStatus, error)
-	DetachFieldFromListParams(context.Context, *AttachFieldParams) (*common.BoolStatus, error)
-	AttachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error)
-	DetachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error)
+	UpsertEntityFieldValue(context.Context, *UpsertEntityFieldValueParams) (*emptypb.Empty, error)
+	RemoveEntityFieldValue(context.Context, *RemoveEntityFieldValueParams) (*emptypb.Empty, error)
+	UpsertEntityFieldImage(context.Context, *UpsertEntityFieldImageResponse) (*emptypb.Empty, error)
+	RemoveEntityFieldImage(context.Context, *RemoveEntityFieldValueParams) (*emptypb.Empty, error)
+	UpdateFields(context.Context, *UpdateFieldsParams) (*emptypb.Empty, error)
+	UpdateFieldsL10Ns(context.Context, *UpdateFieldsL10NsParams) (*emptypb.Empty, error)
+	RemoveFieldsL10Ns(context.Context, *RemoveFieldsL10NsParams) (*emptypb.Empty, error)
+	RemoveFields(context.Context, *RemoveFieldsParams) (*emptypb.Empty, error)
+	SortFields(context.Context, *SortFieldsParams) (*emptypb.Empty, error)
+	UpsertFieldImage(context.Context, *UpdateOptionsFieldsParams) (*emptypb.Empty, error)
+	UpdateOptionsFields(context.Context, *UpdateOptionsFieldsParams) (*emptypb.Empty, error)
+	AttachFieldToListParams(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error)
+	DetachFieldFromListParams(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error)
+	AttachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToKeyGroupsParams) (*emptypb.Empty, error)
+	DetachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToKeyGroupsParams) (*emptypb.Empty, error)
 	CheckAttachedFieldsInList(context.Context, *CheckAttachedFieldsInListParams) (*common.BoolStatus, error)
 	// Pages
 	GetPages(context.Context, *GetPagesParams) (*GetPagesResponse, error)
 	CreatePage(context.Context, *PageParams) (*Page, error)
 	UpdatePage(context.Context, *UpdatePageParams) (*Page, error)
 	RemovePage(context.Context, *RemovePagesParams) (*Page, error)
-	AttachPageToParent(context.Context, *ToggleAttachPageToParentParams) (*common.BoolStatus, error)
-	DetachPageFromParent(context.Context, *ToggleAttachPageToParentParams) (*common.BoolStatus, error)
+	AttachPageToParent(context.Context, *ToggleAttachPageToParentParams) (*emptypb.Empty, error)
+	DetachPageFromParent(context.Context, *ToggleAttachPageToParentParams) (*emptypb.Empty, error)
 	mustEmbedUnimplementedStaticDataServer()
 }
 
@@ -859,7 +860,7 @@ func (UnimplementedStaticDataServer) GetGroupKeys(context.Context, *GetGroupKeys
 func (UnimplementedStaticDataServer) CreateGroupKeys(context.Context, *CreateGroupKeysParams) (*CreateGroupKeysResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateGroupKeys not implemented")
 }
-func (UnimplementedStaticDataServer) RemoveGroupKeys(context.Context, *RemoveGroupKeysParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) RemoveGroupKeys(context.Context, *RemoveGroupKeysParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveGroupKeys not implemented")
 }
 func (UnimplementedStaticDataServer) GetLists(context.Context, *GetListsParams) (*GetListResponse, error) {
@@ -871,37 +872,37 @@ func (UnimplementedStaticDataServer) GetListsInner(context.Context, *GetListsPar
 func (UnimplementedStaticDataServer) CreateList(context.Context, *CreateListParams) (*List, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateList not implemented")
 }
-func (UnimplementedStaticDataServer) UpdateListSlug(context.Context, *UpdateListSlugParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpdateListSlug(context.Context, *UpdateListSlugParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateListSlug not implemented")
 }
-func (UnimplementedStaticDataServer) UpdateListMeta(context.Context, *UpdateListMetaParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpdateListMeta(context.Context, *UpdateListMetaParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateListMeta not implemented")
 }
 func (UnimplementedStaticDataServer) UpdateListImage(context.Context, *UpdateListImageParams) (*UpdateListImageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateListImage not implemented")
 }
-func (UnimplementedStaticDataServer) RemoveListImage(context.Context, *RemoveListImageParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) RemoveListImage(context.Context, *RemoveListImageParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveListImage not implemented")
 }
-func (UnimplementedStaticDataServer) UpdateListL10Ns(context.Context, *UpdateListL10NsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpdateListL10Ns(context.Context, *UpdateListL10NsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateListL10Ns not implemented")
 }
-func (UnimplementedStaticDataServer) ShowLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) ShowLists(context.Context, *SingleManipulationListsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ShowLists not implemented")
 }
-func (UnimplementedStaticDataServer) HideLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) HideLists(context.Context, *SingleManipulationListsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HideLists not implemented")
 }
-func (UnimplementedStaticDataServer) RemoveLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) RemoveLists(context.Context, *SingleManipulationListsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveLists not implemented")
 }
-func (UnimplementedStaticDataServer) SortLists(context.Context, *SortListParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) SortLists(context.Context, *SortListParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SortLists not implemented")
 }
-func (UnimplementedStaticDataServer) AttachListsToLists(context.Context, *AttachListsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) AttachListsToLists(context.Context, *AttachListsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AttachListsToLists not implemented")
 }
-func (UnimplementedStaticDataServer) DetachListsToLists(context.Context, *AttachListsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) DetachListsToLists(context.Context, *AttachListsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DetachListsToLists not implemented")
 }
 func (UnimplementedStaticDataServer) CopyList(context.Context, *CopyListParams) (*List, error) {
@@ -919,43 +920,43 @@ func (UnimplementedStaticDataServer) GetEntities(context.Context, *GetEntitiesPa
 func (UnimplementedStaticDataServer) CreateEntity(context.Context, *CreateEntityParams) (*Entity, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateEntity not implemented")
 }
-func (UnimplementedStaticDataServer) UpdateEntitiesRating(context.Context, *UpdateEntitiesRaringParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpdateEntitiesRating(context.Context, *UpdateEntitiesRaringParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateEntitiesRating not implemented")
 }
-func (UnimplementedStaticDataServer) UpdateEntitySlug(context.Context, *UpdateEntitySlugParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpdateEntitySlug(context.Context, *UpdateEntitySlugParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateEntitySlug not implemented")
 }
 func (UnimplementedStaticDataServer) UpdateEntityImage(context.Context, *UpdateEntityImageParams) (*UpdateEntityImageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateEntityImage not implemented")
 }
-func (UnimplementedStaticDataServer) RemoveEntityImage(context.Context, *RemoveEntityImageParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) RemoveEntityImage(context.Context, *RemoveEntityImageParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveEntityImage not implemented")
 }
-func (UnimplementedStaticDataServer) UpdateEntityL10Ns(context.Context, *UpdateEntityL10NsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpdateEntityL10Ns(context.Context, *UpdateEntityL10NsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateEntityL10Ns not implemented")
 }
-func (UnimplementedStaticDataServer) ShowEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) ShowEntities(context.Context, *SingleManipulationEntitiesParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ShowEntities not implemented")
 }
-func (UnimplementedStaticDataServer) HideEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) HideEntities(context.Context, *SingleManipulationEntitiesParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HideEntities not implemented")
 }
-func (UnimplementedStaticDataServer) RemoveEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) RemoveEntities(context.Context, *SingleManipulationEntitiesParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveEntities not implemented")
 }
-func (UnimplementedStaticDataServer) SortEntities(context.Context, *SortEntitiesParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) SortEntities(context.Context, *SortEntitiesParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SortEntities not implemented")
 }
-func (UnimplementedStaticDataServer) AttachEntitiesToList(context.Context, *AttachEntitiesToListsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) AttachEntitiesToList(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AttachEntitiesToList not implemented")
 }
-func (UnimplementedStaticDataServer) DetachEntitiesFromList(context.Context, *AttachEntitiesToListsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) DetachEntitiesFromList(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DetachEntitiesFromList not implemented")
 }
-func (UnimplementedStaticDataServer) CopyEntity(context.Context, *CopyEntitiesParams) (*Entity, error) {
+func (UnimplementedStaticDataServer) CopyEntity(context.Context, *CopyEntityParams) (*Entity, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CopyEntity not implemented")
 }
-func (UnimplementedStaticDataServer) CopyEntityWithRelations(context.Context, *CopyEntitiesParams) (*Entity, error) {
+func (UnimplementedStaticDataServer) CopyEntityWithRelations(context.Context, *CopyEntityParams) (*Entity, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CopyEntityWithRelations not implemented")
 }
 func (UnimplementedStaticDataServer) CheckFreeSlugInEntities(context.Context, *CheckFreeSlugInEntitiesParams) (*common.BoolStatus, error) {
@@ -970,49 +971,49 @@ func (UnimplementedStaticDataServer) GetFieldsValuesByEntities(context.Context, 
 func (UnimplementedStaticDataServer) CreateField(context.Context, *CreateFieldParams) (*Field, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateField not implemented")
 }
-func (UnimplementedStaticDataServer) UpsertEntityFieldValue(context.Context, *UpsertEntityFieldValueParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpsertEntityFieldValue(context.Context, *UpsertEntityFieldValueParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpsertEntityFieldValue not implemented")
 }
-func (UnimplementedStaticDataServer) RemoveEntityFieldValue(context.Context, *RemoveEntityFieldValueParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) RemoveEntityFieldValue(context.Context, *RemoveEntityFieldValueParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveEntityFieldValue not implemented")
 }
-func (UnimplementedStaticDataServer) UpsertEntityFieldImage(context.Context, *UpsertEntityFieldImageResponse) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpsertEntityFieldImage(context.Context, *UpsertEntityFieldImageResponse) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpsertEntityFieldImage not implemented")
 }
-func (UnimplementedStaticDataServer) RemoveEntityFieldImage(context.Context, *RemoveEntityFieldValueParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) RemoveEntityFieldImage(context.Context, *RemoveEntityFieldValueParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveEntityFieldImage not implemented")
 }
-func (UnimplementedStaticDataServer) UpdateFields(context.Context, *UpdateFieldsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpdateFields(context.Context, *UpdateFieldsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateFields not implemented")
 }
-func (UnimplementedStaticDataServer) UpdateFieldsL10Ns(context.Context, *UpdateFieldsL10NsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpdateFieldsL10Ns(context.Context, *UpdateFieldsL10NsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateFieldsL10Ns not implemented")
 }
-func (UnimplementedStaticDataServer) RemoveFieldsL10Ns(context.Context, *RemoveFieldsL10NsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) RemoveFieldsL10Ns(context.Context, *RemoveFieldsL10NsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveFieldsL10Ns not implemented")
 }
-func (UnimplementedStaticDataServer) RemoveFields(context.Context, *RemoveFieldsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) RemoveFields(context.Context, *RemoveFieldsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveFields not implemented")
 }
-func (UnimplementedStaticDataServer) SortFields(context.Context, *SortFieldsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) SortFields(context.Context, *SortFieldsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SortFields not implemented")
 }
-func (UnimplementedStaticDataServer) UpsertFieldImage(context.Context, *UpdateOptionsFieldsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpsertFieldImage(context.Context, *UpdateOptionsFieldsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpsertFieldImage not implemented")
 }
-func (UnimplementedStaticDataServer) UpdateOptionsFields(context.Context, *UpdateOptionsFieldsParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) UpdateOptionsFields(context.Context, *UpdateOptionsFieldsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOptionsFields not implemented")
 }
-func (UnimplementedStaticDataServer) AttachFieldToListParams(context.Context, *AttachFieldParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) AttachFieldToListParams(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AttachFieldToListParams not implemented")
 }
-func (UnimplementedStaticDataServer) DetachFieldFromListParams(context.Context, *AttachFieldParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) DetachFieldFromListParams(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DetachFieldFromListParams not implemented")
 }
-func (UnimplementedStaticDataServer) AttachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) AttachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToKeyGroupsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AttachFieldsToGroupKeys not implemented")
 }
-func (UnimplementedStaticDataServer) DetachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) DetachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToKeyGroupsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DetachFieldsToGroupKeys not implemented")
 }
 func (UnimplementedStaticDataServer) CheckAttachedFieldsInList(context.Context, *CheckAttachedFieldsInListParams) (*common.BoolStatus, error) {
@@ -1030,10 +1031,10 @@ func (UnimplementedStaticDataServer) UpdatePage(context.Context, *UpdatePagePara
 func (UnimplementedStaticDataServer) RemovePage(context.Context, *RemovePagesParams) (*Page, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemovePage not implemented")
 }
-func (UnimplementedStaticDataServer) AttachPageToParent(context.Context, *ToggleAttachPageToParentParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) AttachPageToParent(context.Context, *ToggleAttachPageToParentParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AttachPageToParent not implemented")
 }
-func (UnimplementedStaticDataServer) DetachPageFromParent(context.Context, *ToggleAttachPageToParentParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) DetachPageFromParent(context.Context, *ToggleAttachPageToParentParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DetachPageFromParent not implemented")
 }
 func (UnimplementedStaticDataServer) mustEmbedUnimplementedStaticDataServer() {}
@@ -1544,7 +1545,7 @@ func _StaticData_UpdateEntityL10Ns_Handler(srv interface{}, ctx context.Context,
 }
 
 func _StaticData_ShowEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SingleManipulationEntityParams)
+	in := new(SingleManipulationEntitiesParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1556,13 +1557,13 @@ func _StaticData_ShowEntities_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: StaticData_ShowEntities_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).ShowEntities(ctx, req.(*SingleManipulationEntityParams))
+		return srv.(StaticDataServer).ShowEntities(ctx, req.(*SingleManipulationEntitiesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _StaticData_HideEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SingleManipulationEntityParams)
+	in := new(SingleManipulationEntitiesParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1574,13 +1575,13 @@ func _StaticData_HideEntities_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: StaticData_HideEntities_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).HideEntities(ctx, req.(*SingleManipulationEntityParams))
+		return srv.(StaticDataServer).HideEntities(ctx, req.(*SingleManipulationEntitiesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _StaticData_RemoveEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SingleManipulationEntityParams)
+	in := new(SingleManipulationEntitiesParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1592,7 +1593,7 @@ func _StaticData_RemoveEntities_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: StaticData_RemoveEntities_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).RemoveEntities(ctx, req.(*SingleManipulationEntityParams))
+		return srv.(StaticDataServer).RemoveEntities(ctx, req.(*SingleManipulationEntitiesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1652,7 +1653,7 @@ func _StaticData_DetachEntitiesFromList_Handler(srv interface{}, ctx context.Con
 }
 
 func _StaticData_CopyEntity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CopyEntitiesParams)
+	in := new(CopyEntityParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1664,13 +1665,13 @@ func _StaticData_CopyEntity_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: StaticData_CopyEntity_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).CopyEntity(ctx, req.(*CopyEntitiesParams))
+		return srv.(StaticDataServer).CopyEntity(ctx, req.(*CopyEntityParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _StaticData_CopyEntityWithRelations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CopyEntitiesParams)
+	in := new(CopyEntityParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1682,7 +1683,7 @@ func _StaticData_CopyEntityWithRelations_Handler(srv interface{}, ctx context.Co
 		FullMethod: StaticData_CopyEntityWithRelations_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).CopyEntityWithRelations(ctx, req.(*CopyEntitiesParams))
+		return srv.(StaticDataServer).CopyEntityWithRelations(ctx, req.(*CopyEntityParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1958,7 +1959,7 @@ func _StaticData_UpdateOptionsFields_Handler(srv interface{}, ctx context.Contex
 }
 
 func _StaticData_AttachFieldToListParams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AttachFieldParams)
+	in := new(ToggleAttachFieldToListsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1970,13 +1971,13 @@ func _StaticData_AttachFieldToListParams_Handler(srv interface{}, ctx context.Co
 		FullMethod: StaticData_AttachFieldToListParams_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).AttachFieldToListParams(ctx, req.(*AttachFieldParams))
+		return srv.(StaticDataServer).AttachFieldToListParams(ctx, req.(*ToggleAttachFieldToListsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _StaticData_DetachFieldFromListParams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AttachFieldParams)
+	in := new(ToggleAttachFieldToListsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1988,13 +1989,13 @@ func _StaticData_DetachFieldFromListParams_Handler(srv interface{}, ctx context.
 		FullMethod: StaticData_DetachFieldFromListParams_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).DetachFieldFromListParams(ctx, req.(*AttachFieldParams))
+		return srv.(StaticDataServer).DetachFieldFromListParams(ctx, req.(*ToggleAttachFieldToListsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _StaticData_AttachFieldsToGroupKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ToggleAttachFieldToListParams)
+	in := new(ToggleAttachFieldToKeyGroupsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -2006,13 +2007,13 @@ func _StaticData_AttachFieldsToGroupKeys_Handler(srv interface{}, ctx context.Co
 		FullMethod: StaticData_AttachFieldsToGroupKeys_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).AttachFieldsToGroupKeys(ctx, req.(*ToggleAttachFieldToListParams))
+		return srv.(StaticDataServer).AttachFieldsToGroupKeys(ctx, req.(*ToggleAttachFieldToKeyGroupsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _StaticData_DetachFieldsToGroupKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ToggleAttachFieldToListParams)
+	in := new(ToggleAttachFieldToKeyGroupsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -2024,7 +2025,7 @@ func _StaticData_DetachFieldsToGroupKeys_Handler(srv interface{}, ctx context.Co
 		FullMethod: StaticData_DetachFieldsToGroupKeys_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).DetachFieldsToGroupKeys(ctx, req.(*ToggleAttachFieldToListParams))
+		return srv.(StaticDataServer).DetachFieldsToGroupKeys(ctx, req.(*ToggleAttachFieldToKeyGroupsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
