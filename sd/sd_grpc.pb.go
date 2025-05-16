@@ -20,52 +20,139 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	StaticData_GetListBySlug_FullMethodName             = "/sd.StaticData/GetListBySlug"
-	StaticData_GetListEntitiesBySlug_FullMethodName     = "/sd.StaticData/GetListEntitiesBySlug"
+	StaticData_GetGroupKeys_FullMethodName              = "/sd.StaticData/GetGroupKeys"
+	StaticData_CreateGroupKeys_FullMethodName           = "/sd.StaticData/CreateGroupKeys"
+	StaticData_RemoveGroupKeys_FullMethodName           = "/sd.StaticData/RemoveGroupKeys"
+	StaticData_GetLists_FullMethodName                  = "/sd.StaticData/GetLists"
+	StaticData_GetListsInner_FullMethodName             = "/sd.StaticData/GetListsInner"
 	StaticData_CreateList_FullMethodName                = "/sd.StaticData/CreateList"
-	StaticData_UpdateList_FullMethodName                = "/sd.StaticData/UpdateList"
-	StaticData_DeleteList_FullMethodName                = "/sd.StaticData/DeleteList"
+	StaticData_UpdateListSlug_FullMethodName            = "/sd.StaticData/UpdateListSlug"
+	StaticData_UpdateListMeta_FullMethodName            = "/sd.StaticData/UpdateListMeta"
+	StaticData_UpdateListImage_FullMethodName           = "/sd.StaticData/UpdateListImage"
+	StaticData_RemoveListImage_FullMethodName           = "/sd.StaticData/RemoveListImage"
+	StaticData_UpdateListL10Ns_FullMethodName           = "/sd.StaticData/UpdateListL10ns"
+	StaticData_ShowLists_FullMethodName                 = "/sd.StaticData/ShowLists"
+	StaticData_HideLists_FullMethodName                 = "/sd.StaticData/HideLists"
+	StaticData_RemoveLists_FullMethodName               = "/sd.StaticData/RemoveLists"
 	StaticData_SortLists_FullMethodName                 = "/sd.StaticData/SortLists"
-	StaticData_ToggleVisibleLists_FullMethodName        = "/sd.StaticData/ToggleVisibleLists"
+	StaticData_AttachListsToLists_FullMethodName        = "/sd.StaticData/AttachListsToLists"
+	StaticData_DetachListsToLists_FullMethodName        = "/sd.StaticData/DetachListsToLists"
+	StaticData_CopyList_FullMethodName                  = "/sd.StaticData/CopyList"
+	StaticData_CopyListWithRelations_FullMethodName     = "/sd.StaticData/CopyListWithRelations"
+	StaticData_CheckFreeSlugInList_FullMethodName       = "/sd.StaticData/CheckFreeSlugInList"
+	StaticData_GetEntities_FullMethodName               = "/sd.StaticData/GetEntities"
 	StaticData_CreateEntity_FullMethodName              = "/sd.StaticData/CreateEntity"
-	StaticData_GetEntityBySlug_FullMethodName           = "/sd.StaticData/GetEntityBySlug"
-	StaticData_SortEntity_FullMethodName                = "/sd.StaticData/SortEntity"
-	StaticData_ToggleVisibleEntities_FullMethodName     = "/sd.StaticData/ToggleVisibleEntities"
+	StaticData_UpdateEntitiesRating_FullMethodName      = "/sd.StaticData/UpdateEntitiesRating"
+	StaticData_UpdateEntitySlug_FullMethodName          = "/sd.StaticData/UpdateEntitySlug"
+	StaticData_UpdateEntityImage_FullMethodName         = "/sd.StaticData/UpdateEntityImage"
+	StaticData_RemoveEntityImage_FullMethodName         = "/sd.StaticData/RemoveEntityImage"
+	StaticData_UpdateEntityL10Ns_FullMethodName         = "/sd.StaticData/UpdateEntityL10ns"
+	StaticData_ShowEntities_FullMethodName              = "/sd.StaticData/ShowEntities"
+	StaticData_HideEntities_FullMethodName              = "/sd.StaticData/HideEntities"
+	StaticData_RemoveEntities_FullMethodName            = "/sd.StaticData/RemoveEntities"
+	StaticData_SortEntities_FullMethodName              = "/sd.StaticData/SortEntities"
 	StaticData_AttachEntitiesToList_FullMethodName      = "/sd.StaticData/AttachEntitiesToList"
 	StaticData_DetachEntitiesFromList_FullMethodName    = "/sd.StaticData/DetachEntitiesFromList"
+	StaticData_CopyEntity_FullMethodName                = "/sd.StaticData/CopyEntity"
+	StaticData_CopyEntityWithRelations_FullMethodName   = "/sd.StaticData/CopyEntityWithRelations"
+	StaticData_CheckFreeSlugInEntities_FullMethodName   = "/sd.StaticData/CheckFreeSlugInEntities"
+	StaticData_GetFields_FullMethodName                 = "/sd.StaticData/GetFields"
+	StaticData_GetFieldsValuesByEntities_FullMethodName = "/sd.StaticData/GetFieldsValuesByEntities"
 	StaticData_CreateField_FullMethodName               = "/sd.StaticData/CreateField"
-	StaticData_UpdateField_FullMethodName               = "/sd.StaticData/UpdateField"
-	StaticData_DeleteField_FullMethodName               = "/sd.StaticData/DeleteField"
+	StaticData_UpsertEntityFieldValue_FullMethodName    = "/sd.StaticData/UpsertEntityFieldValue"
+	StaticData_RemoveEntityFieldValue_FullMethodName    = "/sd.StaticData/RemoveEntityFieldValue"
+	StaticData_UpsertEntityFieldImage_FullMethodName    = "/sd.StaticData/UpsertEntityFieldImage"
+	StaticData_RemoveEntityFieldImage_FullMethodName    = "/sd.StaticData/RemoveEntityFieldImage"
+	StaticData_UpdateFields_FullMethodName              = "/sd.StaticData/UpdateFields"
+	StaticData_UpdateFieldsL10Ns_FullMethodName         = "/sd.StaticData/UpdateFieldsL10ns"
+	StaticData_RemoveFieldsL10Ns_FullMethodName         = "/sd.StaticData/RemoveFieldsL10ns"
+	StaticData_RemoveFields_FullMethodName              = "/sd.StaticData/RemoveFields"
+	StaticData_SortFields_FullMethodName                = "/sd.StaticData/SortFields"
+	StaticData_UpsertFieldImage_FullMethodName          = "/sd.StaticData/UpsertFieldImage"
+	StaticData_UpdateOptionsFields_FullMethodName       = "/sd.StaticData/UpdateOptionsFields"
 	StaticData_AttachFieldToListParams_FullMethodName   = "/sd.StaticData/AttachFieldToListParams"
 	StaticData_DetachFieldFromListParams_FullMethodName = "/sd.StaticData/DetachFieldFromListParams"
-	StaticData_SetEntityFieldValue_FullMethodName       = "/sd.StaticData/SetEntityFieldValue"
-	StaticData_RemoveEntityFieldValue_FullMethodName    = "/sd.StaticData/RemoveEntityFieldValue"
+	StaticData_AttachFieldsToGroupKeys_FullMethodName   = "/sd.StaticData/AttachFieldsToGroupKeys"
+	StaticData_DetachFieldsToGroupKeys_FullMethodName   = "/sd.StaticData/DetachFieldsToGroupKeys"
+	StaticData_CheckAttachedFieldsInList_FullMethodName = "/sd.StaticData/CheckAttachedFieldsInList"
+	StaticData_GetPages_FullMethodName                  = "/sd.StaticData/GetPages"
+	StaticData_CreatePage_FullMethodName                = "/sd.StaticData/CreatePage"
+	StaticData_UpdatePage_FullMethodName                = "/sd.StaticData/UpdatePage"
+	StaticData_RemovePage_FullMethodName                = "/sd.StaticData/RemovePage"
+	StaticData_AttachPageToParent_FullMethodName        = "/sd.StaticData/AttachPageToParent"
+	StaticData_DetachPageFromParent_FullMethodName      = "/sd.StaticData/DetachPageFromParent"
 )
 
 // StaticDataClient is the client API for StaticData service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type StaticDataClient interface {
-	GetListBySlug(ctx context.Context, in *GetListBySlugParams, opts ...grpc.CallOption) (*GetListBySlugResponse, error)
-	GetListEntitiesBySlug(ctx context.Context, in *GetListBySlugParams, opts ...grpc.CallOption) (*GetListEntitiesBySlugResponse, error)
+	// GroupKeys
+	GetGroupKeys(ctx context.Context, in *GetGroupKeysParams, opts ...grpc.CallOption) (*GetGroupKeysResponse, error)
+	CreateGroupKeys(ctx context.Context, in *CreateGroupKeysParams, opts ...grpc.CallOption) (*CreateGroupKeysResponse, error)
+	RemoveGroupKeys(ctx context.Context, in *RemoveGroupKeysParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	// Lists
+	GetLists(ctx context.Context, in *GetListsParams, opts ...grpc.CallOption) (*GetListResponse, error)
+	GetListsInner(ctx context.Context, in *GetListsParams, opts ...grpc.CallOption) (*GetListResponse, error)
 	CreateList(ctx context.Context, in *CreateListParams, opts ...grpc.CallOption) (*List, error)
-	UpdateList(ctx context.Context, in *List, opts ...grpc.CallOption) (*List, error)
-	DeleteList(ctx context.Context, in *SingleManipulationParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateListSlug(ctx context.Context, in *UpdateListSlugParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateListMeta(ctx context.Context, in *UpdateListMetaParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateListImage(ctx context.Context, in *UpdateListImageParams, opts ...grpc.CallOption) (*UpdateListImageResponse, error)
+	RemoveListImage(ctx context.Context, in *RemoveListImageParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateListL10Ns(ctx context.Context, in *UpdateListL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	ShowLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	HideLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	RemoveLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	SortLists(ctx context.Context, in *SortListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	ToggleVisibleLists(ctx context.Context, in *ToggleVisibleListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	AttachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	DetachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	CopyList(ctx context.Context, in *CopyListParams, opts ...grpc.CallOption) (*List, error)
+	CopyListWithRelations(ctx context.Context, in *CopyListParams, opts ...grpc.CallOption) (*List, error)
+	CheckFreeSlugInList(ctx context.Context, in *CheckFreeSlugInListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	// Entities
+	GetEntities(ctx context.Context, in *GetEntitiesParams, opts ...grpc.CallOption) (*GetEntitiesResponse, error)
 	CreateEntity(ctx context.Context, in *CreateEntityParams, opts ...grpc.CallOption) (*Entity, error)
-	GetEntityBySlug(ctx context.Context, in *GetEntityBySlugParams, opts ...grpc.CallOption) (*Entity, error)
-	SortEntity(ctx context.Context, in *SortEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	ToggleVisibleEntities(ctx context.Context, in *ToggleVisibleEntitiesParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	AttachEntitiesToList(ctx context.Context, in *ToggleAttachEntityToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	DetachEntitiesFromList(ctx context.Context, in *ToggleAttachEntityToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	CreateField(ctx context.Context, in *FieldMetaBase, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	UpdateField(ctx context.Context, in *FieldMetaBase, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	DeleteField(ctx context.Context, in *SingleManipulationParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	AttachFieldToListParams(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	DetachFieldFromListParams(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	SetEntityFieldValue(ctx context.Context, in *EntityFieldValue, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateEntitiesRating(ctx context.Context, in *UpdateEntitiesRaringParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateEntitySlug(ctx context.Context, in *UpdateEntitySlugParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateEntityImage(ctx context.Context, in *UpdateEntityImageParams, opts ...grpc.CallOption) (*UpdateEntityImageResponse, error)
+	RemoveEntityImage(ctx context.Context, in *RemoveEntityImageParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateEntityL10Ns(ctx context.Context, in *UpdateEntityL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	ShowEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	HideEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	RemoveEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	SortEntities(ctx context.Context, in *SortEntitiesParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	AttachEntitiesToList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	DetachEntitiesFromList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	CopyEntity(ctx context.Context, in *CopyEntitiesParams, opts ...grpc.CallOption) (*Entity, error)
+	CopyEntityWithRelations(ctx context.Context, in *CopyEntitiesParams, opts ...grpc.CallOption) (*Entity, error)
+	CheckFreeSlugInEntities(ctx context.Context, in *CheckFreeSlugInEntitiesParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	// Fields
+	GetFields(ctx context.Context, in *GetFieldsParams, opts ...grpc.CallOption) (*GetFieldsResponse, error)
+	GetFieldsValuesByEntities(ctx context.Context, in *GetFieldsValuesByEntitiesParams, opts ...grpc.CallOption) (*GetFieldsValuesByEntitiesResponse, error)
+	CreateField(ctx context.Context, in *CreateFieldParams, opts ...grpc.CallOption) (*Field, error)
+	UpsertEntityFieldValue(ctx context.Context, in *UpsertEntityFieldValueParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	RemoveEntityFieldValue(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpsertEntityFieldImage(ctx context.Context, in *UpsertEntityFieldImageResponse, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	RemoveEntityFieldImage(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateFields(ctx context.Context, in *UpdateFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateFieldsL10Ns(ctx context.Context, in *UpdateFieldsL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	RemoveFieldsL10Ns(ctx context.Context, in *RemoveFieldsL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	RemoveFields(ctx context.Context, in *RemoveFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	SortFields(ctx context.Context, in *SortFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpsertFieldImage(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	UpdateOptionsFields(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	AttachFieldToListParams(ctx context.Context, in *AttachFieldParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	DetachFieldFromListParams(ctx context.Context, in *AttachFieldParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	AttachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	DetachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	CheckAttachedFieldsInList(ctx context.Context, in *CheckAttachedFieldsInListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	// Pages
+	GetPages(ctx context.Context, in *GetPagesParams, opts ...grpc.CallOption) (*GetPagesResponse, error)
+	CreatePage(ctx context.Context, in *PageParams, opts ...grpc.CallOption) (*Page, error)
+	UpdatePage(ctx context.Context, in *UpdatePageParams, opts ...grpc.CallOption) (*Page, error)
+	RemovePage(ctx context.Context, in *RemovePagesParams, opts ...grpc.CallOption) (*Page, error)
+	AttachPageToParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	DetachPageFromParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 }
 
 type staticDataClient struct {
@@ -76,20 +163,50 @@ func NewStaticDataClient(cc grpc.ClientConnInterface) StaticDataClient {
 	return &staticDataClient{cc}
 }
 
-func (c *staticDataClient) GetListBySlug(ctx context.Context, in *GetListBySlugParams, opts ...grpc.CallOption) (*GetListBySlugResponse, error) {
+func (c *staticDataClient) GetGroupKeys(ctx context.Context, in *GetGroupKeysParams, opts ...grpc.CallOption) (*GetGroupKeysResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetListBySlugResponse)
-	err := c.cc.Invoke(ctx, StaticData_GetListBySlug_FullMethodName, in, out, cOpts...)
+	out := new(GetGroupKeysResponse)
+	err := c.cc.Invoke(ctx, StaticData_GetGroupKeys_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *staticDataClient) GetListEntitiesBySlug(ctx context.Context, in *GetListBySlugParams, opts ...grpc.CallOption) (*GetListEntitiesBySlugResponse, error) {
+func (c *staticDataClient) CreateGroupKeys(ctx context.Context, in *CreateGroupKeysParams, opts ...grpc.CallOption) (*CreateGroupKeysResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetListEntitiesBySlugResponse)
-	err := c.cc.Invoke(ctx, StaticData_GetListEntitiesBySlug_FullMethodName, in, out, cOpts...)
+	out := new(CreateGroupKeysResponse)
+	err := c.cc.Invoke(ctx, StaticData_CreateGroupKeys_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) RemoveGroupKeys(ctx context.Context, in *RemoveGroupKeysParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_RemoveGroupKeys_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) GetLists(ctx context.Context, in *GetListsParams, opts ...grpc.CallOption) (*GetListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetListResponse)
+	err := c.cc.Invoke(ctx, StaticData_GetLists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) GetListsInner(ctx context.Context, in *GetListsParams, opts ...grpc.CallOption) (*GetListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetListResponse)
+	err := c.cc.Invoke(ctx, StaticData_GetListsInner_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -106,20 +223,80 @@ func (c *staticDataClient) CreateList(ctx context.Context, in *CreateListParams,
 	return out, nil
 }
 
-func (c *staticDataClient) UpdateList(ctx context.Context, in *List, opts ...grpc.CallOption) (*List, error) {
+func (c *staticDataClient) UpdateListSlug(ctx context.Context, in *UpdateListSlugParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(List)
-	err := c.cc.Invoke(ctx, StaticData_UpdateList_FullMethodName, in, out, cOpts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_UpdateListSlug_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *staticDataClient) DeleteList(ctx context.Context, in *SingleManipulationParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateListMeta(ctx context.Context, in *UpdateListMetaParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
-	err := c.cc.Invoke(ctx, StaticData_DeleteList_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, StaticData_UpdateListMeta_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) UpdateListImage(ctx context.Context, in *UpdateListImageParams, opts ...grpc.CallOption) (*UpdateListImageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateListImageResponse)
+	err := c.cc.Invoke(ctx, StaticData_UpdateListImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) RemoveListImage(ctx context.Context, in *RemoveListImageParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_RemoveListImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) UpdateListL10Ns(ctx context.Context, in *UpdateListL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_UpdateListL10Ns_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) ShowLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_ShowLists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) HideLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_HideLists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) RemoveLists(ctx context.Context, in *SingleManipulationListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_RemoveLists_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -136,10 +313,60 @@ func (c *staticDataClient) SortLists(ctx context.Context, in *SortListParams, op
 	return out, nil
 }
 
-func (c *staticDataClient) ToggleVisibleLists(ctx context.Context, in *ToggleVisibleListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) AttachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
-	err := c.cc.Invoke(ctx, StaticData_ToggleVisibleLists_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, StaticData_AttachListsToLists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) DetachListsToLists(ctx context.Context, in *AttachListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_DetachListsToLists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) CopyList(ctx context.Context, in *CopyListParams, opts ...grpc.CallOption) (*List, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(List)
+	err := c.cc.Invoke(ctx, StaticData_CopyList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) CopyListWithRelations(ctx context.Context, in *CopyListParams, opts ...grpc.CallOption) (*List, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(List)
+	err := c.cc.Invoke(ctx, StaticData_CopyListWithRelations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) CheckFreeSlugInList(ctx context.Context, in *CheckFreeSlugInListParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_CheckFreeSlugInList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) GetEntities(ctx context.Context, in *GetEntitiesParams, opts ...grpc.CallOption) (*GetEntitiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetEntitiesResponse)
+	err := c.cc.Invoke(ctx, StaticData_GetEntities_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -156,37 +383,97 @@ func (c *staticDataClient) CreateEntity(ctx context.Context, in *CreateEntityPar
 	return out, nil
 }
 
-func (c *staticDataClient) GetEntityBySlug(ctx context.Context, in *GetEntityBySlugParams, opts ...grpc.CallOption) (*Entity, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Entity)
-	err := c.cc.Invoke(ctx, StaticData_GetEntityBySlug_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *staticDataClient) SortEntity(ctx context.Context, in *SortEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateEntitiesRating(ctx context.Context, in *UpdateEntitiesRaringParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
-	err := c.cc.Invoke(ctx, StaticData_SortEntity_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, StaticData_UpdateEntitiesRating_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *staticDataClient) ToggleVisibleEntities(ctx context.Context, in *ToggleVisibleEntitiesParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateEntitySlug(ctx context.Context, in *UpdateEntitySlugParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
-	err := c.cc.Invoke(ctx, StaticData_ToggleVisibleEntities_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, StaticData_UpdateEntitySlug_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *staticDataClient) AttachEntitiesToList(ctx context.Context, in *ToggleAttachEntityToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpdateEntityImage(ctx context.Context, in *UpdateEntityImageParams, opts ...grpc.CallOption) (*UpdateEntityImageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateEntityImageResponse)
+	err := c.cc.Invoke(ctx, StaticData_UpdateEntityImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) RemoveEntityImage(ctx context.Context, in *RemoveEntityImageParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_RemoveEntityImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) UpdateEntityL10Ns(ctx context.Context, in *UpdateEntityL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_UpdateEntityL10Ns_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) ShowEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_ShowEntities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) HideEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_HideEntities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) RemoveEntities(ctx context.Context, in *SingleManipulationEntityParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_RemoveEntities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) SortEntities(ctx context.Context, in *SortEntitiesParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_SortEntities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) AttachEntitiesToList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, StaticData_AttachEntitiesToList_FullMethodName, in, out, cOpts...)
@@ -196,7 +483,7 @@ func (c *staticDataClient) AttachEntitiesToList(ctx context.Context, in *ToggleA
 	return out, nil
 }
 
-func (c *staticDataClient) DetachEntitiesFromList(ctx context.Context, in *ToggleAttachEntityToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) DetachEntitiesFromList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, StaticData_DetachEntitiesFromList_FullMethodName, in, out, cOpts...)
@@ -206,9 +493,59 @@ func (c *staticDataClient) DetachEntitiesFromList(ctx context.Context, in *Toggl
 	return out, nil
 }
 
-func (c *staticDataClient) CreateField(ctx context.Context, in *FieldMetaBase, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) CopyEntity(ctx context.Context, in *CopyEntitiesParams, opts ...grpc.CallOption) (*Entity, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Entity)
+	err := c.cc.Invoke(ctx, StaticData_CopyEntity_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) CopyEntityWithRelations(ctx context.Context, in *CopyEntitiesParams, opts ...grpc.CallOption) (*Entity, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Entity)
+	err := c.cc.Invoke(ctx, StaticData_CopyEntityWithRelations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) CheckFreeSlugInEntities(ctx context.Context, in *CheckFreeSlugInEntitiesParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_CheckFreeSlugInEntities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) GetFields(ctx context.Context, in *GetFieldsParams, opts ...grpc.CallOption) (*GetFieldsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFieldsResponse)
+	err := c.cc.Invoke(ctx, StaticData_GetFields_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) GetFieldsValuesByEntities(ctx context.Context, in *GetFieldsValuesByEntitiesParams, opts ...grpc.CallOption) (*GetFieldsValuesByEntitiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFieldsValuesByEntitiesResponse)
+	err := c.cc.Invoke(ctx, StaticData_GetFieldsValuesByEntities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) CreateField(ctx context.Context, in *CreateFieldParams, opts ...grpc.CallOption) (*Field, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Field)
 	err := c.cc.Invoke(ctx, StaticData_CreateField_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -216,50 +553,10 @@ func (c *staticDataClient) CreateField(ctx context.Context, in *FieldMetaBase, o
 	return out, nil
 }
 
-func (c *staticDataClient) UpdateField(ctx context.Context, in *FieldMetaBase, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *staticDataClient) UpsertEntityFieldValue(ctx context.Context, in *UpsertEntityFieldValueParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
-	err := c.cc.Invoke(ctx, StaticData_UpdateField_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *staticDataClient) DeleteField(ctx context.Context, in *SingleManipulationParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
-	err := c.cc.Invoke(ctx, StaticData_DeleteField_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *staticDataClient) AttachFieldToListParams(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
-	err := c.cc.Invoke(ctx, StaticData_AttachFieldToListParams_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *staticDataClient) DetachFieldFromListParams(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
-	err := c.cc.Invoke(ctx, StaticData_DetachFieldFromListParams_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *staticDataClient) SetEntityFieldValue(ctx context.Context, in *EntityFieldValue, opts ...grpc.CallOption) (*common.BoolStatus, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
-	err := c.cc.Invoke(ctx, StaticData_SetEntityFieldValue_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, StaticData_UpsertEntityFieldValue_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -276,30 +573,276 @@ func (c *staticDataClient) RemoveEntityFieldValue(ctx context.Context, in *Remov
 	return out, nil
 }
 
+func (c *staticDataClient) UpsertEntityFieldImage(ctx context.Context, in *UpsertEntityFieldImageResponse, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_UpsertEntityFieldImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) RemoveEntityFieldImage(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_RemoveEntityFieldImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) UpdateFields(ctx context.Context, in *UpdateFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_UpdateFields_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) UpdateFieldsL10Ns(ctx context.Context, in *UpdateFieldsL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_UpdateFieldsL10Ns_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) RemoveFieldsL10Ns(ctx context.Context, in *RemoveFieldsL10NsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_RemoveFieldsL10Ns_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) RemoveFields(ctx context.Context, in *RemoveFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_RemoveFields_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) SortFields(ctx context.Context, in *SortFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_SortFields_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) UpsertFieldImage(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_UpsertFieldImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) UpdateOptionsFields(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_UpdateOptionsFields_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) AttachFieldToListParams(ctx context.Context, in *AttachFieldParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_AttachFieldToListParams_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) DetachFieldFromListParams(ctx context.Context, in *AttachFieldParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_DetachFieldFromListParams_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) AttachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_AttachFieldsToGroupKeys_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) DetachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToListParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_DetachFieldsToGroupKeys_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) CheckAttachedFieldsInList(ctx context.Context, in *CheckAttachedFieldsInListParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_CheckAttachedFieldsInList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) GetPages(ctx context.Context, in *GetPagesParams, opts ...grpc.CallOption) (*GetPagesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPagesResponse)
+	err := c.cc.Invoke(ctx, StaticData_GetPages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) CreatePage(ctx context.Context, in *PageParams, opts ...grpc.CallOption) (*Page, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Page)
+	err := c.cc.Invoke(ctx, StaticData_CreatePage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) UpdatePage(ctx context.Context, in *UpdatePageParams, opts ...grpc.CallOption) (*Page, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Page)
+	err := c.cc.Invoke(ctx, StaticData_UpdatePage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) RemovePage(ctx context.Context, in *RemovePagesParams, opts ...grpc.CallOption) (*Page, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Page)
+	err := c.cc.Invoke(ctx, StaticData_RemovePage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) AttachPageToParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_AttachPageToParent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *staticDataClient) DetachPageFromParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.BoolStatus)
+	err := c.cc.Invoke(ctx, StaticData_DetachPageFromParent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // StaticDataServer is the server API for StaticData service.
 // All implementations must embed UnimplementedStaticDataServer
 // for forward compatibility.
 type StaticDataServer interface {
-	GetListBySlug(context.Context, *GetListBySlugParams) (*GetListBySlugResponse, error)
-	GetListEntitiesBySlug(context.Context, *GetListBySlugParams) (*GetListEntitiesBySlugResponse, error)
+	// GroupKeys
+	GetGroupKeys(context.Context, *GetGroupKeysParams) (*GetGroupKeysResponse, error)
+	CreateGroupKeys(context.Context, *CreateGroupKeysParams) (*CreateGroupKeysResponse, error)
+	RemoveGroupKeys(context.Context, *RemoveGroupKeysParams) (*common.BoolStatus, error)
+	// Lists
+	GetLists(context.Context, *GetListsParams) (*GetListResponse, error)
+	GetListsInner(context.Context, *GetListsParams) (*GetListResponse, error)
 	CreateList(context.Context, *CreateListParams) (*List, error)
-	UpdateList(context.Context, *List) (*List, error)
-	DeleteList(context.Context, *SingleManipulationParams) (*common.BoolStatus, error)
+	UpdateListSlug(context.Context, *UpdateListSlugParams) (*common.BoolStatus, error)
+	UpdateListMeta(context.Context, *UpdateListMetaParams) (*common.BoolStatus, error)
+	UpdateListImage(context.Context, *UpdateListImageParams) (*UpdateListImageResponse, error)
+	RemoveListImage(context.Context, *RemoveListImageParams) (*common.BoolStatus, error)
+	UpdateListL10Ns(context.Context, *UpdateListL10NsParams) (*common.BoolStatus, error)
+	ShowLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error)
+	HideLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error)
+	RemoveLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error)
 	SortLists(context.Context, *SortListParams) (*common.BoolStatus, error)
-	ToggleVisibleLists(context.Context, *ToggleVisibleListsParams) (*common.BoolStatus, error)
+	AttachListsToLists(context.Context, *AttachListsParams) (*common.BoolStatus, error)
+	DetachListsToLists(context.Context, *AttachListsParams) (*common.BoolStatus, error)
+	CopyList(context.Context, *CopyListParams) (*List, error)
+	CopyListWithRelations(context.Context, *CopyListParams) (*List, error)
+	CheckFreeSlugInList(context.Context, *CheckFreeSlugInListParams) (*common.BoolStatus, error)
+	// Entities
+	GetEntities(context.Context, *GetEntitiesParams) (*GetEntitiesResponse, error)
 	CreateEntity(context.Context, *CreateEntityParams) (*Entity, error)
-	GetEntityBySlug(context.Context, *GetEntityBySlugParams) (*Entity, error)
-	SortEntity(context.Context, *SortEntityParams) (*common.BoolStatus, error)
-	ToggleVisibleEntities(context.Context, *ToggleVisibleEntitiesParams) (*common.BoolStatus, error)
-	AttachEntitiesToList(context.Context, *ToggleAttachEntityToListParams) (*common.BoolStatus, error)
-	DetachEntitiesFromList(context.Context, *ToggleAttachEntityToListParams) (*common.BoolStatus, error)
-	CreateField(context.Context, *FieldMetaBase) (*common.BoolStatus, error)
-	UpdateField(context.Context, *FieldMetaBase) (*common.BoolStatus, error)
-	DeleteField(context.Context, *SingleManipulationParams) (*common.BoolStatus, error)
-	AttachFieldToListParams(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error)
-	DetachFieldFromListParams(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error)
-	SetEntityFieldValue(context.Context, *EntityFieldValue) (*common.BoolStatus, error)
+	UpdateEntitiesRating(context.Context, *UpdateEntitiesRaringParams) (*common.BoolStatus, error)
+	UpdateEntitySlug(context.Context, *UpdateEntitySlugParams) (*common.BoolStatus, error)
+	UpdateEntityImage(context.Context, *UpdateEntityImageParams) (*UpdateEntityImageResponse, error)
+	RemoveEntityImage(context.Context, *RemoveEntityImageParams) (*common.BoolStatus, error)
+	UpdateEntityL10Ns(context.Context, *UpdateEntityL10NsParams) (*common.BoolStatus, error)
+	ShowEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error)
+	HideEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error)
+	RemoveEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error)
+	SortEntities(context.Context, *SortEntitiesParams) (*common.BoolStatus, error)
+	AttachEntitiesToList(context.Context, *AttachEntitiesToListsParams) (*common.BoolStatus, error)
+	DetachEntitiesFromList(context.Context, *AttachEntitiesToListsParams) (*common.BoolStatus, error)
+	CopyEntity(context.Context, *CopyEntitiesParams) (*Entity, error)
+	CopyEntityWithRelations(context.Context, *CopyEntitiesParams) (*Entity, error)
+	CheckFreeSlugInEntities(context.Context, *CheckFreeSlugInEntitiesParams) (*common.BoolStatus, error)
+	// Fields
+	GetFields(context.Context, *GetFieldsParams) (*GetFieldsResponse, error)
+	GetFieldsValuesByEntities(context.Context, *GetFieldsValuesByEntitiesParams) (*GetFieldsValuesByEntitiesResponse, error)
+	CreateField(context.Context, *CreateFieldParams) (*Field, error)
+	UpsertEntityFieldValue(context.Context, *UpsertEntityFieldValueParams) (*common.BoolStatus, error)
 	RemoveEntityFieldValue(context.Context, *RemoveEntityFieldValueParams) (*common.BoolStatus, error)
+	UpsertEntityFieldImage(context.Context, *UpsertEntityFieldImageResponse) (*common.BoolStatus, error)
+	RemoveEntityFieldImage(context.Context, *RemoveEntityFieldValueParams) (*common.BoolStatus, error)
+	UpdateFields(context.Context, *UpdateFieldsParams) (*common.BoolStatus, error)
+	UpdateFieldsL10Ns(context.Context, *UpdateFieldsL10NsParams) (*common.BoolStatus, error)
+	RemoveFieldsL10Ns(context.Context, *RemoveFieldsL10NsParams) (*common.BoolStatus, error)
+	RemoveFields(context.Context, *RemoveFieldsParams) (*common.BoolStatus, error)
+	SortFields(context.Context, *SortFieldsParams) (*common.BoolStatus, error)
+	UpsertFieldImage(context.Context, *UpdateOptionsFieldsParams) (*common.BoolStatus, error)
+	UpdateOptionsFields(context.Context, *UpdateOptionsFieldsParams) (*common.BoolStatus, error)
+	AttachFieldToListParams(context.Context, *AttachFieldParams) (*common.BoolStatus, error)
+	DetachFieldFromListParams(context.Context, *AttachFieldParams) (*common.BoolStatus, error)
+	AttachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error)
+	DetachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error)
+	CheckAttachedFieldsInList(context.Context, *CheckAttachedFieldsInListParams) (*common.BoolStatus, error)
+	// Pages
+	GetPages(context.Context, *GetPagesParams) (*GetPagesResponse, error)
+	CreatePage(context.Context, *PageParams) (*Page, error)
+	UpdatePage(context.Context, *UpdatePageParams) (*Page, error)
+	RemovePage(context.Context, *RemovePagesParams) (*Page, error)
+	AttachPageToParent(context.Context, *ToggleAttachPageToParentParams) (*common.BoolStatus, error)
+	DetachPageFromParent(context.Context, *ToggleAttachPageToParentParams) (*common.BoolStatus, error)
 	mustEmbedUnimplementedStaticDataServer()
 }
 
@@ -310,65 +853,188 @@ type StaticDataServer interface {
 // pointer dereference when methods are called.
 type UnimplementedStaticDataServer struct{}
 
-func (UnimplementedStaticDataServer) GetListBySlug(context.Context, *GetListBySlugParams) (*GetListBySlugResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetListBySlug not implemented")
+func (UnimplementedStaticDataServer) GetGroupKeys(context.Context, *GetGroupKeysParams) (*GetGroupKeysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGroupKeys not implemented")
 }
-func (UnimplementedStaticDataServer) GetListEntitiesBySlug(context.Context, *GetListBySlugParams) (*GetListEntitiesBySlugResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetListEntitiesBySlug not implemented")
+func (UnimplementedStaticDataServer) CreateGroupKeys(context.Context, *CreateGroupKeysParams) (*CreateGroupKeysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGroupKeys not implemented")
+}
+func (UnimplementedStaticDataServer) RemoveGroupKeys(context.Context, *RemoveGroupKeysParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveGroupKeys not implemented")
+}
+func (UnimplementedStaticDataServer) GetLists(context.Context, *GetListsParams) (*GetListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLists not implemented")
+}
+func (UnimplementedStaticDataServer) GetListsInner(context.Context, *GetListsParams) (*GetListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetListsInner not implemented")
 }
 func (UnimplementedStaticDataServer) CreateList(context.Context, *CreateListParams) (*List, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateList not implemented")
 }
-func (UnimplementedStaticDataServer) UpdateList(context.Context, *List) (*List, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateList not implemented")
+func (UnimplementedStaticDataServer) UpdateListSlug(context.Context, *UpdateListSlugParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateListSlug not implemented")
 }
-func (UnimplementedStaticDataServer) DeleteList(context.Context, *SingleManipulationParams) (*common.BoolStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteList not implemented")
+func (UnimplementedStaticDataServer) UpdateListMeta(context.Context, *UpdateListMetaParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateListMeta not implemented")
+}
+func (UnimplementedStaticDataServer) UpdateListImage(context.Context, *UpdateListImageParams) (*UpdateListImageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateListImage not implemented")
+}
+func (UnimplementedStaticDataServer) RemoveListImage(context.Context, *RemoveListImageParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveListImage not implemented")
+}
+func (UnimplementedStaticDataServer) UpdateListL10Ns(context.Context, *UpdateListL10NsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateListL10Ns not implemented")
+}
+func (UnimplementedStaticDataServer) ShowLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowLists not implemented")
+}
+func (UnimplementedStaticDataServer) HideLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HideLists not implemented")
+}
+func (UnimplementedStaticDataServer) RemoveLists(context.Context, *SingleManipulationListsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveLists not implemented")
 }
 func (UnimplementedStaticDataServer) SortLists(context.Context, *SortListParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SortLists not implemented")
 }
-func (UnimplementedStaticDataServer) ToggleVisibleLists(context.Context, *ToggleVisibleListsParams) (*common.BoolStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ToggleVisibleLists not implemented")
+func (UnimplementedStaticDataServer) AttachListsToLists(context.Context, *AttachListsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AttachListsToLists not implemented")
+}
+func (UnimplementedStaticDataServer) DetachListsToLists(context.Context, *AttachListsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DetachListsToLists not implemented")
+}
+func (UnimplementedStaticDataServer) CopyList(context.Context, *CopyListParams) (*List, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CopyList not implemented")
+}
+func (UnimplementedStaticDataServer) CopyListWithRelations(context.Context, *CopyListParams) (*List, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CopyListWithRelations not implemented")
+}
+func (UnimplementedStaticDataServer) CheckFreeSlugInList(context.Context, *CheckFreeSlugInListParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckFreeSlugInList not implemented")
+}
+func (UnimplementedStaticDataServer) GetEntities(context.Context, *GetEntitiesParams) (*GetEntitiesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEntities not implemented")
 }
 func (UnimplementedStaticDataServer) CreateEntity(context.Context, *CreateEntityParams) (*Entity, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateEntity not implemented")
 }
-func (UnimplementedStaticDataServer) GetEntityBySlug(context.Context, *GetEntityBySlugParams) (*Entity, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetEntityBySlug not implemented")
+func (UnimplementedStaticDataServer) UpdateEntitiesRating(context.Context, *UpdateEntitiesRaringParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEntitiesRating not implemented")
 }
-func (UnimplementedStaticDataServer) SortEntity(context.Context, *SortEntityParams) (*common.BoolStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SortEntity not implemented")
+func (UnimplementedStaticDataServer) UpdateEntitySlug(context.Context, *UpdateEntitySlugParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEntitySlug not implemented")
 }
-func (UnimplementedStaticDataServer) ToggleVisibleEntities(context.Context, *ToggleVisibleEntitiesParams) (*common.BoolStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ToggleVisibleEntities not implemented")
+func (UnimplementedStaticDataServer) UpdateEntityImage(context.Context, *UpdateEntityImageParams) (*UpdateEntityImageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEntityImage not implemented")
 }
-func (UnimplementedStaticDataServer) AttachEntitiesToList(context.Context, *ToggleAttachEntityToListParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) RemoveEntityImage(context.Context, *RemoveEntityImageParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveEntityImage not implemented")
+}
+func (UnimplementedStaticDataServer) UpdateEntityL10Ns(context.Context, *UpdateEntityL10NsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEntityL10Ns not implemented")
+}
+func (UnimplementedStaticDataServer) ShowEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowEntities not implemented")
+}
+func (UnimplementedStaticDataServer) HideEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HideEntities not implemented")
+}
+func (UnimplementedStaticDataServer) RemoveEntities(context.Context, *SingleManipulationEntityParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveEntities not implemented")
+}
+func (UnimplementedStaticDataServer) SortEntities(context.Context, *SortEntitiesParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SortEntities not implemented")
+}
+func (UnimplementedStaticDataServer) AttachEntitiesToList(context.Context, *AttachEntitiesToListsParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AttachEntitiesToList not implemented")
 }
-func (UnimplementedStaticDataServer) DetachEntitiesFromList(context.Context, *ToggleAttachEntityToListParams) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) DetachEntitiesFromList(context.Context, *AttachEntitiesToListsParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DetachEntitiesFromList not implemented")
 }
-func (UnimplementedStaticDataServer) CreateField(context.Context, *FieldMetaBase) (*common.BoolStatus, error) {
+func (UnimplementedStaticDataServer) CopyEntity(context.Context, *CopyEntitiesParams) (*Entity, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CopyEntity not implemented")
+}
+func (UnimplementedStaticDataServer) CopyEntityWithRelations(context.Context, *CopyEntitiesParams) (*Entity, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CopyEntityWithRelations not implemented")
+}
+func (UnimplementedStaticDataServer) CheckFreeSlugInEntities(context.Context, *CheckFreeSlugInEntitiesParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckFreeSlugInEntities not implemented")
+}
+func (UnimplementedStaticDataServer) GetFields(context.Context, *GetFieldsParams) (*GetFieldsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFields not implemented")
+}
+func (UnimplementedStaticDataServer) GetFieldsValuesByEntities(context.Context, *GetFieldsValuesByEntitiesParams) (*GetFieldsValuesByEntitiesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFieldsValuesByEntities not implemented")
+}
+func (UnimplementedStaticDataServer) CreateField(context.Context, *CreateFieldParams) (*Field, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateField not implemented")
 }
-func (UnimplementedStaticDataServer) UpdateField(context.Context, *FieldMetaBase) (*common.BoolStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateField not implemented")
-}
-func (UnimplementedStaticDataServer) DeleteField(context.Context, *SingleManipulationParams) (*common.BoolStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteField not implemented")
-}
-func (UnimplementedStaticDataServer) AttachFieldToListParams(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AttachFieldToListParams not implemented")
-}
-func (UnimplementedStaticDataServer) DetachFieldFromListParams(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DetachFieldFromListParams not implemented")
-}
-func (UnimplementedStaticDataServer) SetEntityFieldValue(context.Context, *EntityFieldValue) (*common.BoolStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetEntityFieldValue not implemented")
+func (UnimplementedStaticDataServer) UpsertEntityFieldValue(context.Context, *UpsertEntityFieldValueParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertEntityFieldValue not implemented")
 }
 func (UnimplementedStaticDataServer) RemoveEntityFieldValue(context.Context, *RemoveEntityFieldValueParams) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveEntityFieldValue not implemented")
+}
+func (UnimplementedStaticDataServer) UpsertEntityFieldImage(context.Context, *UpsertEntityFieldImageResponse) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertEntityFieldImage not implemented")
+}
+func (UnimplementedStaticDataServer) RemoveEntityFieldImage(context.Context, *RemoveEntityFieldValueParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveEntityFieldImage not implemented")
+}
+func (UnimplementedStaticDataServer) UpdateFields(context.Context, *UpdateFieldsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFields not implemented")
+}
+func (UnimplementedStaticDataServer) UpdateFieldsL10Ns(context.Context, *UpdateFieldsL10NsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFieldsL10Ns not implemented")
+}
+func (UnimplementedStaticDataServer) RemoveFieldsL10Ns(context.Context, *RemoveFieldsL10NsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveFieldsL10Ns not implemented")
+}
+func (UnimplementedStaticDataServer) RemoveFields(context.Context, *RemoveFieldsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveFields not implemented")
+}
+func (UnimplementedStaticDataServer) SortFields(context.Context, *SortFieldsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SortFields not implemented")
+}
+func (UnimplementedStaticDataServer) UpsertFieldImage(context.Context, *UpdateOptionsFieldsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertFieldImage not implemented")
+}
+func (UnimplementedStaticDataServer) UpdateOptionsFields(context.Context, *UpdateOptionsFieldsParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOptionsFields not implemented")
+}
+func (UnimplementedStaticDataServer) AttachFieldToListParams(context.Context, *AttachFieldParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AttachFieldToListParams not implemented")
+}
+func (UnimplementedStaticDataServer) DetachFieldFromListParams(context.Context, *AttachFieldParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DetachFieldFromListParams not implemented")
+}
+func (UnimplementedStaticDataServer) AttachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AttachFieldsToGroupKeys not implemented")
+}
+func (UnimplementedStaticDataServer) DetachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToListParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DetachFieldsToGroupKeys not implemented")
+}
+func (UnimplementedStaticDataServer) CheckAttachedFieldsInList(context.Context, *CheckAttachedFieldsInListParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckAttachedFieldsInList not implemented")
+}
+func (UnimplementedStaticDataServer) GetPages(context.Context, *GetPagesParams) (*GetPagesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPages not implemented")
+}
+func (UnimplementedStaticDataServer) CreatePage(context.Context, *PageParams) (*Page, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePage not implemented")
+}
+func (UnimplementedStaticDataServer) UpdatePage(context.Context, *UpdatePageParams) (*Page, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePage not implemented")
+}
+func (UnimplementedStaticDataServer) RemovePage(context.Context, *RemovePagesParams) (*Page, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemovePage not implemented")
+}
+func (UnimplementedStaticDataServer) AttachPageToParent(context.Context, *ToggleAttachPageToParentParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AttachPageToParent not implemented")
+}
+func (UnimplementedStaticDataServer) DetachPageFromParent(context.Context, *ToggleAttachPageToParentParams) (*common.BoolStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DetachPageFromParent not implemented")
 }
 func (UnimplementedStaticDataServer) mustEmbedUnimplementedStaticDataServer() {}
 func (UnimplementedStaticDataServer) testEmbeddedByValue()                    {}
@@ -391,38 +1057,92 @@ func RegisterStaticDataServer(s grpc.ServiceRegistrar, srv StaticDataServer) {
 	s.RegisterService(&StaticData_ServiceDesc, srv)
 }
 
-func _StaticData_GetListBySlug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetListBySlugParams)
+func _StaticData_GetGroupKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGroupKeysParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).GetListBySlug(ctx, in)
+		return srv.(StaticDataServer).GetGroupKeys(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_GetListBySlug_FullMethodName,
+		FullMethod: StaticData_GetGroupKeys_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).GetListBySlug(ctx, req.(*GetListBySlugParams))
+		return srv.(StaticDataServer).GetGroupKeys(ctx, req.(*GetGroupKeysParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_GetListEntitiesBySlug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetListBySlugParams)
+func _StaticData_CreateGroupKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateGroupKeysParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).GetListEntitiesBySlug(ctx, in)
+		return srv.(StaticDataServer).CreateGroupKeys(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_GetListEntitiesBySlug_FullMethodName,
+		FullMethod: StaticData_CreateGroupKeys_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).GetListEntitiesBySlug(ctx, req.(*GetListBySlugParams))
+		return srv.(StaticDataServer).CreateGroupKeys(ctx, req.(*CreateGroupKeysParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_RemoveGroupKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveGroupKeysParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).RemoveGroupKeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_RemoveGroupKeys_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).RemoveGroupKeys(ctx, req.(*RemoveGroupKeysParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_GetLists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetListsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).GetLists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_GetLists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).GetLists(ctx, req.(*GetListsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_GetListsInner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetListsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).GetListsInner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_GetListsInner_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).GetListsInner(ctx, req.(*GetListsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -445,38 +1165,146 @@ func _StaticData_CreateList_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_UpdateList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(List)
+func _StaticData_UpdateListSlug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateListSlugParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).UpdateList(ctx, in)
+		return srv.(StaticDataServer).UpdateListSlug(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_UpdateList_FullMethodName,
+		FullMethod: StaticData_UpdateListSlug_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).UpdateList(ctx, req.(*List))
+		return srv.(StaticDataServer).UpdateListSlug(ctx, req.(*UpdateListSlugParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_DeleteList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SingleManipulationParams)
+func _StaticData_UpdateListMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateListMetaParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).DeleteList(ctx, in)
+		return srv.(StaticDataServer).UpdateListMeta(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_DeleteList_FullMethodName,
+		FullMethod: StaticData_UpdateListMeta_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).DeleteList(ctx, req.(*SingleManipulationParams))
+		return srv.(StaticDataServer).UpdateListMeta(ctx, req.(*UpdateListMetaParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_UpdateListImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateListImageParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).UpdateListImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_UpdateListImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).UpdateListImage(ctx, req.(*UpdateListImageParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_RemoveListImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveListImageParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).RemoveListImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_RemoveListImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).RemoveListImage(ctx, req.(*RemoveListImageParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_UpdateListL10Ns_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateListL10NsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).UpdateListL10Ns(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_UpdateListL10Ns_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).UpdateListL10Ns(ctx, req.(*UpdateListL10NsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_ShowLists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SingleManipulationListsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).ShowLists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_ShowLists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).ShowLists(ctx, req.(*SingleManipulationListsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_HideLists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SingleManipulationListsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).HideLists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_HideLists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).HideLists(ctx, req.(*SingleManipulationListsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_RemoveLists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SingleManipulationListsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).RemoveLists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_RemoveLists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).RemoveLists(ctx, req.(*SingleManipulationListsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -499,20 +1327,110 @@ func _StaticData_SortLists_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_ToggleVisibleLists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ToggleVisibleListsParams)
+func _StaticData_AttachListsToLists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AttachListsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).ToggleVisibleLists(ctx, in)
+		return srv.(StaticDataServer).AttachListsToLists(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_ToggleVisibleLists_FullMethodName,
+		FullMethod: StaticData_AttachListsToLists_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).ToggleVisibleLists(ctx, req.(*ToggleVisibleListsParams))
+		return srv.(StaticDataServer).AttachListsToLists(ctx, req.(*AttachListsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_DetachListsToLists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AttachListsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).DetachListsToLists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_DetachListsToLists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).DetachListsToLists(ctx, req.(*AttachListsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_CopyList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CopyListParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).CopyList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_CopyList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).CopyList(ctx, req.(*CopyListParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_CopyListWithRelations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CopyListParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).CopyListWithRelations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_CopyListWithRelations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).CopyListWithRelations(ctx, req.(*CopyListParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_CheckFreeSlugInList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckFreeSlugInListParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).CheckFreeSlugInList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_CheckFreeSlugInList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).CheckFreeSlugInList(ctx, req.(*CheckFreeSlugInListParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_GetEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEntitiesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).GetEntities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_GetEntities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).GetEntities(ctx, req.(*GetEntitiesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -535,62 +1453,170 @@ func _StaticData_CreateEntity_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_GetEntityBySlug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetEntityBySlugParams)
+func _StaticData_UpdateEntitiesRating_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateEntitiesRaringParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).GetEntityBySlug(ctx, in)
+		return srv.(StaticDataServer).UpdateEntitiesRating(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_GetEntityBySlug_FullMethodName,
+		FullMethod: StaticData_UpdateEntitiesRating_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).GetEntityBySlug(ctx, req.(*GetEntityBySlugParams))
+		return srv.(StaticDataServer).UpdateEntitiesRating(ctx, req.(*UpdateEntitiesRaringParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_SortEntity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SortEntityParams)
+func _StaticData_UpdateEntitySlug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateEntitySlugParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).SortEntity(ctx, in)
+		return srv.(StaticDataServer).UpdateEntitySlug(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_SortEntity_FullMethodName,
+		FullMethod: StaticData_UpdateEntitySlug_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).SortEntity(ctx, req.(*SortEntityParams))
+		return srv.(StaticDataServer).UpdateEntitySlug(ctx, req.(*UpdateEntitySlugParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_ToggleVisibleEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ToggleVisibleEntitiesParams)
+func _StaticData_UpdateEntityImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateEntityImageParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).ToggleVisibleEntities(ctx, in)
+		return srv.(StaticDataServer).UpdateEntityImage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_ToggleVisibleEntities_FullMethodName,
+		FullMethod: StaticData_UpdateEntityImage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).ToggleVisibleEntities(ctx, req.(*ToggleVisibleEntitiesParams))
+		return srv.(StaticDataServer).UpdateEntityImage(ctx, req.(*UpdateEntityImageParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_RemoveEntityImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveEntityImageParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).RemoveEntityImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_RemoveEntityImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).RemoveEntityImage(ctx, req.(*RemoveEntityImageParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_UpdateEntityL10Ns_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateEntityL10NsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).UpdateEntityL10Ns(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_UpdateEntityL10Ns_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).UpdateEntityL10Ns(ctx, req.(*UpdateEntityL10NsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_ShowEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SingleManipulationEntityParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).ShowEntities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_ShowEntities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).ShowEntities(ctx, req.(*SingleManipulationEntityParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_HideEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SingleManipulationEntityParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).HideEntities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_HideEntities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).HideEntities(ctx, req.(*SingleManipulationEntityParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_RemoveEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SingleManipulationEntityParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).RemoveEntities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_RemoveEntities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).RemoveEntities(ctx, req.(*SingleManipulationEntityParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_SortEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SortEntitiesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).SortEntities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_SortEntities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).SortEntities(ctx, req.(*SortEntitiesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _StaticData_AttachEntitiesToList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ToggleAttachEntityToListParams)
+	in := new(AttachEntitiesToListsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -602,13 +1628,13 @@ func _StaticData_AttachEntitiesToList_Handler(srv interface{}, ctx context.Conte
 		FullMethod: StaticData_AttachEntitiesToList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).AttachEntitiesToList(ctx, req.(*ToggleAttachEntityToListParams))
+		return srv.(StaticDataServer).AttachEntitiesToList(ctx, req.(*AttachEntitiesToListsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _StaticData_DetachEntitiesFromList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ToggleAttachEntityToListParams)
+	in := new(AttachEntitiesToListsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -620,13 +1646,103 @@ func _StaticData_DetachEntitiesFromList_Handler(srv interface{}, ctx context.Con
 		FullMethod: StaticData_DetachEntitiesFromList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).DetachEntitiesFromList(ctx, req.(*ToggleAttachEntityToListParams))
+		return srv.(StaticDataServer).DetachEntitiesFromList(ctx, req.(*AttachEntitiesToListsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_CopyEntity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CopyEntitiesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).CopyEntity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_CopyEntity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).CopyEntity(ctx, req.(*CopyEntitiesParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_CopyEntityWithRelations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CopyEntitiesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).CopyEntityWithRelations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_CopyEntityWithRelations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).CopyEntityWithRelations(ctx, req.(*CopyEntitiesParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_CheckFreeSlugInEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckFreeSlugInEntitiesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).CheckFreeSlugInEntities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_CheckFreeSlugInEntities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).CheckFreeSlugInEntities(ctx, req.(*CheckFreeSlugInEntitiesParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_GetFields_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFieldsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).GetFields(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_GetFields_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).GetFields(ctx, req.(*GetFieldsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_GetFieldsValuesByEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFieldsValuesByEntitiesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).GetFieldsValuesByEntities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_GetFieldsValuesByEntities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).GetFieldsValuesByEntities(ctx, req.(*GetFieldsValuesByEntitiesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _StaticData_CreateField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FieldMetaBase)
+	in := new(CreateFieldParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -638,97 +1754,25 @@ func _StaticData_CreateField_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: StaticData_CreateField_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).CreateField(ctx, req.(*FieldMetaBase))
+		return srv.(StaticDataServer).CreateField(ctx, req.(*CreateFieldParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_UpdateField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FieldMetaBase)
+func _StaticData_UpsertEntityFieldValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsertEntityFieldValueParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).UpdateField(ctx, in)
+		return srv.(StaticDataServer).UpsertEntityFieldValue(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_UpdateField_FullMethodName,
+		FullMethod: StaticData_UpsertEntityFieldValue_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).UpdateField(ctx, req.(*FieldMetaBase))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _StaticData_DeleteField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SingleManipulationParams)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(StaticDataServer).DeleteField(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: StaticData_DeleteField_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).DeleteField(ctx, req.(*SingleManipulationParams))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _StaticData_AttachFieldToListParams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ToggleAttachFieldToListParams)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(StaticDataServer).AttachFieldToListParams(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: StaticData_AttachFieldToListParams_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).AttachFieldToListParams(ctx, req.(*ToggleAttachFieldToListParams))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _StaticData_DetachFieldFromListParams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ToggleAttachFieldToListParams)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(StaticDataServer).DetachFieldFromListParams(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: StaticData_DetachFieldFromListParams_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).DetachFieldFromListParams(ctx, req.(*ToggleAttachFieldToListParams))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _StaticData_SetEntityFieldValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EntityFieldValue)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(StaticDataServer).SetEntityFieldValue(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: StaticData_SetEntityFieldValue_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).SetEntityFieldValue(ctx, req.(*EntityFieldValue))
+		return srv.(StaticDataServer).UpsertEntityFieldValue(ctx, req.(*UpsertEntityFieldValueParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -751,6 +1795,366 @@ func _StaticData_RemoveEntityFieldValue_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _StaticData_UpsertEntityFieldImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsertEntityFieldImageResponse)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).UpsertEntityFieldImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_UpsertEntityFieldImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).UpsertEntityFieldImage(ctx, req.(*UpsertEntityFieldImageResponse))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_RemoveEntityFieldImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveEntityFieldValueParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).RemoveEntityFieldImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_RemoveEntityFieldImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).RemoveEntityFieldImage(ctx, req.(*RemoveEntityFieldValueParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_UpdateFields_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFieldsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).UpdateFields(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_UpdateFields_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).UpdateFields(ctx, req.(*UpdateFieldsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_UpdateFieldsL10Ns_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFieldsL10NsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).UpdateFieldsL10Ns(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_UpdateFieldsL10Ns_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).UpdateFieldsL10Ns(ctx, req.(*UpdateFieldsL10NsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_RemoveFieldsL10Ns_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveFieldsL10NsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).RemoveFieldsL10Ns(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_RemoveFieldsL10Ns_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).RemoveFieldsL10Ns(ctx, req.(*RemoveFieldsL10NsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_RemoveFields_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveFieldsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).RemoveFields(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_RemoveFields_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).RemoveFields(ctx, req.(*RemoveFieldsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_SortFields_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SortFieldsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).SortFields(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_SortFields_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).SortFields(ctx, req.(*SortFieldsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_UpsertFieldImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOptionsFieldsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).UpsertFieldImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_UpsertFieldImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).UpsertFieldImage(ctx, req.(*UpdateOptionsFieldsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_UpdateOptionsFields_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOptionsFieldsParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).UpdateOptionsFields(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_UpdateOptionsFields_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).UpdateOptionsFields(ctx, req.(*UpdateOptionsFieldsParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_AttachFieldToListParams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AttachFieldParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).AttachFieldToListParams(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_AttachFieldToListParams_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).AttachFieldToListParams(ctx, req.(*AttachFieldParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_DetachFieldFromListParams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AttachFieldParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).DetachFieldFromListParams(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_DetachFieldFromListParams_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).DetachFieldFromListParams(ctx, req.(*AttachFieldParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_AttachFieldsToGroupKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToggleAttachFieldToListParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).AttachFieldsToGroupKeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_AttachFieldsToGroupKeys_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).AttachFieldsToGroupKeys(ctx, req.(*ToggleAttachFieldToListParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_DetachFieldsToGroupKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToggleAttachFieldToListParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).DetachFieldsToGroupKeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_DetachFieldsToGroupKeys_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).DetachFieldsToGroupKeys(ctx, req.(*ToggleAttachFieldToListParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_CheckAttachedFieldsInList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckAttachedFieldsInListParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).CheckAttachedFieldsInList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_CheckAttachedFieldsInList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).CheckAttachedFieldsInList(ctx, req.(*CheckAttachedFieldsInListParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_GetPages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPagesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).GetPages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_GetPages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).GetPages(ctx, req.(*GetPagesParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_CreatePage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PageParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).CreatePage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_CreatePage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).CreatePage(ctx, req.(*PageParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_UpdatePage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePageParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).UpdatePage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_UpdatePage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).UpdatePage(ctx, req.(*UpdatePageParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_RemovePage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemovePagesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).RemovePage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_RemovePage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).RemovePage(ctx, req.(*RemovePagesParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_AttachPageToParent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToggleAttachPageToParentParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).AttachPageToParent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_AttachPageToParent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).AttachPageToParent(ctx, req.(*ToggleAttachPageToParentParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticData_DetachPageFromParent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToggleAttachPageToParentParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticDataServer).DetachPageFromParent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticData_DetachPageFromParent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticDataServer).DetachPageFromParent(ctx, req.(*ToggleAttachPageToParentParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // StaticData_ServiceDesc is the grpc.ServiceDesc for StaticData service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -759,48 +2163,128 @@ var StaticData_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*StaticDataServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetListBySlug",
-			Handler:    _StaticData_GetListBySlug_Handler,
+			MethodName: "GetGroupKeys",
+			Handler:    _StaticData_GetGroupKeys_Handler,
 		},
 		{
-			MethodName: "GetListEntitiesBySlug",
-			Handler:    _StaticData_GetListEntitiesBySlug_Handler,
+			MethodName: "CreateGroupKeys",
+			Handler:    _StaticData_CreateGroupKeys_Handler,
+		},
+		{
+			MethodName: "RemoveGroupKeys",
+			Handler:    _StaticData_RemoveGroupKeys_Handler,
+		},
+		{
+			MethodName: "GetLists",
+			Handler:    _StaticData_GetLists_Handler,
+		},
+		{
+			MethodName: "GetListsInner",
+			Handler:    _StaticData_GetListsInner_Handler,
 		},
 		{
 			MethodName: "CreateList",
 			Handler:    _StaticData_CreateList_Handler,
 		},
 		{
-			MethodName: "UpdateList",
-			Handler:    _StaticData_UpdateList_Handler,
+			MethodName: "UpdateListSlug",
+			Handler:    _StaticData_UpdateListSlug_Handler,
 		},
 		{
-			MethodName: "DeleteList",
-			Handler:    _StaticData_DeleteList_Handler,
+			MethodName: "UpdateListMeta",
+			Handler:    _StaticData_UpdateListMeta_Handler,
+		},
+		{
+			MethodName: "UpdateListImage",
+			Handler:    _StaticData_UpdateListImage_Handler,
+		},
+		{
+			MethodName: "RemoveListImage",
+			Handler:    _StaticData_RemoveListImage_Handler,
+		},
+		{
+			MethodName: "UpdateListL10ns",
+			Handler:    _StaticData_UpdateListL10Ns_Handler,
+		},
+		{
+			MethodName: "ShowLists",
+			Handler:    _StaticData_ShowLists_Handler,
+		},
+		{
+			MethodName: "HideLists",
+			Handler:    _StaticData_HideLists_Handler,
+		},
+		{
+			MethodName: "RemoveLists",
+			Handler:    _StaticData_RemoveLists_Handler,
 		},
 		{
 			MethodName: "SortLists",
 			Handler:    _StaticData_SortLists_Handler,
 		},
 		{
-			MethodName: "ToggleVisibleLists",
-			Handler:    _StaticData_ToggleVisibleLists_Handler,
+			MethodName: "AttachListsToLists",
+			Handler:    _StaticData_AttachListsToLists_Handler,
+		},
+		{
+			MethodName: "DetachListsToLists",
+			Handler:    _StaticData_DetachListsToLists_Handler,
+		},
+		{
+			MethodName: "CopyList",
+			Handler:    _StaticData_CopyList_Handler,
+		},
+		{
+			MethodName: "CopyListWithRelations",
+			Handler:    _StaticData_CopyListWithRelations_Handler,
+		},
+		{
+			MethodName: "CheckFreeSlugInList",
+			Handler:    _StaticData_CheckFreeSlugInList_Handler,
+		},
+		{
+			MethodName: "GetEntities",
+			Handler:    _StaticData_GetEntities_Handler,
 		},
 		{
 			MethodName: "CreateEntity",
 			Handler:    _StaticData_CreateEntity_Handler,
 		},
 		{
-			MethodName: "GetEntityBySlug",
-			Handler:    _StaticData_GetEntityBySlug_Handler,
+			MethodName: "UpdateEntitiesRating",
+			Handler:    _StaticData_UpdateEntitiesRating_Handler,
 		},
 		{
-			MethodName: "SortEntity",
-			Handler:    _StaticData_SortEntity_Handler,
+			MethodName: "UpdateEntitySlug",
+			Handler:    _StaticData_UpdateEntitySlug_Handler,
 		},
 		{
-			MethodName: "ToggleVisibleEntities",
-			Handler:    _StaticData_ToggleVisibleEntities_Handler,
+			MethodName: "UpdateEntityImage",
+			Handler:    _StaticData_UpdateEntityImage_Handler,
+		},
+		{
+			MethodName: "RemoveEntityImage",
+			Handler:    _StaticData_RemoveEntityImage_Handler,
+		},
+		{
+			MethodName: "UpdateEntityL10ns",
+			Handler:    _StaticData_UpdateEntityL10Ns_Handler,
+		},
+		{
+			MethodName: "ShowEntities",
+			Handler:    _StaticData_ShowEntities_Handler,
+		},
+		{
+			MethodName: "HideEntities",
+			Handler:    _StaticData_HideEntities_Handler,
+		},
+		{
+			MethodName: "RemoveEntities",
+			Handler:    _StaticData_RemoveEntities_Handler,
+		},
+		{
+			MethodName: "SortEntities",
+			Handler:    _StaticData_SortEntities_Handler,
 		},
 		{
 			MethodName: "AttachEntitiesToList",
@@ -811,16 +2295,72 @@ var StaticData_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _StaticData_DetachEntitiesFromList_Handler,
 		},
 		{
+			MethodName: "CopyEntity",
+			Handler:    _StaticData_CopyEntity_Handler,
+		},
+		{
+			MethodName: "CopyEntityWithRelations",
+			Handler:    _StaticData_CopyEntityWithRelations_Handler,
+		},
+		{
+			MethodName: "CheckFreeSlugInEntities",
+			Handler:    _StaticData_CheckFreeSlugInEntities_Handler,
+		},
+		{
+			MethodName: "GetFields",
+			Handler:    _StaticData_GetFields_Handler,
+		},
+		{
+			MethodName: "GetFieldsValuesByEntities",
+			Handler:    _StaticData_GetFieldsValuesByEntities_Handler,
+		},
+		{
 			MethodName: "CreateField",
 			Handler:    _StaticData_CreateField_Handler,
 		},
 		{
-			MethodName: "UpdateField",
-			Handler:    _StaticData_UpdateField_Handler,
+			MethodName: "UpsertEntityFieldValue",
+			Handler:    _StaticData_UpsertEntityFieldValue_Handler,
 		},
 		{
-			MethodName: "DeleteField",
-			Handler:    _StaticData_DeleteField_Handler,
+			MethodName: "RemoveEntityFieldValue",
+			Handler:    _StaticData_RemoveEntityFieldValue_Handler,
+		},
+		{
+			MethodName: "UpsertEntityFieldImage",
+			Handler:    _StaticData_UpsertEntityFieldImage_Handler,
+		},
+		{
+			MethodName: "RemoveEntityFieldImage",
+			Handler:    _StaticData_RemoveEntityFieldImage_Handler,
+		},
+		{
+			MethodName: "UpdateFields",
+			Handler:    _StaticData_UpdateFields_Handler,
+		},
+		{
+			MethodName: "UpdateFieldsL10ns",
+			Handler:    _StaticData_UpdateFieldsL10Ns_Handler,
+		},
+		{
+			MethodName: "RemoveFieldsL10ns",
+			Handler:    _StaticData_RemoveFieldsL10Ns_Handler,
+		},
+		{
+			MethodName: "RemoveFields",
+			Handler:    _StaticData_RemoveFields_Handler,
+		},
+		{
+			MethodName: "SortFields",
+			Handler:    _StaticData_SortFields_Handler,
+		},
+		{
+			MethodName: "UpsertFieldImage",
+			Handler:    _StaticData_UpsertFieldImage_Handler,
+		},
+		{
+			MethodName: "UpdateOptionsFields",
+			Handler:    _StaticData_UpdateOptionsFields_Handler,
 		},
 		{
 			MethodName: "AttachFieldToListParams",
@@ -831,12 +2371,40 @@ var StaticData_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _StaticData_DetachFieldFromListParams_Handler,
 		},
 		{
-			MethodName: "SetEntityFieldValue",
-			Handler:    _StaticData_SetEntityFieldValue_Handler,
+			MethodName: "AttachFieldsToGroupKeys",
+			Handler:    _StaticData_AttachFieldsToGroupKeys_Handler,
 		},
 		{
-			MethodName: "RemoveEntityFieldValue",
-			Handler:    _StaticData_RemoveEntityFieldValue_Handler,
+			MethodName: "DetachFieldsToGroupKeys",
+			Handler:    _StaticData_DetachFieldsToGroupKeys_Handler,
+		},
+		{
+			MethodName: "CheckAttachedFieldsInList",
+			Handler:    _StaticData_CheckAttachedFieldsInList_Handler,
+		},
+		{
+			MethodName: "GetPages",
+			Handler:    _StaticData_GetPages_Handler,
+		},
+		{
+			MethodName: "CreatePage",
+			Handler:    _StaticData_CreatePage_Handler,
+		},
+		{
+			MethodName: "UpdatePage",
+			Handler:    _StaticData_UpdatePage_Handler,
+		},
+		{
+			MethodName: "RemovePage",
+			Handler:    _StaticData_RemovePage_Handler,
+		},
+		{
+			MethodName: "AttachPageToParent",
+			Handler:    _StaticData_AttachPageToParent_Handler,
+		},
+		{
+			MethodName: "DetachPageFromParent",
+			Handler:    _StaticData_DetachPageFromParent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -70,6 +70,55 @@ func (Lang) EnumDescriptor() ([]byte, []int) {
 	return file_common_common_proto_rawDescGZIP(), []int{0}
 }
 
+type OrderBy int32
+
+const (
+	OrderBy_NULL OrderBy = 0
+	OrderBy_DESC OrderBy = 1
+	OrderBy_ASC  OrderBy = 2
+)
+
+// Enum value maps for OrderBy.
+var (
+	OrderBy_name = map[int32]string{
+		0: "NULL",
+		1: "DESC",
+		2: "ASC",
+	}
+	OrderBy_value = map[string]int32{
+		"NULL": 0,
+		"DESC": 1,
+		"ASC":  2,
+	}
+)
+
+func (x OrderBy) Enum() *OrderBy {
+	p := new(OrderBy)
+	*p = x
+	return p
+}
+
+func (x OrderBy) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (OrderBy) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_common_proto_enumTypes[1].Descriptor()
+}
+
+func (OrderBy) Type() protoreflect.EnumType {
+	return &file_common_common_proto_enumTypes[1]
+}
+
+func (x OrderBy) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use OrderBy.Descriptor instead.
+func (OrderBy) EnumDescriptor() ([]byte, []int) {
+	return file_common_common_proto_rawDescGZIP(), []int{1}
+}
+
 type ListParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
@@ -122,7 +171,7 @@ func (x *ListParams) GetOffset() int32 {
 	return 0
 }
 
-type I10N struct {
+type L10N struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Lang          Lang                   `protobuf:"varint,2,opt,name=lang,proto3,enum=common.Lang" json:"lang,omitempty"`
@@ -131,20 +180,20 @@ type I10N struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *I10N) Reset() {
-	*x = I10N{}
+func (x *L10N) Reset() {
+	*x = L10N{}
 	mi := &file_common_common_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *I10N) String() string {
+func (x *L10N) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*I10N) ProtoMessage() {}
+func (*L10N) ProtoMessage() {}
 
-func (x *I10N) ProtoReflect() protoreflect.Message {
+func (x *L10N) ProtoReflect() protoreflect.Message {
 	mi := &file_common_common_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -156,26 +205,130 @@ func (x *I10N) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use I10N.ProtoReflect.Descriptor instead.
-func (*I10N) Descriptor() ([]byte, []int) {
+// Deprecated: Use L10N.ProtoReflect.Descriptor instead.
+func (*L10N) Descriptor() ([]byte, []int) {
 	return file_common_common_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *I10N) GetId() int32 {
+func (x *L10N) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *I10N) GetLang() Lang {
+func (x *L10N) GetLang() Lang {
 	if x != nil {
 		return x.Lang
 	}
 	return Lang_LANG_UNSPECIFIED
 }
 
-func (x *I10N) GetText() string {
+func (x *L10N) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
+type NewL10N struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Lang          Lang                   `protobuf:"varint,1,opt,name=lang,proto3,enum=common.Lang" json:"lang,omitempty"`
+	Text          string                 `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewL10N) Reset() {
+	*x = NewL10N{}
+	mi := &file_common_common_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewL10N) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewL10N) ProtoMessage() {}
+
+func (x *NewL10N) ProtoReflect() protoreflect.Message {
+	mi := &file_common_common_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewL10N.ProtoReflect.Descriptor instead.
+func (*NewL10N) Descriptor() ([]byte, []int) {
+	return file_common_common_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *NewL10N) GetLang() Lang {
+	if x != nil {
+		return x.Lang
+	}
+	return Lang_LANG_UNSPECIFIED
+}
+
+func (x *NewL10N) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
+type SetL10N struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Text          string                 `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetL10N) Reset() {
+	*x = SetL10N{}
+	mi := &file_common_common_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetL10N) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetL10N) ProtoMessage() {}
+
+func (x *SetL10N) ProtoReflect() protoreflect.Message {
+	mi := &file_common_common_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetL10N.ProtoReflect.Descriptor instead.
+func (*SetL10N) Descriptor() ([]byte, []int) {
+	return file_common_common_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *SetL10N) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *SetL10N) GetText() string {
 	if x != nil {
 		return x.Text
 	}
@@ -190,18 +343,28 @@ var file_common_common_proto_rawDesc = string([]byte{
 	0x0a, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x6c,
 	0x69, 0x6d, 0x69, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x6c, 0x69, 0x6d, 0x69,
 	0x74, 0x12, 0x16, 0x0a, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x05, 0x52, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x22, 0x4c, 0x0a, 0x04, 0x49, 0x31, 0x30,
+	0x05, 0x52, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x22, 0x4c, 0x0a, 0x04, 0x4c, 0x31, 0x30,
 	0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69,
 	0x64, 0x12, 0x20, 0x0a, 0x04, 0x6c, 0x61, 0x6e, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32,
 	0x0c, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x4c, 0x61, 0x6e, 0x67, 0x52, 0x04, 0x6c,
 	0x61, 0x6e, 0x67, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x65, 0x78, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x04, 0x74, 0x65, 0x78, 0x74, 0x22, 0x3f, 0x0a, 0x07, 0x4e, 0x65, 0x77, 0x4c, 0x31,
+	0x30, 0x6e, 0x12, 0x20, 0x0a, 0x04, 0x6c, 0x61, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e,
+	0x32, 0x0c, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x4c, 0x61, 0x6e, 0x67, 0x52, 0x04,
+	0x6c, 0x61, 0x6e, 0x67, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x65, 0x78, 0x74, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x74, 0x65, 0x78, 0x74, 0x22, 0x2d, 0x0a, 0x07, 0x53, 0x65, 0x74, 0x4c,
+	0x31, 0x30, 0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x65, 0x78, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x04, 0x74, 0x65, 0x78, 0x74, 0x2a, 0x2c, 0x0a, 0x04, 0x4c, 0x61, 0x6e, 0x67, 0x12,
 	0x14, 0x0a, 0x10, 0x4c, 0x41, 0x4e, 0x47, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46,
 	0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x06, 0x0a, 0x02, 0x45, 0x4e, 0x10, 0x01, 0x12, 0x06, 0x0a,
-	0x02, 0x52, 0x55, 0x10, 0x02, 0x42, 0x31, 0x5a, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x33, 0x61, 0x2d, 0x74, 0x65, 0x63, 0x68, 0x2f, 0x63, 0x6f, 0x6e,
-	0x74, 0x72, 0x61, 0x63, 0x74, 0x2d, 0x67, 0x6f, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x3b,
-	0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x02, 0x52, 0x55, 0x10, 0x02, 0x2a, 0x26, 0x0a, 0x07, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x42, 0x79,
+	0x12, 0x08, 0x0a, 0x04, 0x4e, 0x55, 0x4c, 0x4c, 0x10, 0x00, 0x12, 0x08, 0x0a, 0x04, 0x44, 0x45,
+	0x53, 0x43, 0x10, 0x01, 0x12, 0x07, 0x0a, 0x03, 0x41, 0x53, 0x43, 0x10, 0x02, 0x42, 0x31, 0x5a,
+	0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x33, 0x61, 0x2d,
+	0x74, 0x65, 0x63, 0x68, 0x2f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2d, 0x67, 0x6f,
+	0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x3b, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x76, 0x31,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 })
 
 var (
@@ -216,20 +379,24 @@ func file_common_common_proto_rawDescGZIP() []byte {
 	return file_common_common_proto_rawDescData
 }
 
-var file_common_common_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_common_common_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_common_common_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_common_common_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_common_common_proto_goTypes = []any{
 	(Lang)(0),          // 0: common.Lang
-	(*ListParams)(nil), // 1: common.ListParams
-	(*I10N)(nil),       // 2: common.I10n
+	(OrderBy)(0),       // 1: common.OrderBy
+	(*ListParams)(nil), // 2: common.ListParams
+	(*L10N)(nil),       // 3: common.L10n
+	(*NewL10N)(nil),    // 4: common.NewL10n
+	(*SetL10N)(nil),    // 5: common.SetL10n
 }
 var file_common_common_proto_depIdxs = []int32{
-	0, // 0: common.I10n.lang:type_name -> common.Lang
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0, // 0: common.L10n.lang:type_name -> common.Lang
+	0, // 1: common.NewL10n.lang:type_name -> common.Lang
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_common_common_proto_init() }
@@ -242,8 +409,8 @@ func file_common_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_common_proto_rawDesc), len(file_common_common_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   2,
+			NumEnums:      2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
