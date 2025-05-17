@@ -67,17 +67,16 @@ const (
 	StaticData_RemoveFieldsL10Ns_FullMethodName         = "/sd.StaticData/RemoveFieldsL10ns"
 	StaticData_RemoveFields_FullMethodName              = "/sd.StaticData/RemoveFields"
 	StaticData_SortFields_FullMethodName                = "/sd.StaticData/SortFields"
-	StaticData_UpsertFieldImage_FullMethodName          = "/sd.StaticData/UpsertFieldImage"
 	StaticData_UpdateOptionsFields_FullMethodName       = "/sd.StaticData/UpdateOptionsFields"
-	StaticData_AttachFieldToListParams_FullMethodName   = "/sd.StaticData/AttachFieldToListParams"
-	StaticData_DetachFieldFromListParams_FullMethodName = "/sd.StaticData/DetachFieldFromListParams"
+	StaticData_AttachFieldToList_FullMethodName         = "/sd.StaticData/AttachFieldToList"
+	StaticData_DetachFieldFromList_FullMethodName       = "/sd.StaticData/DetachFieldFromList"
 	StaticData_AttachFieldsToGroupKeys_FullMethodName   = "/sd.StaticData/AttachFieldsToGroupKeys"
 	StaticData_DetachFieldsToGroupKeys_FullMethodName   = "/sd.StaticData/DetachFieldsToGroupKeys"
 	StaticData_CheckAttachedFieldsInList_FullMethodName = "/sd.StaticData/CheckAttachedFieldsInList"
 	StaticData_GetPages_FullMethodName                  = "/sd.StaticData/GetPages"
 	StaticData_CreatePage_FullMethodName                = "/sd.StaticData/CreatePage"
 	StaticData_UpdatePage_FullMethodName                = "/sd.StaticData/UpdatePage"
-	StaticData_RemovePage_FullMethodName                = "/sd.StaticData/RemovePage"
+	StaticData_RemovePages_FullMethodName               = "/sd.StaticData/RemovePages"
 	StaticData_AttachPageToParent_FullMethodName        = "/sd.StaticData/AttachPageToParent"
 	StaticData_DetachPageFromParent_FullMethodName      = "/sd.StaticData/DetachPageFromParent"
 )
@@ -129,17 +128,16 @@ type StaticDataClient interface {
 	CreateField(ctx context.Context, in *CreateFieldParams, opts ...grpc.CallOption) (*Field, error)
 	UpsertEntityFieldValue(ctx context.Context, in *UpsertEntityFieldValueParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	RemoveEntityFieldValue(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpsertEntityFieldImage(ctx context.Context, in *UpsertEntityFieldImageResponse, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpsertEntityFieldImage(ctx context.Context, in *UpsertEntityFieldImageParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	RemoveEntityFieldImage(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateFields(ctx context.Context, in *UpdateFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateFieldsL10Ns(ctx context.Context, in *UpdateFieldsL10NsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	RemoveFieldsL10Ns(ctx context.Context, in *RemoveFieldsL10NsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	RemoveFields(ctx context.Context, in *RemoveFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	SortFields(ctx context.Context, in *SortFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpsertFieldImage(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateOptionsFields(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	AttachFieldToListParams(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	DetachFieldFromListParams(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AttachFieldToList(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DetachFieldFromList(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AttachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToKeyGroupsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DetachFieldsToGroupKeys(ctx context.Context, in *ToggleAttachFieldToKeyGroupsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CheckAttachedFieldsInList(ctx context.Context, in *CheckAttachedFieldsInListParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
@@ -147,7 +145,7 @@ type StaticDataClient interface {
 	GetPages(ctx context.Context, in *GetPagesParams, opts ...grpc.CallOption) (*GetPagesResponse, error)
 	CreatePage(ctx context.Context, in *PageParams, opts ...grpc.CallOption) (*Page, error)
 	UpdatePage(ctx context.Context, in *UpdatePageParams, opts ...grpc.CallOption) (*Page, error)
-	RemovePage(ctx context.Context, in *RemovePagesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RemovePages(ctx context.Context, in *RemovePagesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AttachPageToParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DetachPageFromParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -550,7 +548,7 @@ func (c *staticDataClient) RemoveEntityFieldValue(ctx context.Context, in *Remov
 	return out, nil
 }
 
-func (c *staticDataClient) UpsertEntityFieldImage(ctx context.Context, in *UpsertEntityFieldImageResponse, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *staticDataClient) UpsertEntityFieldImage(ctx context.Context, in *UpsertEntityFieldImageParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_UpsertEntityFieldImage_FullMethodName, in, out, cOpts...)
@@ -620,16 +618,6 @@ func (c *staticDataClient) SortFields(ctx context.Context, in *SortFieldsParams,
 	return out, nil
 }
 
-func (c *staticDataClient) UpsertFieldImage(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, StaticData_UpsertFieldImage_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *staticDataClient) UpdateOptionsFields(ctx context.Context, in *UpdateOptionsFieldsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
@@ -640,20 +628,20 @@ func (c *staticDataClient) UpdateOptionsFields(ctx context.Context, in *UpdateOp
 	return out, nil
 }
 
-func (c *staticDataClient) AttachFieldToListParams(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *staticDataClient) AttachFieldToList(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, StaticData_AttachFieldToListParams_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, StaticData_AttachFieldToList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *staticDataClient) DetachFieldFromListParams(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *staticDataClient) DetachFieldFromList(ctx context.Context, in *ToggleAttachFieldToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, StaticData_DetachFieldFromListParams_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, StaticData_DetachFieldFromList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -720,10 +708,10 @@ func (c *staticDataClient) UpdatePage(ctx context.Context, in *UpdatePageParams,
 	return out, nil
 }
 
-func (c *staticDataClient) RemovePage(ctx context.Context, in *RemovePagesParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *staticDataClient) RemovePages(ctx context.Context, in *RemovePagesParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, StaticData_RemovePage_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, StaticData_RemovePages_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -797,17 +785,16 @@ type StaticDataServer interface {
 	CreateField(context.Context, *CreateFieldParams) (*Field, error)
 	UpsertEntityFieldValue(context.Context, *UpsertEntityFieldValueParams) (*emptypb.Empty, error)
 	RemoveEntityFieldValue(context.Context, *RemoveEntityFieldValueParams) (*emptypb.Empty, error)
-	UpsertEntityFieldImage(context.Context, *UpsertEntityFieldImageResponse) (*emptypb.Empty, error)
+	UpsertEntityFieldImage(context.Context, *UpsertEntityFieldImageParams) (*emptypb.Empty, error)
 	RemoveEntityFieldImage(context.Context, *RemoveEntityFieldValueParams) (*emptypb.Empty, error)
 	UpdateFields(context.Context, *UpdateFieldsParams) (*emptypb.Empty, error)
 	UpdateFieldsL10Ns(context.Context, *UpdateFieldsL10NsParams) (*emptypb.Empty, error)
 	RemoveFieldsL10Ns(context.Context, *RemoveFieldsL10NsParams) (*emptypb.Empty, error)
 	RemoveFields(context.Context, *RemoveFieldsParams) (*emptypb.Empty, error)
 	SortFields(context.Context, *SortFieldsParams) (*emptypb.Empty, error)
-	UpsertFieldImage(context.Context, *UpdateOptionsFieldsParams) (*emptypb.Empty, error)
 	UpdateOptionsFields(context.Context, *UpdateOptionsFieldsParams) (*emptypb.Empty, error)
-	AttachFieldToListParams(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error)
-	DetachFieldFromListParams(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error)
+	AttachFieldToList(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error)
+	DetachFieldFromList(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error)
 	AttachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToKeyGroupsParams) (*emptypb.Empty, error)
 	DetachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToKeyGroupsParams) (*emptypb.Empty, error)
 	CheckAttachedFieldsInList(context.Context, *CheckAttachedFieldsInListParams) (*common.BoolStatus, error)
@@ -815,7 +802,7 @@ type StaticDataServer interface {
 	GetPages(context.Context, *GetPagesParams) (*GetPagesResponse, error)
 	CreatePage(context.Context, *PageParams) (*Page, error)
 	UpdatePage(context.Context, *UpdatePageParams) (*Page, error)
-	RemovePage(context.Context, *RemovePagesParams) (*emptypb.Empty, error)
+	RemovePages(context.Context, *RemovePagesParams) (*emptypb.Empty, error)
 	AttachPageToParent(context.Context, *ToggleAttachPageToParentParams) (*emptypb.Empty, error)
 	DetachPageFromParent(context.Context, *ToggleAttachPageToParentParams) (*emptypb.Empty, error)
 	mustEmbedUnimplementedStaticDataServer()
@@ -945,7 +932,7 @@ func (UnimplementedStaticDataServer) UpsertEntityFieldValue(context.Context, *Up
 func (UnimplementedStaticDataServer) RemoveEntityFieldValue(context.Context, *RemoveEntityFieldValueParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveEntityFieldValue not implemented")
 }
-func (UnimplementedStaticDataServer) UpsertEntityFieldImage(context.Context, *UpsertEntityFieldImageResponse) (*emptypb.Empty, error) {
+func (UnimplementedStaticDataServer) UpsertEntityFieldImage(context.Context, *UpsertEntityFieldImageParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpsertEntityFieldImage not implemented")
 }
 func (UnimplementedStaticDataServer) RemoveEntityFieldImage(context.Context, *RemoveEntityFieldValueParams) (*emptypb.Empty, error) {
@@ -966,17 +953,14 @@ func (UnimplementedStaticDataServer) RemoveFields(context.Context, *RemoveFields
 func (UnimplementedStaticDataServer) SortFields(context.Context, *SortFieldsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SortFields not implemented")
 }
-func (UnimplementedStaticDataServer) UpsertFieldImage(context.Context, *UpdateOptionsFieldsParams) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpsertFieldImage not implemented")
-}
 func (UnimplementedStaticDataServer) UpdateOptionsFields(context.Context, *UpdateOptionsFieldsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOptionsFields not implemented")
 }
-func (UnimplementedStaticDataServer) AttachFieldToListParams(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AttachFieldToListParams not implemented")
+func (UnimplementedStaticDataServer) AttachFieldToList(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AttachFieldToList not implemented")
 }
-func (UnimplementedStaticDataServer) DetachFieldFromListParams(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DetachFieldFromListParams not implemented")
+func (UnimplementedStaticDataServer) DetachFieldFromList(context.Context, *ToggleAttachFieldToListsParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DetachFieldFromList not implemented")
 }
 func (UnimplementedStaticDataServer) AttachFieldsToGroupKeys(context.Context, *ToggleAttachFieldToKeyGroupsParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AttachFieldsToGroupKeys not implemented")
@@ -996,8 +980,8 @@ func (UnimplementedStaticDataServer) CreatePage(context.Context, *PageParams) (*
 func (UnimplementedStaticDataServer) UpdatePage(context.Context, *UpdatePageParams) (*Page, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePage not implemented")
 }
-func (UnimplementedStaticDataServer) RemovePage(context.Context, *RemovePagesParams) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemovePage not implemented")
+func (UnimplementedStaticDataServer) RemovePages(context.Context, *RemovePagesParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemovePages not implemented")
 }
 func (UnimplementedStaticDataServer) AttachPageToParent(context.Context, *ToggleAttachPageToParentParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AttachPageToParent not implemented")
@@ -1729,7 +1713,7 @@ func _StaticData_RemoveEntityFieldValue_Handler(srv interface{}, ctx context.Con
 }
 
 func _StaticData_UpsertEntityFieldImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpsertEntityFieldImageResponse)
+	in := new(UpsertEntityFieldImageParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1741,7 +1725,7 @@ func _StaticData_UpsertEntityFieldImage_Handler(srv interface{}, ctx context.Con
 		FullMethod: StaticData_UpsertEntityFieldImage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).UpsertEntityFieldImage(ctx, req.(*UpsertEntityFieldImageResponse))
+		return srv.(StaticDataServer).UpsertEntityFieldImage(ctx, req.(*UpsertEntityFieldImageParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1854,24 +1838,6 @@ func _StaticData_SortFields_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_UpsertFieldImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateOptionsFieldsParams)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(StaticDataServer).UpsertFieldImage(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: StaticData_UpsertFieldImage_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).UpsertFieldImage(ctx, req.(*UpdateOptionsFieldsParams))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _StaticData_UpdateOptionsFields_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateOptionsFieldsParams)
 	if err := dec(in); err != nil {
@@ -1890,38 +1856,38 @@ func _StaticData_UpdateOptionsFields_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_AttachFieldToListParams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _StaticData_AttachFieldToList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ToggleAttachFieldToListsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).AttachFieldToListParams(ctx, in)
+		return srv.(StaticDataServer).AttachFieldToList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_AttachFieldToListParams_FullMethodName,
+		FullMethod: StaticData_AttachFieldToList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).AttachFieldToListParams(ctx, req.(*ToggleAttachFieldToListsParams))
+		return srv.(StaticDataServer).AttachFieldToList(ctx, req.(*ToggleAttachFieldToListsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_DetachFieldFromListParams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _StaticData_DetachFieldFromList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ToggleAttachFieldToListsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).DetachFieldFromListParams(ctx, in)
+		return srv.(StaticDataServer).DetachFieldFromList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_DetachFieldFromListParams_FullMethodName,
+		FullMethod: StaticData_DetachFieldFromList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).DetachFieldFromListParams(ctx, req.(*ToggleAttachFieldToListsParams))
+		return srv.(StaticDataServer).DetachFieldFromList(ctx, req.(*ToggleAttachFieldToListsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2034,20 +2000,20 @@ func _StaticData_UpdatePage_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_RemovePage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _StaticData_RemovePages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RemovePagesParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).RemovePage(ctx, in)
+		return srv.(StaticDataServer).RemovePages(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_RemovePage_FullMethodName,
+		FullMethod: StaticData_RemovePages_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).RemovePage(ctx, req.(*RemovePagesParams))
+		return srv.(StaticDataServer).RemovePages(ctx, req.(*RemovePagesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2280,20 +2246,16 @@ var StaticData_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _StaticData_SortFields_Handler,
 		},
 		{
-			MethodName: "UpsertFieldImage",
-			Handler:    _StaticData_UpsertFieldImage_Handler,
-		},
-		{
 			MethodName: "UpdateOptionsFields",
 			Handler:    _StaticData_UpdateOptionsFields_Handler,
 		},
 		{
-			MethodName: "AttachFieldToListParams",
-			Handler:    _StaticData_AttachFieldToListParams_Handler,
+			MethodName: "AttachFieldToList",
+			Handler:    _StaticData_AttachFieldToList_Handler,
 		},
 		{
-			MethodName: "DetachFieldFromListParams",
-			Handler:    _StaticData_DetachFieldFromListParams_Handler,
+			MethodName: "DetachFieldFromList",
+			Handler:    _StaticData_DetachFieldFromList_Handler,
 		},
 		{
 			MethodName: "AttachFieldsToGroupKeys",
@@ -2320,8 +2282,8 @@ var StaticData_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _StaticData_UpdatePage_Handler,
 		},
 		{
-			MethodName: "RemovePage",
-			Handler:    _StaticData_RemovePage_Handler,
+			MethodName: "RemovePages",
+			Handler:    _StaticData_RemovePages_Handler,
 		},
 		{
 			MethodName: "AttachPageToParent",
