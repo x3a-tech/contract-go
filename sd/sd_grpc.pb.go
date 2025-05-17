@@ -149,7 +149,7 @@ type StaticDataClient interface {
 	GetPages(ctx context.Context, in *GetPagesParams, opts ...grpc.CallOption) (*GetPagesResponse, error)
 	CreatePage(ctx context.Context, in *PageParams, opts ...grpc.CallOption) (*Page, error)
 	UpdatePage(ctx context.Context, in *UpdatePageParams, opts ...grpc.CallOption) (*Page, error)
-	RemovePage(ctx context.Context, in *RemovePagesParams, opts ...grpc.CallOption) (*Page, error)
+	RemovePage(ctx context.Context, in *RemovePagesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AttachPageToParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DetachPageFromParent(ctx context.Context, in *ToggleAttachPageToParentParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -732,9 +732,9 @@ func (c *staticDataClient) UpdatePage(ctx context.Context, in *UpdatePageParams,
 	return out, nil
 }
 
-func (c *staticDataClient) RemovePage(ctx context.Context, in *RemovePagesParams, opts ...grpc.CallOption) (*Page, error) {
+func (c *staticDataClient) RemovePage(ctx context.Context, in *RemovePagesParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Page)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, StaticData_RemovePage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -828,7 +828,7 @@ type StaticDataServer interface {
 	GetPages(context.Context, *GetPagesParams) (*GetPagesResponse, error)
 	CreatePage(context.Context, *PageParams) (*Page, error)
 	UpdatePage(context.Context, *UpdatePageParams) (*Page, error)
-	RemovePage(context.Context, *RemovePagesParams) (*Page, error)
+	RemovePage(context.Context, *RemovePagesParams) (*emptypb.Empty, error)
 	AttachPageToParent(context.Context, *ToggleAttachPageToParentParams) (*emptypb.Empty, error)
 	DetachPageFromParent(context.Context, *ToggleAttachPageToParentParams) (*emptypb.Empty, error)
 	mustEmbedUnimplementedStaticDataServer()
@@ -1012,7 +1012,7 @@ func (UnimplementedStaticDataServer) CreatePage(context.Context, *PageParams) (*
 func (UnimplementedStaticDataServer) UpdatePage(context.Context, *UpdatePageParams) (*Page, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePage not implemented")
 }
-func (UnimplementedStaticDataServer) RemovePage(context.Context, *RemovePagesParams) (*Page, error) {
+func (UnimplementedStaticDataServer) RemovePage(context.Context, *RemovePagesParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemovePage not implemented")
 }
 func (UnimplementedStaticDataServer) AttachPageToParent(context.Context, *ToggleAttachPageToParentParams) (*emptypb.Empty, error) {
