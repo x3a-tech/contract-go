@@ -51,13 +51,12 @@ const (
 	StaticData_HideEntities_FullMethodName              = "/sd.StaticData/HideEntities"
 	StaticData_RemoveEntities_FullMethodName            = "/sd.StaticData/RemoveEntities"
 	StaticData_SortEntities_FullMethodName              = "/sd.StaticData/SortEntities"
-	StaticData_AttachEntitiesToList_FullMethodName      = "/sd.StaticData/AttachEntitiesToList"
-	StaticData_DetachEntitiesFromList_FullMethodName    = "/sd.StaticData/DetachEntitiesFromList"
+	StaticData_AttachEntitiesToLists_FullMethodName     = "/sd.StaticData/AttachEntitiesToLists"
+	StaticData_DetachEntitiesFromLists_FullMethodName   = "/sd.StaticData/DetachEntitiesFromLists"
 	StaticData_CopyEntity_FullMethodName                = "/sd.StaticData/CopyEntity"
 	StaticData_CopyEntityWithRelations_FullMethodName   = "/sd.StaticData/CopyEntityWithRelations"
 	StaticData_CheckFreeSlugInEntities_FullMethodName   = "/sd.StaticData/CheckFreeSlugInEntities"
 	StaticData_GetFields_FullMethodName                 = "/sd.StaticData/GetFields"
-	StaticData_GetFieldsValuesByEntities_FullMethodName = "/sd.StaticData/GetFieldsValuesByEntities"
 	StaticData_CreateField_FullMethodName               = "/sd.StaticData/CreateField"
 	StaticData_UpsertEntityFieldValue_FullMethodName    = "/sd.StaticData/UpsertEntityFieldValue"
 	StaticData_RemoveEntityFieldValue_FullMethodName    = "/sd.StaticData/RemoveEntityFieldValue"
@@ -120,14 +119,13 @@ type StaticDataClient interface {
 	HideEntities(ctx context.Context, in *SingleManipulationEntitiesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	RemoveEntities(ctx context.Context, in *SingleManipulationEntitiesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	SortEntities(ctx context.Context, in *SortEntitiesParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	AttachEntitiesToList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	DetachEntitiesFromList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AttachEntitiesToLists(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DetachEntitiesFromLists(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CopyEntity(ctx context.Context, in *CopyEntityParams, opts ...grpc.CallOption) (*Entity, error)
 	CopyEntityWithRelations(ctx context.Context, in *CopyEntityParams, opts ...grpc.CallOption) (*Entity, error)
 	CheckFreeSlugInEntities(ctx context.Context, in *CheckFreeSlugInEntitiesParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Fields
 	GetFields(ctx context.Context, in *GetFieldsParams, opts ...grpc.CallOption) (*GetFieldsResponse, error)
-	GetFieldsValuesByEntities(ctx context.Context, in *GetFieldsValuesByEntitiesParams, opts ...grpc.CallOption) (*GetFieldsValuesByEntitiesResponse, error)
 	CreateField(ctx context.Context, in *CreateFieldParams, opts ...grpc.CallOption) (*Field, error)
 	UpsertEntityFieldValue(ctx context.Context, in *UpsertEntityFieldValueParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	RemoveEntityFieldValue(ctx context.Context, in *RemoveEntityFieldValueParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -462,20 +460,20 @@ func (c *staticDataClient) SortEntities(ctx context.Context, in *SortEntitiesPar
 	return out, nil
 }
 
-func (c *staticDataClient) AttachEntitiesToList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *staticDataClient) AttachEntitiesToLists(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, StaticData_AttachEntitiesToList_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, StaticData_AttachEntitiesToLists_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *staticDataClient) DetachEntitiesFromList(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *staticDataClient) DetachEntitiesFromLists(ctx context.Context, in *AttachEntitiesToListsParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, StaticData_DetachEntitiesFromList_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, StaticData_DetachEntitiesFromLists_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -516,16 +514,6 @@ func (c *staticDataClient) GetFields(ctx context.Context, in *GetFieldsParams, o
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetFieldsResponse)
 	err := c.cc.Invoke(ctx, StaticData_GetFields_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *staticDataClient) GetFieldsValuesByEntities(ctx context.Context, in *GetFieldsValuesByEntitiesParams, opts ...grpc.CallOption) (*GetFieldsValuesByEntitiesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetFieldsValuesByEntitiesResponse)
-	err := c.cc.Invoke(ctx, StaticData_GetFieldsValuesByEntities_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -799,14 +787,13 @@ type StaticDataServer interface {
 	HideEntities(context.Context, *SingleManipulationEntitiesParams) (*emptypb.Empty, error)
 	RemoveEntities(context.Context, *SingleManipulationEntitiesParams) (*emptypb.Empty, error)
 	SortEntities(context.Context, *SortEntitiesParams) (*emptypb.Empty, error)
-	AttachEntitiesToList(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error)
-	DetachEntitiesFromList(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error)
+	AttachEntitiesToLists(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error)
+	DetachEntitiesFromLists(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error)
 	CopyEntity(context.Context, *CopyEntityParams) (*Entity, error)
 	CopyEntityWithRelations(context.Context, *CopyEntityParams) (*Entity, error)
 	CheckFreeSlugInEntities(context.Context, *CheckFreeSlugInEntitiesParams) (*common.BoolStatus, error)
 	// Fields
 	GetFields(context.Context, *GetFieldsParams) (*GetFieldsResponse, error)
-	GetFieldsValuesByEntities(context.Context, *GetFieldsValuesByEntitiesParams) (*GetFieldsValuesByEntitiesResponse, error)
 	CreateField(context.Context, *CreateFieldParams) (*Field, error)
 	UpsertEntityFieldValue(context.Context, *UpsertEntityFieldValueParams) (*emptypb.Empty, error)
 	RemoveEntityFieldValue(context.Context, *RemoveEntityFieldValueParams) (*emptypb.Empty, error)
@@ -931,11 +918,11 @@ func (UnimplementedStaticDataServer) RemoveEntities(context.Context, *SingleMani
 func (UnimplementedStaticDataServer) SortEntities(context.Context, *SortEntitiesParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SortEntities not implemented")
 }
-func (UnimplementedStaticDataServer) AttachEntitiesToList(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AttachEntitiesToList not implemented")
+func (UnimplementedStaticDataServer) AttachEntitiesToLists(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AttachEntitiesToLists not implemented")
 }
-func (UnimplementedStaticDataServer) DetachEntitiesFromList(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DetachEntitiesFromList not implemented")
+func (UnimplementedStaticDataServer) DetachEntitiesFromLists(context.Context, *AttachEntitiesToListsParams) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DetachEntitiesFromLists not implemented")
 }
 func (UnimplementedStaticDataServer) CopyEntity(context.Context, *CopyEntityParams) (*Entity, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CopyEntity not implemented")
@@ -948,9 +935,6 @@ func (UnimplementedStaticDataServer) CheckFreeSlugInEntities(context.Context, *C
 }
 func (UnimplementedStaticDataServer) GetFields(context.Context, *GetFieldsParams) (*GetFieldsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFields not implemented")
-}
-func (UnimplementedStaticDataServer) GetFieldsValuesByEntities(context.Context, *GetFieldsValuesByEntitiesParams) (*GetFieldsValuesByEntitiesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetFieldsValuesByEntities not implemented")
 }
 func (UnimplementedStaticDataServer) CreateField(context.Context, *CreateFieldParams) (*Field, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateField not implemented")
@@ -1582,38 +1566,38 @@ func _StaticData_SortEntities_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_AttachEntitiesToList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _StaticData_AttachEntitiesToLists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AttachEntitiesToListsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).AttachEntitiesToList(ctx, in)
+		return srv.(StaticDataServer).AttachEntitiesToLists(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_AttachEntitiesToList_FullMethodName,
+		FullMethod: StaticData_AttachEntitiesToLists_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).AttachEntitiesToList(ctx, req.(*AttachEntitiesToListsParams))
+		return srv.(StaticDataServer).AttachEntitiesToLists(ctx, req.(*AttachEntitiesToListsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticData_DetachEntitiesFromList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _StaticData_DetachEntitiesFromLists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AttachEntitiesToListsParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StaticDataServer).DetachEntitiesFromList(ctx, in)
+		return srv.(StaticDataServer).DetachEntitiesFromLists(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StaticData_DetachEntitiesFromList_FullMethodName,
+		FullMethod: StaticData_DetachEntitiesFromLists_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).DetachEntitiesFromList(ctx, req.(*AttachEntitiesToListsParams))
+		return srv.(StaticDataServer).DetachEntitiesFromLists(ctx, req.(*AttachEntitiesToListsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1686,24 +1670,6 @@ func _StaticData_GetFields_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(StaticDataServer).GetFields(ctx, req.(*GetFieldsParams))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _StaticData_GetFieldsValuesByEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFieldsValuesByEntitiesParams)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(StaticDataServer).GetFieldsValuesByEntities(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: StaticData_GetFieldsValuesByEntities_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).GetFieldsValuesByEntities(ctx, req.(*GetFieldsValuesByEntitiesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2250,12 +2216,12 @@ var StaticData_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _StaticData_SortEntities_Handler,
 		},
 		{
-			MethodName: "AttachEntitiesToList",
-			Handler:    _StaticData_AttachEntitiesToList_Handler,
+			MethodName: "AttachEntitiesToLists",
+			Handler:    _StaticData_AttachEntitiesToLists_Handler,
 		},
 		{
-			MethodName: "DetachEntitiesFromList",
-			Handler:    _StaticData_DetachEntitiesFromList_Handler,
+			MethodName: "DetachEntitiesFromLists",
+			Handler:    _StaticData_DetachEntitiesFromLists_Handler,
 		},
 		{
 			MethodName: "CopyEntity",
@@ -2272,10 +2238,6 @@ var StaticData_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetFields",
 			Handler:    _StaticData_GetFields_Handler,
-		},
-		{
-			MethodName: "GetFieldsValuesByEntities",
-			Handler:    _StaticData_GetFieldsValuesByEntities_Handler,
 		},
 		{
 			MethodName: "CreateField",
