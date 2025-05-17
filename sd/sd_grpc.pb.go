@@ -25,7 +25,6 @@ const (
 	StaticData_CreateGroupKeys_FullMethodName           = "/sd.StaticData/CreateGroupKeys"
 	StaticData_RemoveGroupKeys_FullMethodName           = "/sd.StaticData/RemoveGroupKeys"
 	StaticData_GetLists_FullMethodName                  = "/sd.StaticData/GetLists"
-	StaticData_GetListsInner_FullMethodName             = "/sd.StaticData/GetListsInner"
 	StaticData_CreateList_FullMethodName                = "/sd.StaticData/CreateList"
 	StaticData_UpdateListSlug_FullMethodName            = "/sd.StaticData/UpdateListSlug"
 	StaticData_UpdateListMeta_FullMethodName            = "/sd.StaticData/UpdateListMeta"
@@ -94,7 +93,6 @@ type StaticDataClient interface {
 	RemoveGroupKeys(ctx context.Context, in *RemoveGroupKeysParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists
 	GetLists(ctx context.Context, in *GetListsParams, opts ...grpc.CallOption) (*GetListResponse, error)
-	GetListsInner(ctx context.Context, in *GetListsParams, opts ...grpc.CallOption) (*GetListResponse, error)
 	CreateList(ctx context.Context, in *CreateListParams, opts ...grpc.CallOption) (*List, error)
 	UpdateListSlug(ctx context.Context, in *UpdateListSlugParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateListMeta(ctx context.Context, in *UpdateListMetaParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -198,16 +196,6 @@ func (c *staticDataClient) GetLists(ctx context.Context, in *GetListsParams, opt
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetListResponse)
 	err := c.cc.Invoke(ctx, StaticData_GetLists_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *staticDataClient) GetListsInner(ctx context.Context, in *GetListsParams, opts ...grpc.CallOption) (*GetListResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetListResponse)
-	err := c.cc.Invoke(ctx, StaticData_GetListsInner_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -784,7 +772,6 @@ type StaticDataServer interface {
 	RemoveGroupKeys(context.Context, *RemoveGroupKeysParams) (*emptypb.Empty, error)
 	// Lists
 	GetLists(context.Context, *GetListsParams) (*GetListResponse, error)
-	GetListsInner(context.Context, *GetListsParams) (*GetListResponse, error)
 	CreateList(context.Context, *CreateListParams) (*List, error)
 	UpdateListSlug(context.Context, *UpdateListSlugParams) (*emptypb.Empty, error)
 	UpdateListMeta(context.Context, *UpdateListMetaParams) (*emptypb.Empty, error)
@@ -865,9 +852,6 @@ func (UnimplementedStaticDataServer) RemoveGroupKeys(context.Context, *RemoveGro
 }
 func (UnimplementedStaticDataServer) GetLists(context.Context, *GetListsParams) (*GetListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLists not implemented")
-}
-func (UnimplementedStaticDataServer) GetListsInner(context.Context, *GetListsParams) (*GetListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetListsInner not implemented")
 }
 func (UnimplementedStaticDataServer) CreateList(context.Context, *CreateListParams) (*List, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateList not implemented")
@@ -1126,24 +1110,6 @@ func _StaticData_GetLists_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(StaticDataServer).GetLists(ctx, req.(*GetListsParams))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _StaticData_GetListsInner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetListsParams)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(StaticDataServer).GetListsInner(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: StaticData_GetListsInner_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticDataServer).GetListsInner(ctx, req.(*GetListsParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2178,10 +2144,6 @@ var StaticData_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetLists",
 			Handler:    _StaticData_GetLists_Handler,
-		},
-		{
-			MethodName: "GetListsInner",
-			Handler:    _StaticData_GetListsInner_Handler,
 		},
 		{
 			MethodName: "CreateList",
