@@ -8,10 +8,10 @@ package supportv1
 
 import (
 	context "context"
-	common "github.com/x3a-tech/contract-go/common"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	anypb "google.golang.org/protobuf/types/known/anypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -40,9 +40,9 @@ type SupportClient interface {
 	CreateTicket(ctx context.Context, in *CreateTicketParamsInner, opts ...grpc.CallOption) (*Ticket, error)
 	ReplyTicketFromUser(ctx context.Context, in *ReplyTicketFromUserParamsInner, opts ...grpc.CallOption) (*TicketMessage, error)
 	ReplyTicketFromSupport(ctx context.Context, in *ReplyTicketFromSupportParamsInner, opts ...grpc.CallOption) (*TicketMessage, error)
-	CloseTicketFromAccount(ctx context.Context, in *CloseTicketFromAccountParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	CloseTicketFromSupport(ctx context.Context, in *CloseTicketFromSupportParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
-	TakeTickets(ctx context.Context, in *TakeTicketsParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	CloseTicketFromAccount(ctx context.Context, in *CloseTicketFromAccountParamsInner, opts ...grpc.CallOption) (*anypb.Any, error)
+	CloseTicketFromSupport(ctx context.Context, in *CloseTicketFromSupportParamsInner, opts ...grpc.CallOption) (*anypb.Any, error)
+	TakeTickets(ctx context.Context, in *TakeTicketsParamsInner, opts ...grpc.CallOption) (*anypb.Any, error)
 }
 
 type supportClient struct {
@@ -103,9 +103,9 @@ func (c *supportClient) ReplyTicketFromSupport(ctx context.Context, in *ReplyTic
 	return out, nil
 }
 
-func (c *supportClient) CloseTicketFromAccount(ctx context.Context, in *CloseTicketFromAccountParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *supportClient) CloseTicketFromAccount(ctx context.Context, in *CloseTicketFromAccountParamsInner, opts ...grpc.CallOption) (*anypb.Any, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(anypb.Any)
 	err := c.cc.Invoke(ctx, Support_CloseTicketFromAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -113,9 +113,9 @@ func (c *supportClient) CloseTicketFromAccount(ctx context.Context, in *CloseTic
 	return out, nil
 }
 
-func (c *supportClient) CloseTicketFromSupport(ctx context.Context, in *CloseTicketFromSupportParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *supportClient) CloseTicketFromSupport(ctx context.Context, in *CloseTicketFromSupportParamsInner, opts ...grpc.CallOption) (*anypb.Any, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(anypb.Any)
 	err := c.cc.Invoke(ctx, Support_CloseTicketFromSupport_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -123,9 +123,9 @@ func (c *supportClient) CloseTicketFromSupport(ctx context.Context, in *CloseTic
 	return out, nil
 }
 
-func (c *supportClient) TakeTickets(ctx context.Context, in *TakeTicketsParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error) {
+func (c *supportClient) TakeTickets(ctx context.Context, in *TakeTicketsParamsInner, opts ...grpc.CallOption) (*anypb.Any, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.BoolStatus)
+	out := new(anypb.Any)
 	err := c.cc.Invoke(ctx, Support_TakeTickets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -143,9 +143,9 @@ type SupportServer interface {
 	CreateTicket(context.Context, *CreateTicketParamsInner) (*Ticket, error)
 	ReplyTicketFromUser(context.Context, *ReplyTicketFromUserParamsInner) (*TicketMessage, error)
 	ReplyTicketFromSupport(context.Context, *ReplyTicketFromSupportParamsInner) (*TicketMessage, error)
-	CloseTicketFromAccount(context.Context, *CloseTicketFromAccountParamsInner) (*common.BoolStatus, error)
-	CloseTicketFromSupport(context.Context, *CloseTicketFromSupportParamsInner) (*common.BoolStatus, error)
-	TakeTickets(context.Context, *TakeTicketsParamsInner) (*common.BoolStatus, error)
+	CloseTicketFromAccount(context.Context, *CloseTicketFromAccountParamsInner) (*anypb.Any, error)
+	CloseTicketFromSupport(context.Context, *CloseTicketFromSupportParamsInner) (*anypb.Any, error)
+	TakeTickets(context.Context, *TakeTicketsParamsInner) (*anypb.Any, error)
 	mustEmbedUnimplementedSupportServer()
 }
 
@@ -171,13 +171,13 @@ func (UnimplementedSupportServer) ReplyTicketFromUser(context.Context, *ReplyTic
 func (UnimplementedSupportServer) ReplyTicketFromSupport(context.Context, *ReplyTicketFromSupportParamsInner) (*TicketMessage, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReplyTicketFromSupport not implemented")
 }
-func (UnimplementedSupportServer) CloseTicketFromAccount(context.Context, *CloseTicketFromAccountParamsInner) (*common.BoolStatus, error) {
+func (UnimplementedSupportServer) CloseTicketFromAccount(context.Context, *CloseTicketFromAccountParamsInner) (*anypb.Any, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CloseTicketFromAccount not implemented")
 }
-func (UnimplementedSupportServer) CloseTicketFromSupport(context.Context, *CloseTicketFromSupportParamsInner) (*common.BoolStatus, error) {
+func (UnimplementedSupportServer) CloseTicketFromSupport(context.Context, *CloseTicketFromSupportParamsInner) (*anypb.Any, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CloseTicketFromSupport not implemented")
 }
-func (UnimplementedSupportServer) TakeTickets(context.Context, *TakeTicketsParamsInner) (*common.BoolStatus, error) {
+func (UnimplementedSupportServer) TakeTickets(context.Context, *TakeTicketsParamsInner) (*anypb.Any, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TakeTickets not implemented")
 }
 func (UnimplementedSupportServer) mustEmbedUnimplementedSupportServer() {}
