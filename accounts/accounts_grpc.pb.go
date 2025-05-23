@@ -82,7 +82,7 @@ type AccountsClient interface {
 	GetSubscribeArticles(ctx context.Context, in *GetSubscribeArticlesParamsInner, opts ...grpc.CallOption) (*GetSubscribeArticlesResponse, error)
 	SubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UnsubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	CheckSourcesSubscribes(ctx context.Context, in *CheckSourcesSubscribesParams, opts ...grpc.CallOption) (*CheckSourcesSubscribesResponse, error)
+	CheckSourcesSubscribes(ctx context.Context, in *CheckSourcesSubscribesParamsInner, opts ...grpc.CallOption) (*CheckSourcesSubscribesResponse, error)
 	// Favorites
 	GetFavorites(ctx context.Context, in *GetFavoritesParamsInner, opts ...grpc.CallOption) (*GetFavoritesResponse, error)
 	SetFavorite(ctx context.Context, in *ToggleFavoriteParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -263,7 +263,7 @@ func (c *accountsClient) UnsubscribeArticle(ctx context.Context, in *SubUnsubArt
 	return out, nil
 }
 
-func (c *accountsClient) CheckSourcesSubscribes(ctx context.Context, in *CheckSourcesSubscribesParams, opts ...grpc.CallOption) (*CheckSourcesSubscribesResponse, error) {
+func (c *accountsClient) CheckSourcesSubscribes(ctx context.Context, in *CheckSourcesSubscribesParamsInner, opts ...grpc.CallOption) (*CheckSourcesSubscribesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CheckSourcesSubscribesResponse)
 	err := c.cc.Invoke(ctx, Accounts_CheckSourcesSubscribes_FullMethodName, in, out, cOpts...)
@@ -488,7 +488,7 @@ type AccountsServer interface {
 	GetSubscribeArticles(context.Context, *GetSubscribeArticlesParamsInner) (*GetSubscribeArticlesResponse, error)
 	SubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error)
 	UnsubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error)
-	CheckSourcesSubscribes(context.Context, *CheckSourcesSubscribesParams) (*CheckSourcesSubscribesResponse, error)
+	CheckSourcesSubscribes(context.Context, *CheckSourcesSubscribesParamsInner) (*CheckSourcesSubscribesResponse, error)
 	// Favorites
 	GetFavorites(context.Context, *GetFavoritesParamsInner) (*GetFavoritesResponse, error)
 	SetFavorite(context.Context, *ToggleFavoriteParamsInner) (*emptypb.Empty, error)
@@ -571,7 +571,7 @@ func (UnimplementedAccountsServer) SubscribeArticle(context.Context, *SubUnsubAr
 func (UnimplementedAccountsServer) UnsubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnsubscribeArticle not implemented")
 }
-func (UnimplementedAccountsServer) CheckSourcesSubscribes(context.Context, *CheckSourcesSubscribesParams) (*CheckSourcesSubscribesResponse, error) {
+func (UnimplementedAccountsServer) CheckSourcesSubscribes(context.Context, *CheckSourcesSubscribesParamsInner) (*CheckSourcesSubscribesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckSourcesSubscribes not implemented")
 }
 func (UnimplementedAccountsServer) GetFavorites(context.Context, *GetFavoritesParamsInner) (*GetFavoritesResponse, error) {
@@ -905,7 +905,7 @@ func _Accounts_UnsubscribeArticle_Handler(srv interface{}, ctx context.Context, 
 }
 
 func _Accounts_CheckSourcesSubscribes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CheckSourcesSubscribesParams)
+	in := new(CheckSourcesSubscribesParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -917,7 +917,7 @@ func _Accounts_CheckSourcesSubscribes_Handler(srv interface{}, ctx context.Conte
 		FullMethod: Accounts_CheckSourcesSubscribes_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).CheckSourcesSubscribes(ctx, req.(*CheckSourcesSubscribesParams))
+		return srv.(AccountsServer).CheckSourcesSubscribes(ctx, req.(*CheckSourcesSubscribesParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
