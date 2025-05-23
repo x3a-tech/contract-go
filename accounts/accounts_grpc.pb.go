@@ -35,6 +35,7 @@ const (
 	Accounts_GetSubscribeArticles_FullMethodName         = "/accounts.Accounts/GetSubscribeArticles"
 	Accounts_SubscribeArticle_FullMethodName             = "/accounts.Accounts/SubscribeArticle"
 	Accounts_UnsubscribeArticle_FullMethodName           = "/accounts.Accounts/UnsubscribeArticle"
+	Accounts_CheckSourcesSubscribes_FullMethodName       = "/accounts.Accounts/CheckSourcesSubscribes"
 	Accounts_GetFavorites_FullMethodName                 = "/accounts.Accounts/GetFavorites"
 	Accounts_SetFavorite_FullMethodName                  = "/accounts.Accounts/SetFavorite"
 	Accounts_RemoveFavorite_FullMethodName               = "/accounts.Accounts/RemoveFavorite"
@@ -81,6 +82,7 @@ type AccountsClient interface {
 	GetSubscribeArticles(ctx context.Context, in *GetSubscribeArticlesParamsInner, opts ...grpc.CallOption) (*GetSubscribeArticlesResponse, error)
 	SubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UnsubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CheckSourcesSubscribes(ctx context.Context, in *CheckSourcesSubscribesParams, opts ...grpc.CallOption) (*CheckSourcesSubscribesResponse, error)
 	// Favorites
 	GetFavorites(ctx context.Context, in *GetFavoritesParamsInner, opts ...grpc.CallOption) (*GetFavoritesResponse, error)
 	SetFavorite(ctx context.Context, in *ToggleFavoriteParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -255,6 +257,16 @@ func (c *accountsClient) UnsubscribeArticle(ctx context.Context, in *SubUnsubArt
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Accounts_UnsubscribeArticle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsClient) CheckSourcesSubscribes(ctx context.Context, in *CheckSourcesSubscribesParams, opts ...grpc.CallOption) (*CheckSourcesSubscribesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckSourcesSubscribesResponse)
+	err := c.cc.Invoke(ctx, Accounts_CheckSourcesSubscribes_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -476,6 +488,7 @@ type AccountsServer interface {
 	GetSubscribeArticles(context.Context, *GetSubscribeArticlesParamsInner) (*GetSubscribeArticlesResponse, error)
 	SubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error)
 	UnsubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error)
+	CheckSourcesSubscribes(context.Context, *CheckSourcesSubscribesParams) (*CheckSourcesSubscribesResponse, error)
 	// Favorites
 	GetFavorites(context.Context, *GetFavoritesParamsInner) (*GetFavoritesResponse, error)
 	SetFavorite(context.Context, *ToggleFavoriteParamsInner) (*emptypb.Empty, error)
@@ -557,6 +570,9 @@ func (UnimplementedAccountsServer) SubscribeArticle(context.Context, *SubUnsubAr
 }
 func (UnimplementedAccountsServer) UnsubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnsubscribeArticle not implemented")
+}
+func (UnimplementedAccountsServer) CheckSourcesSubscribes(context.Context, *CheckSourcesSubscribesParams) (*CheckSourcesSubscribesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckSourcesSubscribes not implemented")
 }
 func (UnimplementedAccountsServer) GetFavorites(context.Context, *GetFavoritesParamsInner) (*GetFavoritesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFavorites not implemented")
@@ -884,6 +900,24 @@ func _Accounts_UnsubscribeArticle_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountsServer).UnsubscribeArticle(ctx, req.(*SubUnsubArticlesParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Accounts_CheckSourcesSubscribes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckSourcesSubscribesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServer).CheckSourcesSubscribes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Accounts_CheckSourcesSubscribes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServer).CheckSourcesSubscribes(ctx, req.(*CheckSourcesSubscribesParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1292,6 +1326,10 @@ var Accounts_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UnsubscribeArticle",
 			Handler:    _Accounts_UnsubscribeArticle_Handler,
+		},
+		{
+			MethodName: "CheckSourcesSubscribes",
+			Handler:    _Accounts_CheckSourcesSubscribes_Handler,
 		},
 		{
 			MethodName: "GetFavorites",

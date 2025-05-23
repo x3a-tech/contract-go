@@ -258,6 +258,102 @@ func (x *SubUnsubArticlesParamsInner) GetData() *SubUnsubArticlesParams {
 	return nil
 }
 
+type CheckSourcesSubscribesParams struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccountUuid   []byte                 `protobuf:"bytes,1,opt,name=account_uuid,json=accountUuid,proto3" json:"account_uuid,omitempty"`
+	SourceUuids   [][]byte               `protobuf:"bytes,2,rep,name=source_uuids,json=sourceUuids,proto3" json:"source_uuids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckSourcesSubscribesParams) Reset() {
+	*x = CheckSourcesSubscribesParams{}
+	mi := &file_accounts_subscribes_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckSourcesSubscribesParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckSourcesSubscribesParams) ProtoMessage() {}
+
+func (x *CheckSourcesSubscribesParams) ProtoReflect() protoreflect.Message {
+	mi := &file_accounts_subscribes_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckSourcesSubscribesParams.ProtoReflect.Descriptor instead.
+func (*CheckSourcesSubscribesParams) Descriptor() ([]byte, []int) {
+	return file_accounts_subscribes_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CheckSourcesSubscribesParams) GetAccountUuid() []byte {
+	if x != nil {
+		return x.AccountUuid
+	}
+	return nil
+}
+
+func (x *CheckSourcesSubscribesParams) GetSourceUuids() [][]byte {
+	if x != nil {
+		return x.SourceUuids
+	}
+	return nil
+}
+
+type CheckSourcesSubscribesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Checks        []bool                 `protobuf:"varint,1,rep,packed,name=checks,proto3" json:"checks,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckSourcesSubscribesResponse) Reset() {
+	*x = CheckSourcesSubscribesResponse{}
+	mi := &file_accounts_subscribes_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckSourcesSubscribesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckSourcesSubscribesResponse) ProtoMessage() {}
+
+func (x *CheckSourcesSubscribesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_accounts_subscribes_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckSourcesSubscribesResponse.ProtoReflect.Descriptor instead.
+func (*CheckSourcesSubscribesResponse) Descriptor() ([]byte, []int) {
+	return file_accounts_subscribes_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CheckSourcesSubscribesResponse) GetChecks() []bool {
+	if x != nil {
+		return x.Checks
+	}
+	return nil
+}
+
 var File_accounts_subscribes_proto protoreflect.FileDescriptor
 
 var file_accounts_subscribes_proto_rawDesc = string([]byte{
@@ -293,7 +389,17 @@ var file_accounts_subscribes_proto_rawDesc = string([]byte{
 	0x12, 0x34, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20,
 	0x2e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x2e, 0x53, 0x75, 0x62, 0x55, 0x6e, 0x73,
 	0x75, 0x62, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x73, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x42, 0x35, 0x5a, 0x33, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x64, 0x0a, 0x1c, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x53,
+	0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x53, 0x75, 0x62, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x73,
+	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x5f, 0x75, 0x75, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0b, 0x61, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x55, 0x75, 0x69, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x73, 0x6f, 0x75,
+	0x72, 0x63, 0x65, 0x5f, 0x75, 0x75, 0x69, 0x64, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0c, 0x52,
+	0x0b, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x55, 0x75, 0x69, 0x64, 0x73, 0x22, 0x38, 0x0a, 0x1e,
+	0x43, 0x68, 0x65, 0x63, 0x6b, 0x53, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x53, 0x75, 0x62, 0x73,
+	0x63, 0x72, 0x69, 0x62, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16,
+	0x0a, 0x06, 0x63, 0x68, 0x65, 0x63, 0x6b, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x08, 0x52, 0x06,
+	0x63, 0x68, 0x65, 0x63, 0x6b, 0x73, 0x42, 0x35, 0x5a, 0x33, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
 	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x33, 0x61, 0x2d, 0x74, 0x65, 0x63, 0x68, 0x2f, 0x63, 0x6f,
 	0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2d, 0x67, 0x6f, 0x2f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
 	0x74, 0x73, 0x3b, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x76, 0x31, 0x62, 0x06, 0x70,
@@ -312,17 +418,19 @@ func file_accounts_subscribes_proto_rawDescGZIP() []byte {
 	return file_accounts_subscribes_proto_rawDescData
 }
 
-var file_accounts_subscribes_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_accounts_subscribes_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_accounts_subscribes_proto_goTypes = []any{
 	(*GetSubscribeArticlesParams)(nil),      // 0: accounts.GetSubscribeArticlesParams
 	(*GetSubscribeArticlesParamsInner)(nil), // 1: accounts.GetSubscribeArticlesParamsInner
 	(*GetSubscribeArticlesResponse)(nil),    // 2: accounts.GetSubscribeArticlesResponse
 	(*SubUnsubArticlesParams)(nil),          // 3: accounts.SubUnsubArticlesParams
 	(*SubUnsubArticlesParamsInner)(nil),     // 4: accounts.SubUnsubArticlesParamsInner
-	(*common.ListParams)(nil),               // 5: common.ListParams
+	(*CheckSourcesSubscribesParams)(nil),    // 5: accounts.CheckSourcesSubscribesParams
+	(*CheckSourcesSubscribesResponse)(nil),  // 6: accounts.CheckSourcesSubscribesResponse
+	(*common.ListParams)(nil),               // 7: common.ListParams
 }
 var file_accounts_subscribes_proto_depIdxs = []int32{
-	5, // 0: accounts.GetSubscribeArticlesParams.listParams:type_name -> common.ListParams
+	7, // 0: accounts.GetSubscribeArticlesParams.listParams:type_name -> common.ListParams
 	0, // 1: accounts.GetSubscribeArticlesParamsInner.data:type_name -> accounts.GetSubscribeArticlesParams
 	3, // 2: accounts.SubUnsubArticlesParamsInner.data:type_name -> accounts.SubUnsubArticlesParams
 	3, // [3:3] is the sub-list for method output_type
@@ -343,7 +451,7 @@ func file_accounts_subscribes_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounts_subscribes_proto_rawDesc), len(file_accounts_subscribes_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
