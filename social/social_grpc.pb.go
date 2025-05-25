@@ -23,6 +23,7 @@ const (
 	Socials_UpdateComment_FullMethodName        = "/social.Socials/UpdateComment"
 	Socials_RemoveComment_FullMethodName        = "/social.Socials/RemoveComment"
 	Socials_SetCommentReaction_FullMethodName   = "/social.Socials/SetCommentReaction"
+	Socials_GetArticlesReactions_FullMethodName = "/social.Socials/GetArticlesReactions"
 	Socials_GetCommentsByArticle_FullMethodName = "/social.Socials/GetCommentsByArticle"
 	Socials_CreateArticleComment_FullMethodName = "/social.Socials/CreateArticleComment"
 	Socials_SetArticleReaction_FullMethodName   = "/social.Socials/SetArticleReaction"
@@ -38,6 +39,7 @@ type SocialsClient interface {
 	UpdateComment(ctx context.Context, in *UpdateCommentParamsInner, opts ...grpc.CallOption) (*Comment, error)
 	RemoveComment(ctx context.Context, in *RemoveCommentParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	SetCommentReaction(ctx context.Context, in *SetCommentReactionParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
+	GetArticlesReactions(ctx context.Context, in *GetArticlesReactionsParamsInner, opts ...grpc.CallOption) (*GetArticlesReactionsResponse, error)
 	GetCommentsByArticle(ctx context.Context, in *GetCommentsByArticleParams, opts ...grpc.CallOption) (*GetCommentsResponse, error)
 	CreateArticleComment(ctx context.Context, in *CreateCommentArticleParamsInner, opts ...grpc.CallOption) (*Comment, error)
 	SetArticleReaction(ctx context.Context, in *SetArticleReactionParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
@@ -78,6 +80,16 @@ func (c *socialsClient) SetCommentReaction(ctx context.Context, in *SetCommentRe
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.BoolStatus)
 	err := c.cc.Invoke(ctx, Socials_SetCommentReaction_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *socialsClient) GetArticlesReactions(ctx context.Context, in *GetArticlesReactionsParamsInner, opts ...grpc.CallOption) (*GetArticlesReactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetArticlesReactionsResponse)
+	err := c.cc.Invoke(ctx, Socials_GetArticlesReactions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -151,6 +163,7 @@ type SocialsServer interface {
 	UpdateComment(context.Context, *UpdateCommentParamsInner) (*Comment, error)
 	RemoveComment(context.Context, *RemoveCommentParamsInner) (*common.BoolStatus, error)
 	SetCommentReaction(context.Context, *SetCommentReactionParamsInner) (*common.BoolStatus, error)
+	GetArticlesReactions(context.Context, *GetArticlesReactionsParamsInner) (*GetArticlesReactionsResponse, error)
 	GetCommentsByArticle(context.Context, *GetCommentsByArticleParams) (*GetCommentsResponse, error)
 	CreateArticleComment(context.Context, *CreateCommentArticleParamsInner) (*Comment, error)
 	SetArticleReaction(context.Context, *SetArticleReactionParamsInner) (*common.BoolStatus, error)
@@ -175,6 +188,9 @@ func (UnimplementedSocialsServer) RemoveComment(context.Context, *RemoveCommentP
 }
 func (UnimplementedSocialsServer) SetCommentReaction(context.Context, *SetCommentReactionParamsInner) (*common.BoolStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetCommentReaction not implemented")
+}
+func (UnimplementedSocialsServer) GetArticlesReactions(context.Context, *GetArticlesReactionsParamsInner) (*GetArticlesReactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesReactions not implemented")
 }
 func (UnimplementedSocialsServer) GetCommentsByArticle(context.Context, *GetCommentsByArticleParams) (*GetCommentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCommentsByArticle not implemented")
@@ -265,6 +281,24 @@ func _Socials_SetCommentReaction_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SocialsServer).SetCommentReaction(ctx, req.(*SetCommentReactionParamsInner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Socials_GetArticlesReactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetArticlesReactionsParamsInner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SocialsServer).GetArticlesReactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Socials_GetArticlesReactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SocialsServer).GetArticlesReactions(ctx, req.(*GetArticlesReactionsParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -395,6 +429,10 @@ var Socials_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetCommentReaction",
 			Handler:    _Socials_SetCommentReaction_Handler,
+		},
+		{
+			MethodName: "GetArticlesReactions",
+			Handler:    _Socials_GetArticlesReactions_Handler,
 		},
 		{
 			MethodName: "GetCommentsByArticle",

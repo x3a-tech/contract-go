@@ -65,6 +65,74 @@ func (x *Reaction) GetType() string {
 	return ""
 }
 
+type ReactionSum struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Count         int32                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	ArticleUuid   []byte                 `protobuf:"bytes,3,opt,name=article_uuid,json=articleUuid,proto3" json:"article_uuid,omitempty"`
+	MyReaction    *Reaction              `protobuf:"bytes,4,opt,name=my_reaction,json=myReaction,proto3" json:"my_reaction,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReactionSum) Reset() {
+	*x = ReactionSum{}
+	mi := &file_social_reactions_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReactionSum) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReactionSum) ProtoMessage() {}
+
+func (x *ReactionSum) ProtoReflect() protoreflect.Message {
+	mi := &file_social_reactions_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReactionSum.ProtoReflect.Descriptor instead.
+func (*ReactionSum) Descriptor() ([]byte, []int) {
+	return file_social_reactions_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ReactionSum) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *ReactionSum) GetCount() int32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *ReactionSum) GetArticleUuid() []byte {
+	if x != nil {
+		return x.ArticleUuid
+	}
+	return nil
+}
+
+func (x *ReactionSum) GetMyReaction() *Reaction {
+	if x != nil {
+		return x.MyReaction
+	}
+	return nil
+}
+
 type SetArticleReactionParamsInner struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccountUuid   []byte                 `protobuf:"bytes,1,opt,name=account_uuid,json=accountUuid,proto3" json:"account_uuid,omitempty"`
@@ -76,7 +144,7 @@ type SetArticleReactionParamsInner struct {
 
 func (x *SetArticleReactionParamsInner) Reset() {
 	*x = SetArticleReactionParamsInner{}
-	mi := &file_social_reactions_proto_msgTypes[1]
+	mi := &file_social_reactions_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -88,7 +156,7 @@ func (x *SetArticleReactionParamsInner) String() string {
 func (*SetArticleReactionParamsInner) ProtoMessage() {}
 
 func (x *SetArticleReactionParamsInner) ProtoReflect() protoreflect.Message {
-	mi := &file_social_reactions_proto_msgTypes[1]
+	mi := &file_social_reactions_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -101,7 +169,7 @@ func (x *SetArticleReactionParamsInner) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetArticleReactionParamsInner.ProtoReflect.Descriptor instead.
 func (*SetArticleReactionParamsInner) Descriptor() ([]byte, []int) {
-	return file_social_reactions_proto_rawDescGZIP(), []int{1}
+	return file_social_reactions_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SetArticleReactionParamsInner) GetAccountUuid() []byte {
@@ -135,7 +203,7 @@ type SetCommentReactionParams struct {
 
 func (x *SetCommentReactionParams) Reset() {
 	*x = SetCommentReactionParams{}
-	mi := &file_social_reactions_proto_msgTypes[2]
+	mi := &file_social_reactions_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -147,7 +215,7 @@ func (x *SetCommentReactionParams) String() string {
 func (*SetCommentReactionParams) ProtoMessage() {}
 
 func (x *SetCommentReactionParams) ProtoReflect() protoreflect.Message {
-	mi := &file_social_reactions_proto_msgTypes[2]
+	mi := &file_social_reactions_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -160,7 +228,7 @@ func (x *SetCommentReactionParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetCommentReactionParams.ProtoReflect.Descriptor instead.
 func (*SetCommentReactionParams) Descriptor() ([]byte, []int) {
-	return file_social_reactions_proto_rawDescGZIP(), []int{2}
+	return file_social_reactions_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SetCommentReactionParams) GetCommentId() int64 {
@@ -187,7 +255,7 @@ type SetCommentReactionParamsInner struct {
 
 func (x *SetCommentReactionParamsInner) Reset() {
 	*x = SetCommentReactionParamsInner{}
-	mi := &file_social_reactions_proto_msgTypes[3]
+	mi := &file_social_reactions_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -199,7 +267,7 @@ func (x *SetCommentReactionParamsInner) String() string {
 func (*SetCommentReactionParamsInner) ProtoMessage() {}
 
 func (x *SetCommentReactionParamsInner) ProtoReflect() protoreflect.Message {
-	mi := &file_social_reactions_proto_msgTypes[3]
+	mi := &file_social_reactions_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -212,7 +280,7 @@ func (x *SetCommentReactionParamsInner) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetCommentReactionParamsInner.ProtoReflect.Descriptor instead.
 func (*SetCommentReactionParamsInner) Descriptor() ([]byte, []int) {
-	return file_social_reactions_proto_rawDescGZIP(), []int{3}
+	return file_social_reactions_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SetCommentReactionParamsInner) GetAccountUuid() []byte {
@@ -229,6 +297,146 @@ func (x *SetCommentReactionParamsInner) GetData() *SetCommentReactionParams {
 	return nil
 }
 
+type GetArticlesReactionsParams struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ArticleUuid   []byte                 `protobuf:"bytes,1,opt,name=article_uuid,json=articleUuid,proto3" json:"article_uuid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetArticlesReactionsParams) Reset() {
+	*x = GetArticlesReactionsParams{}
+	mi := &file_social_reactions_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetArticlesReactionsParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetArticlesReactionsParams) ProtoMessage() {}
+
+func (x *GetArticlesReactionsParams) ProtoReflect() protoreflect.Message {
+	mi := &file_social_reactions_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetArticlesReactionsParams.ProtoReflect.Descriptor instead.
+func (*GetArticlesReactionsParams) Descriptor() ([]byte, []int) {
+	return file_social_reactions_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetArticlesReactionsParams) GetArticleUuid() []byte {
+	if x != nil {
+		return x.ArticleUuid
+	}
+	return nil
+}
+
+type GetArticlesReactionsParamsInner struct {
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	AccountUuid   []byte                      `protobuf:"bytes,1,opt,name=account_uuid,json=accountUuid,proto3" json:"account_uuid,omitempty"`
+	Data          *GetArticlesReactionsParams `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetArticlesReactionsParamsInner) Reset() {
+	*x = GetArticlesReactionsParamsInner{}
+	mi := &file_social_reactions_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetArticlesReactionsParamsInner) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetArticlesReactionsParamsInner) ProtoMessage() {}
+
+func (x *GetArticlesReactionsParamsInner) ProtoReflect() protoreflect.Message {
+	mi := &file_social_reactions_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetArticlesReactionsParamsInner.ProtoReflect.Descriptor instead.
+func (*GetArticlesReactionsParamsInner) Descriptor() ([]byte, []int) {
+	return file_social_reactions_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetArticlesReactionsParamsInner) GetAccountUuid() []byte {
+	if x != nil {
+		return x.AccountUuid
+	}
+	return nil
+}
+
+func (x *GetArticlesReactionsParamsInner) GetData() *GetArticlesReactionsParams {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type GetArticlesReactionsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Reactions     []*ReactionSum         `protobuf:"bytes,1,rep,name=reactions,proto3" json:"reactions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetArticlesReactionsResponse) Reset() {
+	*x = GetArticlesReactionsResponse{}
+	mi := &file_social_reactions_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetArticlesReactionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetArticlesReactionsResponse) ProtoMessage() {}
+
+func (x *GetArticlesReactionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_social_reactions_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetArticlesReactionsResponse.ProtoReflect.Descriptor instead.
+func (*GetArticlesReactionsResponse) Descriptor() ([]byte, []int) {
+	return file_social_reactions_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetArticlesReactionsResponse) GetReactions() []*ReactionSum {
+	if x != nil {
+		return x.Reactions
+	}
+	return nil
+}
+
 var File_social_reactions_proto protoreflect.FileDescriptor
 
 var file_social_reactions_proto_rawDesc = string([]byte{
@@ -236,6 +444,15 @@ var file_social_reactions_proto_rawDesc = string([]byte{
 	0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x06, 0x73, 0x6f, 0x63, 0x69, 0x61, 0x6c,
 	0x22, 0x1e, 0x0a, 0x08, 0x52, 0x65, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x12, 0x0a, 0x04,
 	0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65,
+	0x22, 0x8d, 0x01, 0x0a, 0x0b, 0x52, 0x65, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x75, 0x6d,
+	0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x74, 0x79, 0x70, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x72,
+	0x74, 0x69, 0x63, 0x6c, 0x65, 0x5f, 0x75, 0x75, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0c,
+	0x52, 0x0b, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x55, 0x75, 0x69, 0x64, 0x12, 0x31, 0x0a,
+	0x0b, 0x6d, 0x79, 0x5f, 0x72, 0x65, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x10, 0x2e, 0x73, 0x6f, 0x63, 0x69, 0x61, 0x6c, 0x2e, 0x52, 0x65, 0x61, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x6d, 0x79, 0x52, 0x65, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
 	0x22, 0x93, 0x01, 0x0a, 0x1d, 0x53, 0x65, 0x74, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x52,
 	0x65, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x49, 0x6e, 0x6e,
 	0x65, 0x72, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x75, 0x75,
@@ -259,11 +476,28 @@ var file_social_reactions_proto_rawDesc = string([]byte{
 	0x75, 0x69, 0x64, 0x12, 0x34, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x20, 0x2e, 0x73, 0x6f, 0x63, 0x69, 0x61, 0x6c, 0x2e, 0x53, 0x65, 0x74, 0x43, 0x6f,
 	0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x42, 0x31, 0x5a, 0x2f, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x33, 0x61, 0x2d, 0x74, 0x65, 0x63, 0x68,
-	0x2f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2d, 0x67, 0x6f, 0x2f, 0x73, 0x6f, 0x63,
-	0x69, 0x61, 0x6c, 0x3b, 0x73, 0x6f, 0x63, 0x69, 0x61, 0x6c, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x6d, 0x73, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x3f, 0x0a, 0x1a, 0x47, 0x65, 0x74,
+	0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x72, 0x74, 0x69, 0x63,
+	0x6c, 0x65, 0x5f, 0x75, 0x75, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0b, 0x61,
+	0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x55, 0x75, 0x69, 0x64, 0x22, 0x7c, 0x0a, 0x1f, 0x47, 0x65,
+	0x74, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x61, 0x63, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x49, 0x6e, 0x6e, 0x65, 0x72, 0x12, 0x21, 0x0a,
+	0x0c, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x75, 0x75, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0c, 0x52, 0x0b, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x55, 0x75, 0x69, 0x64,
+	0x12, 0x36, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22,
+	0x2e, 0x73, 0x6f, 0x63, 0x69, 0x61, 0x6c, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x72, 0x74, 0x69, 0x63,
+	0x6c, 0x65, 0x73, 0x52, 0x65, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x50, 0x61, 0x72, 0x61,
+	0x6d, 0x73, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x51, 0x0a, 0x1c, 0x47, 0x65, 0x74, 0x41,
+	0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x31, 0x0a, 0x09, 0x72, 0x65, 0x61, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x73, 0x6f,
+	0x63, 0x69, 0x61, 0x6c, 0x2e, 0x52, 0x65, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x75, 0x6d,
+	0x52, 0x09, 0x72, 0x65, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x31, 0x5a, 0x2f, 0x67,
+	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x33, 0x61, 0x2d, 0x74, 0x65,
+	0x63, 0x68, 0x2f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2d, 0x67, 0x6f, 0x2f, 0x73,
+	0x6f, 0x63, 0x69, 0x61, 0x6c, 0x3b, 0x73, 0x6f, 0x63, 0x69, 0x61, 0x6c, 0x76, 0x31, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 })
 
 var (
@@ -278,22 +512,29 @@ func file_social_reactions_proto_rawDescGZIP() []byte {
 	return file_social_reactions_proto_rawDescData
 }
 
-var file_social_reactions_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_social_reactions_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_social_reactions_proto_goTypes = []any{
-	(*Reaction)(nil),                      // 0: social.Reaction
-	(*SetArticleReactionParamsInner)(nil), // 1: social.SetArticleReactionParamsInner
-	(*SetCommentReactionParams)(nil),      // 2: social.SetCommentReactionParams
-	(*SetCommentReactionParamsInner)(nil), // 3: social.SetCommentReactionParamsInner
+	(*Reaction)(nil),                        // 0: social.Reaction
+	(*ReactionSum)(nil),                     // 1: social.ReactionSum
+	(*SetArticleReactionParamsInner)(nil),   // 2: social.SetArticleReactionParamsInner
+	(*SetCommentReactionParams)(nil),        // 3: social.SetCommentReactionParams
+	(*SetCommentReactionParamsInner)(nil),   // 4: social.SetCommentReactionParamsInner
+	(*GetArticlesReactionsParams)(nil),      // 5: social.GetArticlesReactionsParams
+	(*GetArticlesReactionsParamsInner)(nil), // 6: social.GetArticlesReactionsParamsInner
+	(*GetArticlesReactionsResponse)(nil),    // 7: social.GetArticlesReactionsResponse
 }
 var file_social_reactions_proto_depIdxs = []int32{
-	0, // 0: social.SetArticleReactionParamsInner.reaction:type_name -> social.Reaction
-	0, // 1: social.SetCommentReactionParams.reaction:type_name -> social.Reaction
-	2, // 2: social.SetCommentReactionParamsInner.data:type_name -> social.SetCommentReactionParams
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	0, // 0: social.ReactionSum.my_reaction:type_name -> social.Reaction
+	0, // 1: social.SetArticleReactionParamsInner.reaction:type_name -> social.Reaction
+	0, // 2: social.SetCommentReactionParams.reaction:type_name -> social.Reaction
+	3, // 3: social.SetCommentReactionParamsInner.data:type_name -> social.SetCommentReactionParams
+	5, // 4: social.GetArticlesReactionsParamsInner.data:type_name -> social.GetArticlesReactionsParams
+	1, // 5: social.GetArticlesReactionsResponse.reactions:type_name -> social.ReactionSum
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_social_reactions_proto_init() }
@@ -307,7 +548,7 @@ func file_social_reactions_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_social_reactions_proto_rawDesc), len(file_social_reactions_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
