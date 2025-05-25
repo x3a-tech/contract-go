@@ -20,10 +20,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Analytics_GetArticlesCounts_FullMethodName         = "/analytics.Analytics/GetArticlesCounts"
-	Analytics_SetArticlesAction_FullMethodName         = "/analytics.Analytics/SetArticlesAction"
-	Analytics_GetTrendingArticles_FullMethodName       = "/analytics.Analytics/GetTrendingArticles"
-	Analytics_GetArticlesViewsByAccount_FullMethodName = "/analytics.Analytics/GetArticlesViewsByAccount"
+	Analytics_GetArticlesCounts_FullMethodName            = "/analytics.Analytics/GetArticlesCounts"
+	Analytics_SetArticlesAction_FullMethodName            = "/analytics.Analytics/SetArticlesAction"
+	Analytics_GetArticlesByActionOnAccount_FullMethodName = "/analytics.Analytics/GetArticlesByActionOnAccount"
+	Analytics_GetTrendingArticles_FullMethodName          = "/analytics.Analytics/GetTrendingArticles"
 )
 
 // AnalyticsClient is the client API for Analytics service.
@@ -32,8 +32,8 @@ const (
 type AnalyticsClient interface {
 	GetArticlesCounts(ctx context.Context, in *GetArticlesCountsParams, opts ...grpc.CallOption) (*GetArticlesCountsResponse, error)
 	SetArticlesAction(ctx context.Context, in *SetArticlesActionParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetArticlesByActionOnAccount(ctx context.Context, in *GetArticlesByActionOnAccountParams, opts ...grpc.CallOption) (*ArticleUuidsResponse, error)
 	GetTrendingArticles(ctx context.Context, in *GetTrendingArticlesParams, opts ...grpc.CallOption) (*ArticleUuidsResponse, error)
-	GetArticlesViewsByAccount(ctx context.Context, in *GetArticlesByActionOnAccountParams, opts ...grpc.CallOption) (*ArticleUuidsResponse, error)
 }
 
 type analyticsClient struct {
@@ -64,20 +64,20 @@ func (c *analyticsClient) SetArticlesAction(ctx context.Context, in *SetArticles
 	return out, nil
 }
 
-func (c *analyticsClient) GetTrendingArticles(ctx context.Context, in *GetTrendingArticlesParams, opts ...grpc.CallOption) (*ArticleUuidsResponse, error) {
+func (c *analyticsClient) GetArticlesByActionOnAccount(ctx context.Context, in *GetArticlesByActionOnAccountParams, opts ...grpc.CallOption) (*ArticleUuidsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ArticleUuidsResponse)
-	err := c.cc.Invoke(ctx, Analytics_GetTrendingArticles_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Analytics_GetArticlesByActionOnAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *analyticsClient) GetArticlesViewsByAccount(ctx context.Context, in *GetArticlesByActionOnAccountParams, opts ...grpc.CallOption) (*ArticleUuidsResponse, error) {
+func (c *analyticsClient) GetTrendingArticles(ctx context.Context, in *GetTrendingArticlesParams, opts ...grpc.CallOption) (*ArticleUuidsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ArticleUuidsResponse)
-	err := c.cc.Invoke(ctx, Analytics_GetArticlesViewsByAccount_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Analytics_GetTrendingArticles_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -90,8 +90,8 @@ func (c *analyticsClient) GetArticlesViewsByAccount(ctx context.Context, in *Get
 type AnalyticsServer interface {
 	GetArticlesCounts(context.Context, *GetArticlesCountsParams) (*GetArticlesCountsResponse, error)
 	SetArticlesAction(context.Context, *SetArticlesActionParams) (*emptypb.Empty, error)
+	GetArticlesByActionOnAccount(context.Context, *GetArticlesByActionOnAccountParams) (*ArticleUuidsResponse, error)
 	GetTrendingArticles(context.Context, *GetTrendingArticlesParams) (*ArticleUuidsResponse, error)
-	GetArticlesViewsByAccount(context.Context, *GetArticlesByActionOnAccountParams) (*ArticleUuidsResponse, error)
 	mustEmbedUnimplementedAnalyticsServer()
 }
 
@@ -108,11 +108,11 @@ func (UnimplementedAnalyticsServer) GetArticlesCounts(context.Context, *GetArtic
 func (UnimplementedAnalyticsServer) SetArticlesAction(context.Context, *SetArticlesActionParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetArticlesAction not implemented")
 }
+func (UnimplementedAnalyticsServer) GetArticlesByActionOnAccount(context.Context, *GetArticlesByActionOnAccountParams) (*ArticleUuidsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesByActionOnAccount not implemented")
+}
 func (UnimplementedAnalyticsServer) GetTrendingArticles(context.Context, *GetTrendingArticlesParams) (*ArticleUuidsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTrendingArticles not implemented")
-}
-func (UnimplementedAnalyticsServer) GetArticlesViewsByAccount(context.Context, *GetArticlesByActionOnAccountParams) (*ArticleUuidsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetArticlesViewsByAccount not implemented")
 }
 func (UnimplementedAnalyticsServer) mustEmbedUnimplementedAnalyticsServer() {}
 func (UnimplementedAnalyticsServer) testEmbeddedByValue()                   {}
@@ -171,6 +171,24 @@ func _Analytics_SetArticlesAction_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Analytics_GetArticlesByActionOnAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetArticlesByActionOnAccountParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServer).GetArticlesByActionOnAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Analytics_GetArticlesByActionOnAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServer).GetArticlesByActionOnAccount(ctx, req.(*GetArticlesByActionOnAccountParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Analytics_GetTrendingArticles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTrendingArticlesParams)
 	if err := dec(in); err != nil {
@@ -185,24 +203,6 @@ func _Analytics_GetTrendingArticles_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AnalyticsServer).GetTrendingArticles(ctx, req.(*GetTrendingArticlesParams))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Analytics_GetArticlesViewsByAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetArticlesByActionOnAccountParams)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AnalyticsServer).GetArticlesViewsByAccount(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Analytics_GetArticlesViewsByAccount_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnalyticsServer).GetArticlesViewsByAccount(ctx, req.(*GetArticlesByActionOnAccountParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -223,12 +223,12 @@ var Analytics_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Analytics_SetArticlesAction_Handler,
 		},
 		{
-			MethodName: "GetTrendingArticles",
-			Handler:    _Analytics_GetTrendingArticles_Handler,
+			MethodName: "GetArticlesByActionOnAccount",
+			Handler:    _Analytics_GetArticlesByActionOnAccount_Handler,
 		},
 		{
-			MethodName: "GetArticlesViewsByAccount",
-			Handler:    _Analytics_GetArticlesViewsByAccount_Handler,
+			MethodName: "GetTrendingArticles",
+			Handler:    _Analytics_GetTrendingArticles_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
