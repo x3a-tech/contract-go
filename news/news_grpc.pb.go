@@ -39,6 +39,7 @@ const (
 	News_SortFilter_FullMethodName                 = "/news.News/SortFilter"
 	News_CopyFilter_FullMethodName                 = "/news.News/CopyFilter"
 	News_GetCategories_FullMethodName              = "/news.News/GetCategories"
+	News_GetSources_FullMethodName                 = "/news.News/GetSources"
 	News_GetSourcesByUuids_FullMethodName          = "/news.News/GetSourcesByUuids"
 	News_GetSourcesByQuery_FullMethodName          = "/news.News/GetSourcesByQuery"
 	News_GetSourcesByCategories_FullMethodName     = "/news.News/GetSourcesByCategories"
@@ -67,6 +68,7 @@ type NewsClient interface {
 	SortFilter(ctx context.Context, in *SortFilterParams, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	CopyFilter(ctx context.Context, in *CopyFilterParamsInner, opts ...grpc.CallOption) (*Filter, error)
 	GetCategories(ctx context.Context, in *GetCategoriesParams, opts ...grpc.CallOption) (*GetCategoriesResponse, error)
+	GetSources(ctx context.Context, in *GetSourcesParams, opts ...grpc.CallOption) (*GetSourcesResponse, error)
 	GetSourcesByUuids(ctx context.Context, in *GetSourcesByUuidsParams, opts ...grpc.CallOption) (*GetSourcesResponse, error)
 	GetSourcesByQuery(ctx context.Context, in *GetSourcesByQueryParams, opts ...grpc.CallOption) (*GetSourcesByQueryResponse, error)
 	GetSourcesByCategories(ctx context.Context, in *GetSourcesByCategoriesParams, opts ...grpc.CallOption) (*GetSourcesByCategoriesResponse, error)
@@ -270,6 +272,16 @@ func (c *newsClient) GetCategories(ctx context.Context, in *GetCategoriesParams,
 	return out, nil
 }
 
+func (c *newsClient) GetSources(ctx context.Context, in *GetSourcesParams, opts ...grpc.CallOption) (*GetSourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSourcesResponse)
+	err := c.cc.Invoke(ctx, News_GetSources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *newsClient) GetSourcesByUuids(ctx context.Context, in *GetSourcesByUuidsParams, opts ...grpc.CallOption) (*GetSourcesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetSourcesResponse)
@@ -323,6 +335,7 @@ type NewsServer interface {
 	SortFilter(context.Context, *SortFilterParams) (*common.BoolStatus, error)
 	CopyFilter(context.Context, *CopyFilterParamsInner) (*Filter, error)
 	GetCategories(context.Context, *GetCategoriesParams) (*GetCategoriesResponse, error)
+	GetSources(context.Context, *GetSourcesParams) (*GetSourcesResponse, error)
 	GetSourcesByUuids(context.Context, *GetSourcesByUuidsParams) (*GetSourcesResponse, error)
 	GetSourcesByQuery(context.Context, *GetSourcesByQueryParams) (*GetSourcesByQueryResponse, error)
 	GetSourcesByCategories(context.Context, *GetSourcesByCategoriesParams) (*GetSourcesByCategoriesResponse, error)
@@ -392,6 +405,9 @@ func (UnimplementedNewsServer) CopyFilter(context.Context, *CopyFilterParamsInne
 }
 func (UnimplementedNewsServer) GetCategories(context.Context, *GetCategoriesParams) (*GetCategoriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCategories not implemented")
+}
+func (UnimplementedNewsServer) GetSources(context.Context, *GetSourcesParams) (*GetSourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSources not implemented")
 }
 func (UnimplementedNewsServer) GetSourcesByUuids(context.Context, *GetSourcesByUuidsParams) (*GetSourcesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSourcesByUuids not implemented")
@@ -765,6 +781,24 @@ func _News_GetCategories_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _News_GetSources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSourcesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NewsServer).GetSources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: News_GetSources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NewsServer).GetSources(ctx, req.(*GetSourcesParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _News_GetSourcesByUuids_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetSourcesByUuidsParams)
 	if err := dec(in); err != nil {
@@ -901,6 +935,10 @@ var News_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCategories",
 			Handler:    _News_GetCategories_Handler,
+		},
+		{
+			MethodName: "GetSources",
+			Handler:    _News_GetSources_Handler,
 		},
 		{
 			MethodName: "GetSourcesByUuids",
