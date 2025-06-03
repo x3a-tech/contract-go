@@ -32,10 +32,10 @@ const (
 	Accounts_Onboarded_FullMethodName                    = "/accounts.Accounts/Onboarded"
 	Accounts_SetLang_FullMethodName                      = "/accounts.Accounts/SetLang"
 	Accounts_GetSessions_FullMethodName                  = "/accounts.Accounts/GetSessions"
-	Accounts_GetSubscribeArticles_FullMethodName         = "/accounts.Accounts/GetSubscribeArticles"
-	Accounts_SubscribeArticle_FullMethodName             = "/accounts.Accounts/SubscribeArticle"
-	Accounts_UnsubscribeArticle_FullMethodName           = "/accounts.Accounts/UnsubscribeArticle"
-	Accounts_CheckSourcesSubscribes_FullMethodName       = "/accounts.Accounts/CheckSourcesSubscribes"
+	Accounts_GetFollowingSources_FullMethodName          = "/accounts.Accounts/GetFollowingSources"
+	Accounts_FollowSource_FullMethodName                 = "/accounts.Accounts/FollowSource"
+	Accounts_UnfollowSource_FullMethodName               = "/accounts.Accounts/UnfollowSource"
+	Accounts_CheckSourcesFollowing_FullMethodName        = "/accounts.Accounts/CheckSourcesFollowing"
 	Accounts_GetFavorites_FullMethodName                 = "/accounts.Accounts/GetFavorites"
 	Accounts_SetFavorite_FullMethodName                  = "/accounts.Accounts/SetFavorite"
 	Accounts_RemoveFavorite_FullMethodName               = "/accounts.Accounts/RemoveFavorite"
@@ -78,11 +78,11 @@ type AccountsClient interface {
 	SetLang(ctx context.Context, in *SetLangParamsInner, opts ...grpc.CallOption) (*common.BoolStatus, error)
 	// Sessions
 	GetSessions(ctx context.Context, in *ProfileParams, opts ...grpc.CallOption) (*GetSessionsResponse, error)
-	// Subscribe Articles
-	GetSubscribeArticles(ctx context.Context, in *GetSubscribeArticlesParamsInner, opts ...grpc.CallOption) (*GetSubscribeArticlesResponse, error)
-	SubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UnsubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	CheckSourcesSubscribes(ctx context.Context, in *CheckSourcesSubscribesParamsInner, opts ...grpc.CallOption) (*CheckSourcesSubscribesResponse, error)
+	// Following News
+	GetFollowingSources(ctx context.Context, in *GetFollowingSourcesParamsInner, opts ...grpc.CallOption) (*GetFollowingSourcesResponse, error)
+	FollowSource(ctx context.Context, in *FollowUnfollowSourceParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnfollowSource(ctx context.Context, in *FollowUnfollowSourceParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CheckSourcesFollowing(ctx context.Context, in *CheckSourcesFollowingParamsInner, opts ...grpc.CallOption) (*CheckSourcesFollowingResponse, error)
 	// Favorites
 	GetFavorites(ctx context.Context, in *GetFavoritesParamsInner, opts ...grpc.CallOption) (*GetFavoritesResponse, error)
 	SetFavorite(ctx context.Context, in *ToggleFavoriteParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -233,40 +233,40 @@ func (c *accountsClient) GetSessions(ctx context.Context, in *ProfileParams, opt
 	return out, nil
 }
 
-func (c *accountsClient) GetSubscribeArticles(ctx context.Context, in *GetSubscribeArticlesParamsInner, opts ...grpc.CallOption) (*GetSubscribeArticlesResponse, error) {
+func (c *accountsClient) GetFollowingSources(ctx context.Context, in *GetFollowingSourcesParamsInner, opts ...grpc.CallOption) (*GetFollowingSourcesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetSubscribeArticlesResponse)
-	err := c.cc.Invoke(ctx, Accounts_GetSubscribeArticles_FullMethodName, in, out, cOpts...)
+	out := new(GetFollowingSourcesResponse)
+	err := c.cc.Invoke(ctx, Accounts_GetFollowingSources_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountsClient) SubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *accountsClient) FollowSource(ctx context.Context, in *FollowUnfollowSourceParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Accounts_SubscribeArticle_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Accounts_FollowSource_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountsClient) UnsubscribeArticle(ctx context.Context, in *SubUnsubArticlesParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *accountsClient) UnfollowSource(ctx context.Context, in *FollowUnfollowSourceParamsInner, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Accounts_UnsubscribeArticle_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Accounts_UnfollowSource_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountsClient) CheckSourcesSubscribes(ctx context.Context, in *CheckSourcesSubscribesParamsInner, opts ...grpc.CallOption) (*CheckSourcesSubscribesResponse, error) {
+func (c *accountsClient) CheckSourcesFollowing(ctx context.Context, in *CheckSourcesFollowingParamsInner, opts ...grpc.CallOption) (*CheckSourcesFollowingResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CheckSourcesSubscribesResponse)
-	err := c.cc.Invoke(ctx, Accounts_CheckSourcesSubscribes_FullMethodName, in, out, cOpts...)
+	out := new(CheckSourcesFollowingResponse)
+	err := c.cc.Invoke(ctx, Accounts_CheckSourcesFollowing_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -484,11 +484,11 @@ type AccountsServer interface {
 	SetLang(context.Context, *SetLangParamsInner) (*common.BoolStatus, error)
 	// Sessions
 	GetSessions(context.Context, *ProfileParams) (*GetSessionsResponse, error)
-	// Subscribe Articles
-	GetSubscribeArticles(context.Context, *GetSubscribeArticlesParamsInner) (*GetSubscribeArticlesResponse, error)
-	SubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error)
-	UnsubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error)
-	CheckSourcesSubscribes(context.Context, *CheckSourcesSubscribesParamsInner) (*CheckSourcesSubscribesResponse, error)
+	// Following News
+	GetFollowingSources(context.Context, *GetFollowingSourcesParamsInner) (*GetFollowingSourcesResponse, error)
+	FollowSource(context.Context, *FollowUnfollowSourceParamsInner) (*emptypb.Empty, error)
+	UnfollowSource(context.Context, *FollowUnfollowSourceParamsInner) (*emptypb.Empty, error)
+	CheckSourcesFollowing(context.Context, *CheckSourcesFollowingParamsInner) (*CheckSourcesFollowingResponse, error)
 	// Favorites
 	GetFavorites(context.Context, *GetFavoritesParamsInner) (*GetFavoritesResponse, error)
 	SetFavorite(context.Context, *ToggleFavoriteParamsInner) (*emptypb.Empty, error)
@@ -562,17 +562,17 @@ func (UnimplementedAccountsServer) SetLang(context.Context, *SetLangParamsInner)
 func (UnimplementedAccountsServer) GetSessions(context.Context, *ProfileParams) (*GetSessionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSessions not implemented")
 }
-func (UnimplementedAccountsServer) GetSubscribeArticles(context.Context, *GetSubscribeArticlesParamsInner) (*GetSubscribeArticlesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetSubscribeArticles not implemented")
+func (UnimplementedAccountsServer) GetFollowingSources(context.Context, *GetFollowingSourcesParamsInner) (*GetFollowingSourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFollowingSources not implemented")
 }
-func (UnimplementedAccountsServer) SubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubscribeArticle not implemented")
+func (UnimplementedAccountsServer) FollowSource(context.Context, *FollowUnfollowSourceParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FollowSource not implemented")
 }
-func (UnimplementedAccountsServer) UnsubscribeArticle(context.Context, *SubUnsubArticlesParamsInner) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UnsubscribeArticle not implemented")
+func (UnimplementedAccountsServer) UnfollowSource(context.Context, *FollowUnfollowSourceParamsInner) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnfollowSource not implemented")
 }
-func (UnimplementedAccountsServer) CheckSourcesSubscribes(context.Context, *CheckSourcesSubscribesParamsInner) (*CheckSourcesSubscribesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckSourcesSubscribes not implemented")
+func (UnimplementedAccountsServer) CheckSourcesFollowing(context.Context, *CheckSourcesFollowingParamsInner) (*CheckSourcesFollowingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckSourcesFollowing not implemented")
 }
 func (UnimplementedAccountsServer) GetFavorites(context.Context, *GetFavoritesParamsInner) (*GetFavoritesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFavorites not implemented")
@@ -850,74 +850,74 @@ func _Accounts_GetSessions_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Accounts_GetSubscribeArticles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSubscribeArticlesParamsInner)
+func _Accounts_GetFollowingSources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFollowingSourcesParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountsServer).GetSubscribeArticles(ctx, in)
+		return srv.(AccountsServer).GetFollowingSources(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Accounts_GetSubscribeArticles_FullMethodName,
+		FullMethod: Accounts_GetFollowingSources_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).GetSubscribeArticles(ctx, req.(*GetSubscribeArticlesParamsInner))
+		return srv.(AccountsServer).GetFollowingSources(ctx, req.(*GetFollowingSourcesParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Accounts_SubscribeArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubUnsubArticlesParamsInner)
+func _Accounts_FollowSource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FollowUnfollowSourceParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountsServer).SubscribeArticle(ctx, in)
+		return srv.(AccountsServer).FollowSource(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Accounts_SubscribeArticle_FullMethodName,
+		FullMethod: Accounts_FollowSource_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).SubscribeArticle(ctx, req.(*SubUnsubArticlesParamsInner))
+		return srv.(AccountsServer).FollowSource(ctx, req.(*FollowUnfollowSourceParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Accounts_UnsubscribeArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubUnsubArticlesParamsInner)
+func _Accounts_UnfollowSource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FollowUnfollowSourceParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountsServer).UnsubscribeArticle(ctx, in)
+		return srv.(AccountsServer).UnfollowSource(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Accounts_UnsubscribeArticle_FullMethodName,
+		FullMethod: Accounts_UnfollowSource_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).UnsubscribeArticle(ctx, req.(*SubUnsubArticlesParamsInner))
+		return srv.(AccountsServer).UnfollowSource(ctx, req.(*FollowUnfollowSourceParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Accounts_CheckSourcesSubscribes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CheckSourcesSubscribesParamsInner)
+func _Accounts_CheckSourcesFollowing_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckSourcesFollowingParamsInner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountsServer).CheckSourcesSubscribes(ctx, in)
+		return srv.(AccountsServer).CheckSourcesFollowing(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Accounts_CheckSourcesSubscribes_FullMethodName,
+		FullMethod: Accounts_CheckSourcesFollowing_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountsServer).CheckSourcesSubscribes(ctx, req.(*CheckSourcesSubscribesParamsInner))
+		return srv.(AccountsServer).CheckSourcesFollowing(ctx, req.(*CheckSourcesFollowingParamsInner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1316,20 +1316,20 @@ var Accounts_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Accounts_GetSessions_Handler,
 		},
 		{
-			MethodName: "GetSubscribeArticles",
-			Handler:    _Accounts_GetSubscribeArticles_Handler,
+			MethodName: "GetFollowingSources",
+			Handler:    _Accounts_GetFollowingSources_Handler,
 		},
 		{
-			MethodName: "SubscribeArticle",
-			Handler:    _Accounts_SubscribeArticle_Handler,
+			MethodName: "FollowSource",
+			Handler:    _Accounts_FollowSource_Handler,
 		},
 		{
-			MethodName: "UnsubscribeArticle",
-			Handler:    _Accounts_UnsubscribeArticle_Handler,
+			MethodName: "UnfollowSource",
+			Handler:    _Accounts_UnfollowSource_Handler,
 		},
 		{
-			MethodName: "CheckSourcesSubscribes",
-			Handler:    _Accounts_CheckSourcesSubscribes_Handler,
+			MethodName: "CheckSourcesFollowing",
+			Handler:    _Accounts_CheckSourcesFollowing_Handler,
 		},
 		{
 			MethodName: "GetFavorites",
